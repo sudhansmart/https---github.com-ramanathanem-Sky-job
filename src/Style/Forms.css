@@ -1,0 +1,45 @@
+.form-group{
+    height: 48px;
+   
+    margin-bottom: 20px;
+    position: relative;
+}
+.form-control{
+  
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: 1px solid #a1a1a1;
+    outline: none;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.form-lable{
+    position: absolute;
+    left: 10px;
+    top: 13px;
+    color: #a1a1a1;
+    background-color: white;
+    padding: 0 6px;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.form-control:focus-visible +.form-lable{
+    top: -10px;
+    z-index: 10;
+    color: #1B66C9;
+    font-weight: 500;
+    font-size: 15px;
+}
+.form-control:focus{
+    border: 1px solid #1B66C9;
+}
+.form-control:not(:focus):valid+label{
+    top: -10px;
+    z-index: 10;
+}
+
