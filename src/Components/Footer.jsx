@@ -1,15 +1,24 @@
 import React from 'react'
 import Footerlogo from "../assets/Images/sky1.png"
 import '../Style/Footer.css'
-import { Link } from 'react-router-dom'
-export const Footer = () => {
+import { Link, useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+export const Footer = ({setAdmin}) => {
+
+  const navigate = useNavigate();
+
+  const handleadmin = ()=>{
+    setAdmin(true);
+    navigate('/adminlog')
+  }
   return (
 
-    <div  id ="foot" >
+    <div  id ="foot p-5" >
     <div className="row me-0">
       <div className="col-sm " style={{marginTop:"20px"}} >
    
-        <h4  style={{fontSize:'17px'}} className='ms-2'>ABOUT US</h4>
+     
        <img className='ms-2' src={Footerlogo}/>
         <ul style={{listStyle:"none"}} className='mt-3' >
   
@@ -58,6 +67,7 @@ export const Footer = () => {
       <i className="bi bi-linkedin"id='linkedin' ></i>
     
     </p>
+    <p onClick={handleadmin} className='text-end me-3'><FontAwesomeIcon icon={faUser}/> Admin</p>
    <div>
    </div>
   </div>
