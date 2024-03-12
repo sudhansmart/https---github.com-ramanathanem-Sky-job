@@ -6,7 +6,7 @@ import { Footer } from './Footer'
 import Reviewslider from './Reviewslider'
 import JobsCategory from './JobsCategory'
 
-export const Home = () => {
+export const Home = ({setAdmin}) => {
   return (
     <div>
     <div className='image text-center'>
@@ -28,7 +28,7 @@ export const Home = () => {
     <JobsCategory/>
 <Resume/>
 <Reviewslider/>
-<Footer/>
+<Footer setAdmin={setAdmin}/>
     </div>
   )
 }

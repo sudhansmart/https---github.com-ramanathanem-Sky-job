@@ -6,7 +6,6 @@ import { Home } from './Components/Home'
 import { Contact } from './Components/Contact'
 import Notification from './Components/Notification'
 import Findjob from './Components/Findjob'
-import { Forms } from './Components/Forms'
 import Logins from './Components/Logins'
 import It from './Components/It'
 import Bpo from './Components/Bpo'
@@ -20,18 +19,21 @@ import Manifacturing from './Components/Manifacturing'
 import Skin from './Components/Skin'
 import Humanresource from './Components/Humanresource'
 import Operation from './Components/Operation'
+import UploadForm from './Components/UploadForm'
+import AdminHome from './Components/AdminHome'
+import AdminNavbar from './Components/AdminNavbar'
+import AdminLogin from './Components/AdminLogin'
 
 
 function App() {
     const[userloggedin,setUserloggedin] = useState(false);
-    const[token,setToken] = useState(localStorage.getItem('authToken'))
-    console.log("token : ",token)
+    const[token,setToken] = useState(localStorage.getItem('authToken'));
+    const[admin,setAdmin] = useState(false);
   return (
   <div>
-    <Navbar userloggedin={userloggedin} token={token}/>
+   {admin? <AdminNavbar/> : <Navbar userloggedin={userloggedin} token={token}/>}
     <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/forms' element={<Forms/>}/>
+      <Route path='/' element={<Home setAdmin={setAdmin}/>}/>
       <Route path='/logs' element={<Logins setUserloggedin={setUserloggedin} setToken={setToken}/>}/>
       <Route path='/jobs' element={<Findjob/>}/>
     <Route path='/contact' element={<Contact/>}/>
@@ -47,8 +49,10 @@ function App() {
     <Route path='/Manifcutre' element={<Manifacturing/>}/>
     <Route path='/Skin' element={<Skin/>}/>
     <Route path='/Hr' element={<Humanresource/>}/>
-  <Route path='/Operation' element={<Operation/>}/>
-   
+    <Route path='/Operation' element={<Operation/>}/>
+    <Route path='/forms' element={<UploadForm/>}/>
+    <Route path='/admin' element={<AdminHome/>} />
+    <Route path='/adminlog' element={<AdminLogin/>} />
     </Routes>
   </div>
   )

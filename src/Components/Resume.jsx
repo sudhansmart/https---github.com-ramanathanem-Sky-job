@@ -16,7 +16,7 @@ export const Resume = () => {
      <h1 id='jobsfont' style={{color:"orange" ,fontSize:"30px"}} >step 1</h1>
      <h3 id='jobsfont'  style={{color:"white"}}>REGISTER AN ACCOUNT</h3>
      <li >
-     <Link to="/logs"><span> <button className='butt'  id='jobsfont' style={{fontSize:"15px"}} >Login</button> </span> </Link>
+     <Link to="/logs"><span> <button className='butt'  id='jobsfont' style={{fontSize:"15px"}} >SignUp</button> </span> </Link>
    </li>
     </div>
     <div className="col-sm">
