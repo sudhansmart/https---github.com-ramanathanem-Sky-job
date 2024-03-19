@@ -2,13 +2,14 @@ import React,{useState} from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown';
 import navlogo from "../assets/Images/sky2.png"
+import { Modal } from 'react-bootstrap';
 import "../Style/Navbar.css"
-import MyVerticallyCenteredModal from './Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAddressBook, faBell, faComputer, faHouse, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import { faAddressBook,  faHouse, faMagnifyingGlass, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
+import PostJob from './PostJob';
 
- const AdminNavbar = ({userloggedin,token}) => {
+ const AdminNavbar = ({adminToken}) => {
     const[menuOpen, setOpen]=useState(false)
     const [modalShow, setModalShow] = useState(false);
 
@@ -35,12 +36,17 @@ import { faUser } from '@fortawesome/free-regular-svg-icons'
            </NavLink>
             </li>
         <li>
-        <NavLink to="/contact"><FontAwesomeIcon icon={faAddressBook} className='me-1' />Contact</NavLink></li>
-        <li>
-        <NavLink to="/forms" className="btn btn-outline-primary" style={{borderRadius:'20px',fontSize:'12px'}} >Post a job</NavLink>
+        <NavLink to="/contact"><FontAwesomeIcon icon={faAddressBook} className='me-1' />Applicants</NavLink>
         </li>
         <li>
-        {token?
+        <NavLink to="/contact"><FontAwesomeIcon icon={faMagnifyingGlass} className='me-1' />Find Candidates</NavLink>
+        </li>
+        
+        <li>
+        <NavLink  className="btn btn-outline-primary" onClick={()=>setModalShow(true)} style={{borderRadius:'20px',fontSize:'12px'}} >Post a job</NavLink>
+        </li>
+        <li>
+        {adminToken?
                   <Dropdown>
                   <Dropdown.Toggle variant="light" id="dropdown-basic">
                   <FontAwesomeIcon icon={faUser}/> Profile
@@ -60,13 +66,28 @@ import { faUser } from '@fortawesome/free-regular-svg-icons'
         </li>
            
     </ul>
-   
-   
    </nav>
-   <MyVerticallyCenteredModal
+   <Modal
         show={modalShow}
         onHide={() => setModalShow(false)}
-      />
+      size="xl"
+      aria-labelledby="contained-modal-title-vcenter"
+      backdrop="static"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Post Job
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Add Job Details</h4>
+         <PostJob  setModalShow={setModalShow}/>
+      </Modal.Body>
+      <Modal.Footer>
+      
+      </Modal.Footer>
+    </Modal>
     </div>
   )
 }

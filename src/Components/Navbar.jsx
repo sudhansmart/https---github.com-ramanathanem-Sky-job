@@ -3,7 +3,6 @@ import { Link, NavLink } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown';
 import navlogo from "../assets/Images/sky2.png"
 import "../Style/Navbar.css"
-import MyVerticallyCenteredModal from './Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook, faBell, faComputer, faHouse, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
@@ -62,13 +61,8 @@ export const Navbar = ({userloggedin,token}) => {
         </li>
            
     </ul>
-   
-   
    </nav>
-   <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+  
     </div>
   )
 }

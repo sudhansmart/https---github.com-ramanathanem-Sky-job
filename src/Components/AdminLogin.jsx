@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../Style/adminLogin.css'
 
-const AdminLogin = ({setRole,setToken,setAdminloggedin,setUserloggedin}) => {
+const AdminLogin = ({setRole,setAdminToken,setAdminloggedin,setUserloggedin}) => {
     const [formData, setFormData] = useState({
         userId :'',
         password :''
@@ -24,28 +24,13 @@ const AdminLogin = ({setRole,setToken,setAdminloggedin,setUserloggedin}) => {
     e.preventDefault();
    try {
     const response = await axios.post("http://localhost:5000/admin/login",formData);
-        // localStorage.setItem('token', response.data.token);
-        // setToken(response.data.token)
-        // localStorage.setItem('name', response.data.name);
+        localStorage.setItem('adauthToken', response.data.token);
+        setAdminToken(response.data.token)
         console.log("Login response :",response);
 
     if (response.status ==200){
       alert("Login Sucessful")
-      navigate('/admin'); 
-    
-    //   if (response.data.role === 'admin') {
-    //     setAdminloggedin(true)
-    //     setRole(response.data.role);
-    //     localStorage.setItem('role', role);
-    //     localStorage.setItem('adminloggedin', adminloggedin.toString());
-    //     navigate('/adminpage'); 
-    //   } else if(response.data.role === 'recruiter') {
-    //     setRole(response.data.role);
-    //     setUserloggedin(true);
-    //     localStorage.setItem('role',response.data.role);
-    //     localStorage.setItem('userloggedin',true);
-    //     navigate('/userpage'); 
-    //   }
+      navigate('/'); 
      
     }
     else if(response.status ==201){

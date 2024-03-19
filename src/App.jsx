@@ -1,61 +1,68 @@
-import { useState } from 'react'
-import './App.css'
-import { Navbar } from './Components/Navbar'
-import { Route, Routes } from 'react-router-dom'
-import { Home } from './Components/Home'
-import { Contact } from './Components/Contact'
-import Notification from './Components/Notification'
-import Findjob from './Components/Findjob'
-import Logins from './Components/Logins'
-import It from './Components/It'
-import Bpo from './Components/Bpo'
-import Sale from './Components/Sale'
-import Customer from './Components/Customer'
-import Account from './Components/Account'
-import DigitalMarketing from './Components/DigitalMarketing'
-import Healthcare from './Components/Healthcare'
-import Miscellaneous from './Components/Miscellaneous'
-import Manifacturing from './Components/Manifacturing'
-import Skin from './Components/Skin'
-import Humanresource from './Components/Humanresource'
-import Operation from './Components/Operation'
-import UploadForm from './Components/UploadForm'
-import AdminHome from './Components/AdminHome'
-import AdminNavbar from './Components/AdminNavbar'
-import AdminLogin from './Components/AdminLogin'
+import { useState } from 'react';
+import './App.css';
+import { Navbar } from './Components/Navbar';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { Home } from './Components/Home';
+import { Contact } from './Components/Contact';
+import Notification from './Components/Notification';
+import Findjob from './Components/Findjob';
+import Logins from './Components/Logins';
+import It from './Components/It';
+import Bpo from './Components/Bpo';
+import Sale from './Components/Sale';
+import Customer from './Components/Customer';
+import Account from './Components/Account';
+import DigitalMarketing from './Components/DigitalMarketing';
+import Healthcare from './Components/Healthcare';
+import Miscellaneous from './Components/Miscellaneous';
+import Manufacturing from './Components/Manufacturing';
+import Skin from './Components/Skin';
+import Humanresource from './Components/Humanresource';
+import Operation from './Components/Operation';
+import UploadForm from './Components/UploadForm';
+import AdminHome from './Components/AdminHome';
+import AdminNavbar from './Components/AdminNavbar';
+import AdminLogin from './Components/AdminLogin';
+import DisplayJob from './Components/DisplayJob';
+import PdfViewer from './Components/PdfViewer';
 
 
 function App() {
-    const[userloggedin,setUserloggedin] = useState(false);
-    const[token,setToken] = useState(localStorage.getItem('authToken'));
-    const[admin,setAdmin] = useState(false);
-  return (
-  <div>
-   {admin? <AdminNavbar/> : <Navbar userloggedin={userloggedin} token={token}/>}
-    <Routes>
-      <Route path='/' element={<Home setAdmin={setAdmin}/>}/>
-      <Route path='/logs' element={<Logins setUserloggedin={setUserloggedin} setToken={setToken}/>}/>
-      <Route path='/jobs' element={<Findjob/>}/>
-    <Route path='/contact' element={<Contact/>}/>
-    <Route path='/notification' element={<Notification/>}/>
-    <Route path='/It' element={<It/>}/>
-    <Route path='/Bpo' element={<Bpo/>}/>
-    <Route path='/Sale' element={<Sale/>}/>
-    <Route path='/Cs' element={<Customer/>}/>
-    <Route path='/Account' element={<Account/>}/>
-    <Route path='/Digital' element={<DigitalMarketing/>}/>
-    <Route path='/Health' element={<Healthcare/>}/>
-    <Route path='/Ms' element={<Miscellaneous/>}/>
-    <Route path='/Manifcutre' element={<Manifacturing/>}/>
-    <Route path='/Skin' element={<Skin/>}/>
-    <Route path='/Hr' element={<Humanresource/>}/>
-    <Route path='/Operation' element={<Operation/>}/>
-    <Route path='/forms' element={<UploadForm/>}/>
-    <Route path='/admin' element={<AdminHome/>} />
-    <Route path='/adminlog' element={<AdminLogin/>} />
-    </Routes>
-  </div>
-  )
+    const [userloggedin, setUserloggedin] = useState(false);
+    const [token, setToken] = useState(localStorage.getItem('authToken'));
+    const [authid,setAuthid] = useState(localStorage.getItem('authId'));
+    const [adminToken, setAdminToken] = useState(localStorage.getItem('adauthToken'));
+    const [admin, setAdmin] = useState(false);
+    
+    
+    return (
+        <div>
+            {adminToken ? <AdminNavbar adminToken={adminToken} /> : <Navbar userloggedin={userloggedin} token={token} />}
+            <Routes>
+                <Route path='/' element={adminToken ? <AdminHome /> : <Home setAdmin={setAdmin} />} />
+                <Route path='/jobdetails/:id/:category' element={<DisplayJob />}/>
+                <Route path='/logs' element={<Logins setUserloggedin={setUserloggedin} setToken={setToken} />} />
+                <Route path='/jobs' element={<Findjob />} />
+                <Route path='/contact' element={<Contact />} />
+                <Route path='/notification' element={<Notification />} />
+                <Route path='/It/:category' element={<It />} />
+                <Route path='/Bpo/:category' element={<Bpo />} />
+                <Route path='/Sale/:category' element={<Sale />} />
+                <Route path='/Cs/:category' element={<Customer />} />
+                <Route path='/Account/:category' element={<Account />} />
+                <Route path='/Digital/:category' element={<DigitalMarketing />} />
+                <Route path='/Health/:category' element={<Healthcare />} />
+                <Route path='/Ms/:category' element={<Miscellaneous />} />
+                <Route path='/Manufacturing/:category' element={<Manufacturing />} />
+                <Route path='/Skin/:category' element={<Skin />} />
+                <Route path='/Hr/:category' element={<Humanresource />} />
+                <Route path='/Operation/:category' element={<Operation />} />
+                <Route path='/forms' element={<UploadForm />} />
+                <Route path='/adminlog' element={<AdminLogin setAdminToken={setAdminToken} />} />
+                <Route path='/develop' element={<PdfViewer/>}/>
+            </Routes>
+        </div>
+    );
 }
 
-export default App
+export default App;

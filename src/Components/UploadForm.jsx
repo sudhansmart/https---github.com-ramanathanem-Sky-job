@@ -30,7 +30,7 @@ function UploadForm({handleClose}) {
     currentCtc : yup.string().required('Current CTC is required'),
     expectedCtc : yup.string().required('Expected CTC is required'),
     noticePeriod : yup.string().required('Notice Period is required'),
-    gender : yup.string().required('Gender Mode is required'),
+    gender : yup.string().required('Gender is required'),
   });
  
   const handleSubmit = async (values, { resetForm }) => {

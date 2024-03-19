@@ -104,10 +104,11 @@ const Logins = ({setUserloggedin,setToken}) => {
           otp:data.otp}
          try {
           const response = await axios.post('http://localhost:5000/login/verifyotp',sendData);
-          console.log(response)
+          console.log(response.data)
           if(response.status == 200){
             setToken(response.data.token);
             localStorage.setItem('authToken',response.data.token);
+            localStorage.setItem('authId',response.data.id);
               navigate('/');
               setUserloggedin(true)
               setLoginFormData ({

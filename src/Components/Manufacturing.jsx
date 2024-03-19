@@ -4,14 +4,14 @@ import "../Style/It.css";
 import { Link} from 'react-router-dom';
 import FilterUser from './FilterUser';
 
-function Customer() {
+function Manufacturing() {
     const [data, setData] = useState([]);
     
 
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:5000/job/getdata'); 
-            const filteredData = response.data.filter(entry => entry.category === "Customerservice");
+            const filteredData = response.data.filter(entry => entry.category === "Manufacturing");
             setData(filteredData);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -26,7 +26,7 @@ function Customer() {
         <div className='jobdisplay '>
             <FilterUser  data={data} setData={setData} />
             {data.length == 0? <h6 className='text-center w-100'>No Jobs Found</h6> :
-        <div className='container '>
+        <div className='container'>
             <div className='row mb-4 ' >
                 {data.map((job) => (
                     <div className='col-md-6 p-2' key={job.serialId}>
@@ -46,13 +46,11 @@ function Customer() {
                                         <p key={index}><i className="bi bi-dot"></i>{skill}</p>
                                     ))}
                                 </div>
-                             
-                              <Link to ={`/jobdetails/${job._id}/${job.category}`}>
+                                <Link to ={`/jobdetails/${job._id}/${job.category}`}>
                               <div className='link_wrapper'>
                               <button className="button-17"> More info</button>
                               </div>
                               </Link>
-                            
                                
                             </div>
                         </div>
@@ -64,4 +62,4 @@ function Customer() {
     );
 }
 
-export default Customer ;
+export default Manufacturing;
