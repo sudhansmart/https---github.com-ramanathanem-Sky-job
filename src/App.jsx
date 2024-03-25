@@ -3,7 +3,6 @@ import './App.css';
 import { Navbar } from './Components/Navbar';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { Home } from './Components/Home';
-import { Contact } from './Components/Contact';
 import Notification from './Components/Notification';
 import Findjob from './Components/Findjob';
 import Logins from './Components/Logins';
@@ -25,6 +24,9 @@ import AdminNavbar from './Components/AdminNavbar';
 import AdminLogin from './Components/AdminLogin';
 import DisplayJob from './Components/DisplayJob';
 import PdfViewer from './Components/PdfViewer';
+import ContactPage from './Components/ContactPage';
+import Candidates from './Components/Candidates';
+import CandidateProfile from './Components/CandidateProfile';
 
 
 function App() {
@@ -40,10 +42,12 @@ function App() {
             {adminToken ? <AdminNavbar adminToken={adminToken} /> : <Navbar userloggedin={userloggedin} token={token} />}
             <Routes>
                 <Route path='/' element={adminToken ? <AdminHome /> : <Home setAdmin={setAdmin} />} />
+                <Route path='/profile' element={<CandidateProfile/>}/>
                 <Route path='/jobdetails/:id/:category' element={<DisplayJob />}/>
+                <Route path='/candidates/:jobid' element={<Candidates/>}/>
                 <Route path='/logs' element={<Logins setUserloggedin={setUserloggedin} setToken={setToken} />} />
                 <Route path='/jobs' element={<Findjob />} />
-                <Route path='/contact' element={<Contact />} />
+                <Route path='/contact' element={<ContactPage/>} />
                 <Route path='/notification' element={<Notification />} />
                 <Route path='/It/:category' element={<It />} />
                 <Route path='/Bpo/:category' element={<Bpo />} />
@@ -59,7 +63,7 @@ function App() {
                 <Route path='/Operation/:category' element={<Operation />} />
                 <Route path='/forms' element={<UploadForm />} />
                 <Route path='/adminlog' element={<AdminLogin setAdminToken={setAdminToken} />} />
-                <Route path='/develop' element={<PdfViewer/>}/>
+                <Route path='/develop' element={<CandidateProfile/>}/>
             </Routes>
         </div>
     );

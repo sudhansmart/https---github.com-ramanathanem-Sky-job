@@ -7,16 +7,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook, faBell, faComputer, faHouse, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 
+
+
 export const Navbar = ({userloggedin,token}) => {
     const[menuOpen, setOpen]=useState(false)
-    const [modalShow, setModalShow] = useState(false);
 
+
+    const handleClose =()=>{
+      setModalShow(false)
+    }
 
     const handleSignOut =()=>{
       localStorage.clear();
 
     }
   return (
+    <>
     <div className='nav-main p-2 me-3'>
          <nav className='P-2'>
     <Link to="/" className='title ms-5'><img src={navlogo}/></Link>
@@ -48,7 +54,7 @@ export const Navbar = ({userloggedin,token}) => {
                   </Dropdown.Toggle>
             
                   <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Profile Details</Dropdown.Item>
+                    <Dropdown.Item href='/profile'>Profile Details</Dropdown.Item>
                     <Dropdown.Item href="/" onClick={handleSignOut}>Sign-out</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -62,7 +68,8 @@ export const Navbar = ({userloggedin,token}) => {
            
     </ul>
    </nav>
-  
     </div>
+        
+    </>
   )
 }

@@ -67,7 +67,7 @@ export const Footer = ({setAdmin}) => {
       <i className="bi bi-linkedin"id='linkedin' ></i>
     
     </p>
-    <p onClick={handleadmin} className='text-end me-3'><FontAwesomeIcon icon={faUser}/> Admin</p>
+    <p onClick={handleadmin} className='text-end me-3' style={{cursor:'pointer'}}><FontAwesomeIcon icon={faUser}/> Admin</p>
    <div>
    </div>
   </div>

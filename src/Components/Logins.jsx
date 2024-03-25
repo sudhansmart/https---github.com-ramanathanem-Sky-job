@@ -7,9 +7,12 @@ import { useNavigate } from 'react-router-dom';
 const Logins = ({setUserloggedin,setToken}) => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [showSignupmessage,setShowSignupmessage] = useState(false);
+  const [showLoginmessage,setShowLoginmessage] = useState(false);
   const[showOtp,setshowOtp] = useState(false);
   const [otpError,setOtpError] = useState(false);
   const [signUpFeedback,setSignUpFeedback] = useState(" ");
+  const [loginFeedback,setLoginFeedback] = useState(" ");
+
     const [loginFormData, setLoginFormData]=useState({
         email:'',
     });
@@ -43,9 +46,12 @@ const Logins = ({setUserloggedin,setToken}) => {
         try {
           if (useridValid ) {
             const response = await axios.post('http://localhost:5000/login/verify',loginFormData)
-              console.log('Login successful:', response);
               if(response.data == true){
                 setshowOtp(true);
+              }
+              else if(response.data == false ){
+                setShowLoginmessage(true);
+                setLoginFeedback("User Does not Exists.please Signup");
               }
           }
           
@@ -104,7 +110,7 @@ const Logins = ({setUserloggedin,setToken}) => {
           otp:data.otp}
          try {
           const response = await axios.post('http://localhost:5000/login/verifyotp',sendData);
-          console.log(response.data)
+     
           if(response.status == 200){
             setToken(response.data.token);
             localStorage.setItem('authToken',response.data.token);
@@ -152,7 +158,9 @@ const Logins = ({setUserloggedin,setToken}) => {
                      {errors.email && <p className="error text-danger" >{errors.email}</p>}
             <button className='mt-3' type='submit' >Login</button>
             {errors.server && <p className="error">{errors.server}</p>}
+            {showLoginmessage?<div className='text-center mt-5'>{loginFeedback}</div>:" "}
           </form>}
+       
         </div>}
         <div className="overlay-container">
           <div className="overlay">

@@ -1,8 +1,11 @@
 import React from 'react'
+import RecentJobPost from './RecentJobPost'
 
 function AdminHome() {
   return (
-    <div>AdminHome</div>
+    <div>
+        <RecentJobPost/>
+    </div>
   )
 }
 

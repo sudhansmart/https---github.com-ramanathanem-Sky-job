@@ -42,7 +42,7 @@ function Healthcare() {
                                   <p className='job-salary col-md-5  p-1 m-1'>UPTO {job.salary} LPA</p>
                                   </div>
                                 <div className='job-require mt-3'>
-                                {job.primarySkills && job.primarySkills.split(',').map((skill, index) => (
+                                {job.primarySkills && job.primarySkills.split('/').map((skill, index) => (
                                         <p key={index}><i className="bi bi-dot"></i>{skill}</p>
                                     ))}
                                 </div>

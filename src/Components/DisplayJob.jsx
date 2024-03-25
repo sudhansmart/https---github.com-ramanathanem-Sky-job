@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { Button, Modal, Form, Toast, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SimilarJobs from './SimilarJobs';
 
 function DisplayJob() {
@@ -15,14 +15,25 @@ function DisplayJob() {
   const [fileError, setFileError] = useState('');
   const [authid, setAuthid] = useState(localStorage.getItem('authId'));
   const [showToast, setShowToast] = useState(false);
+  const navigate = useNavigate();
+  const [showFeedback,setShowFeedback] = useState (false)
+
 
   const handleClose = () => {
     setShow(false);
     setFile(null);
     setFileError('');
+    setShowFeedback(false);
   };
 
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+  if(authid){
+    setShow(true);
+  }
+ else if(!authid){
+      navigate('/logs')
+ }
+}
 
   const fetchData = async () => {
     const response = await axios.get(`http://localhost:5000/job/specificjob/${id}`);
@@ -54,9 +65,13 @@ function DisplayJob() {
         },
       });
       console.log(response.data);
-      handleClose();
+     
       if (response.status === 201) {
-        setShowToast(true);
+        handleClose();
+        setShowToast(true); 
+      }
+      else if (response.status === 202){
+        setShowFeedback(true);
       }
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -83,7 +98,8 @@ function DisplayJob() {
             <h5>Company Profile</h5>
             <p>{item.companyprofile}</p>
             <h5>Job Description</h5>
-            <p>{item.jobdescription}</p>
+            <p>{item.jobdescription}</p><hr/>
+            <p className='mt-4' style={{fontWeight:"600"}}>Posted at : 22/01/2024</p>
           </div>
         </div>
       ))}
@@ -101,7 +117,7 @@ function DisplayJob() {
           <Modal.Title>Apply Job</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          {showFeedback? <p className='text-center p-5' style={{fontWeight:'500'}}>You have already applied. Please check your applied jobs</p> :<Form>
             <Form.Group controlId='formFile' className='mb-3'>
               <Form.Label>Upload CV</Form.Label>
               <Form.Control
@@ -114,14 +130,19 @@ function DisplayJob() {
               {fileError && <Form.Control.Feedback type='invalid'>{fileError}</Form.Control.Feedback>}
               <p className='apply-text mt-3 text-center '>Upload Updated CV to Proceed</p>
             </Form.Group>
-          </Form>
+          </Form>}
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+       {showFeedback? <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+            Ok
+          </Button>
+       </Modal.Footer>:
+       <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleApply} >Apply</Button>
-        </Modal.Footer>
+        </Modal.Footer>}
       </Modal>
 
       <Row className="position-fixed top-0 end-0 p-3">
