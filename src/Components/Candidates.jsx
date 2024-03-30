@@ -69,24 +69,25 @@ function Candidates() {
             console.error('An error occurred while updating:', error);
         }
     };
+    console.log(data)
 
     return (
         <div className='d-flex p-3'>
           <FilterAdmin setData={setData}/>
-            <Row className='w-80'>
+            <Row  className='w-70'>
             {data.map((candidate, index) => (
-                <div className='candidate-main d-flex p-3 justify-content-around align-items-center' key={index}>
+                <div className='candidate-main d-flex p-3 justify-content-around align-items-center w-80' key={index}>
                     <div>
                         <h5 className='candidate-name mb-3'>{candidate.candidateName}</h5>
                         <h5 className='candidate-job mb-2'>{candidate.jobtitle}</h5>
-                        <h5 className='candidate-email mb-2'>Email: <span>{candidate.candidateEmail}</span></h5>
-                        <h5 className='candidate-email mb-2'>Phone: <span>{candidate.candidatePhone}</span></h5>
-                        <h5 className='candidate-email mb-2'>Location: <span>{candidate.location}</span></h5>
+                        <h5 className='candidate-email mb-2'>Email: <span style={{color:'#35393C'}}>{candidate.candidateEmail}</span></h5>
+                        <h5 className='candidate-email mb-2'>Phone: <span style={{color:'#35393C'}}>{candidate.candidatePhone}</span></h5>
+                        <h5 className='candidate-email mb-2'>Location: <span style={{color:'#35393C'}}>{candidate.location}</span></h5>
                     </div>
                     <div>
-                        <Button className='cv-button' style={{ fontSize: "14px" }} onClick={() => handleDownload(candidate.candidateId)}> <FontAwesomeIcon icon={faDownload} /> Download CV</Button>
-                        <Form.Control className='mt-3'
-                            as="select"
+                        <button className='cv-button' style={{ fontSize: "14px" }} onClick={() => handleDownload(candidate.candidateId)}> <FontAwesomeIcon icon={faDownload} /> Download CV</button>
+                        <Form.Select className='mt-3'
+                            // as="select"
                             value={candidate.status}
                             onChange={(e) => handleApplicant(index, e.target.value,candidate._id)}
                         >
@@ -94,7 +95,7 @@ function Candidates() {
                             <option value="Under review">Under Review</option>
                             <option value="Accepted">Accepted</option>
                             <option value="Rejected">Rejected</option>
-                        </Form.Control>
+                        </Form.Select>
                     </div>
                 </div>
                

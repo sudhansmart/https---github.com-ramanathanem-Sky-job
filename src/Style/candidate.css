@@ -8,15 +8,19 @@
 .candidate-name{
     font-size: xxx-large;
     font-weight: 600;
-    color: deepskyblue;
+    color: #397367;
 }
 .candidate-email{
-    color: steelblue;
+    color: #42858C;
 }
 .candidate-job{
     font-size: x-large;
     font-weight: 600;
-    color: gray;
+    color: #63CCCA;
+}
+.cv-button{
+    background-color: #42858C;
+    border: none;
 }
 @media (max-width:768px) {
     .candidate-data{

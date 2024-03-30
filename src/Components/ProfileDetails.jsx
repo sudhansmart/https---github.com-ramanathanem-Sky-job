@@ -23,7 +23,7 @@ const ProfileDetails = ({handleCloseModal}) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/profile/specificprofile/${authId}`);
-      console.log("fetched data :",response.data)
+     
       setProfile(response.data); // Assuming response.data contains the profile data
     } catch (error) {
       console.log("Error occurred in Profile Details fetching :", error.message);
