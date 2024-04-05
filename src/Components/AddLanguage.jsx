@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { FloatingLabel, Form,Col, Row } from 'react-bootstrap';
+import { FloatingLabel, Form,Col, Row,Button } from 'react-bootstrap';
 
 const AddLanguage = ({handleCloseModal}) => {
   const [authId, setAuthId] = useState(localStorage.getItem('authId'));
@@ -30,7 +30,7 @@ const AddLanguage = ({handleCloseModal}) => {
       speak: data.speakChecked
     };
 
-    const response = await axios.post(`http://localhost:5000/profile/language/${authId}`, newLanguage);
+    const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/language/${authId}`, newLanguage);
     console.log("response :",response.data);
     setData({
       language: '',
@@ -65,27 +65,28 @@ const AddLanguage = ({handleCloseModal}) => {
     </Form.Group>
       </div>
       <div className='mt-3'>
-        <label>
+        <label >
           Read:
           <input
+          className='ms-2'
             name='readChecked'
             type="checkbox"
             checked={data.readChecked}
             onChange={handleOnChange}
           />
         </label>
-        <label>
+        <label className='ms-5'>
           Write:
-          <input
+          <input   className='ms-2'
             name='writeChecked'
             type="checkbox"
             checked={data.writeChecked}
             onChange={handleOnChange}
           />
         </label>
-        <label>
+        <label className='ms-5'>
           Speak:
-          <input
+          <input  className='ms-2'
             name='speakChecked'
             type="checkbox"
             checked={data.speakChecked}
@@ -94,7 +95,7 @@ const AddLanguage = ({handleCloseModal}) => {
         </label>
       </div>
       </Row>
-      <button className='mt-3' onClick={handleAddLanguage}>Add Language</button>
+      <Button className='mt-3' onClick={handleAddLanguage}>Add Language</Button>
     </div>
   );
 };

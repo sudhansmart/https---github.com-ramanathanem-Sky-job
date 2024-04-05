@@ -18,9 +18,8 @@ function SkillInput({ handleCloseModal }) {
 
   const fetchSkillsData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/profile/specificprofile/${authId}`);
+      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
       setSkills(response.data.keySkills);
-     
     } catch (error) {
       console.error('Error fetching skills:', error);
     }
@@ -33,15 +32,16 @@ function SkillInput({ handleCloseModal }) {
   const handleSkillSubmit = (event) => {
     event.preventDefault();
     if (skill.trim() !== '') {
+      const lowercaseSkill = skill.trim().toLowerCase(); // Convert skill to lowercase
       if (editIndex !== null) {
         // If editing an existing skill
         const updatedSkills = [...skills];
-        updatedSkills[editIndex] = skill.trim();
+        updatedSkills[editIndex] = lowercaseSkill;
         setSkills(updatedSkills);
         setEditIndex(null);
       } else {
         // If adding a new skill
-        setSkills([...skills, skill.trim()]);
+        setSkills([...skills, lowercaseSkill]);
       }
       setSkill('');
     }
@@ -65,7 +65,7 @@ function SkillInput({ handleCloseModal }) {
   const handleFinalSubmit = async () => {
     try {
       // Send skills data to backend
-      const response = await axios.post(`http://localhost:5000/profile/skills/${authId}`, { skills });
+      const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/skills/${authId}`, { skills });
       if (response.status === 201) {
         handleCloseModal(); // Close the modal or perform any other action
       } else {

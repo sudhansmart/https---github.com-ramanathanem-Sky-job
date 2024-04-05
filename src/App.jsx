@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import { Navbar } from './Components/Navbar';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { HashRouter  as Router,Route, Routes, Navigate } from 'react-router-dom';
 import { Home } from './Components/Home';
 import Notification from './Components/Notification';
 import Findjob from './Components/Findjob';
@@ -27,6 +27,8 @@ import PdfViewer from './Components/PdfViewer';
 import ContactPage from './Components/ContactPage';
 import Candidates from './Components/Candidates';
 import CandidateProfile from './Components/CandidateProfile';
+import FindCandidates from './Components/FindCandidates';
+import ApplicantForm from './Components/ApplicantForm';
 
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
     
     return (
         <div>
+            <Router>
             {adminToken ? <AdminNavbar adminToken={adminToken} /> : <Navbar userloggedin={userloggedin} token={token} />}
             <Routes>
                 <Route path='/' element={adminToken ? <AdminHome /> : <Home setAdmin={setAdmin} />} />
@@ -62,9 +65,11 @@ function App() {
                 <Route path='/Hr/:category' element={<Humanresource />} />
                 <Route path='/Operation/:category' element={<Operation />} />
                 <Route path='/forms' element={<UploadForm />} />
+                <Route path='/findcandidate' element={<FindCandidates/>}/>
                 <Route path='/adminlog' element={<AdminLogin setAdminToken={setAdminToken} />} />
-                <Route path='/develop' element={<CandidateProfile/>}/>
+                <Route path='/addcandidate' element={<ApplicantForm/>}/>
             </Routes>
+            </Router>
         </div>
     );
 }

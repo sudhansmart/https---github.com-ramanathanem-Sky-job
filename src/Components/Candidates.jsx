@@ -16,7 +16,7 @@ function Candidates() {
 
     const handleDownload = async (candidateId) => {
         try {
-          const response = await axios.get(`http://localhost:5000/file/download/${candidateId}/${jobid}`, {
+          const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/file/download/${candidateId}/${jobid}`, {
             responseType: 'blob',
           });
           
@@ -56,7 +56,7 @@ function Candidates() {
         setData(newData);
 
         try {
-            const response = await axios.put(`http://localhost:5000/post/update/${jobid}`, {
+            const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/post/update/${jobid}`, {
                 status: value,
                 candidateId : candidateId
             });
@@ -85,7 +85,7 @@ function Candidates() {
                         <h5 className='candidate-email mb-2'>Location: <span style={{color:'#35393C'}}>{candidate.location}</span></h5>
                     </div>
                     <div>
-                        <button className='cv-button' style={{ fontSize: "14px" }} onClick={() => handleDownload(candidate.candidateId)}> <FontAwesomeIcon icon={faDownload} /> Download CV</button>
+                        <Button  style={{ fontSize: "14px" }} onClick={() => handleDownload(candidate.candidateId)}> <FontAwesomeIcon icon={faDownload} /> Download CV</Button>
                         <Form.Select className='mt-3'
                             // as="select"
                             value={candidate.status}

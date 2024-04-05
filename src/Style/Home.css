@@ -160,4 +160,15 @@
     font-size: 16px;
     color: '#505050';
  }
+
+ @media (max-width:768px) {
+    .forms-group{
+        width: auto;
+        height: 60px;
+        position: relative;
+        background: red;
+        margin-left: 0;
+       /* margin-top: 20px; */
+    }
+ } 
  

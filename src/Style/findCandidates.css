@@ -1,0 +1,11 @@
+.top-section{
+    height: 200px;
+    background-color: #143d62;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-section-top{
+        display: flex;
+       
+}

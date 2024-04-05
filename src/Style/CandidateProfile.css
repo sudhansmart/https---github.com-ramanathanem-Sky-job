@@ -135,6 +135,17 @@ font-family: Roboto,sans-serif ;
     color: #121224;
     font-family: Roboto,sans-serif;
 }
+.degree-employment{
+    font-size: xx-large;
+    line-height:18px ;
+    font-weight: 700;
+    color: #121224;
+    font-family: Roboto,sans-serif;
+}
+.company-name{
+       font-size: large;
+       color: navy;
+}
 .edc-clg{
     word-wrap: break-word;
     font-size: 16px;

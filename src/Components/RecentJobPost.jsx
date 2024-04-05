@@ -9,7 +9,7 @@ const RecentJobPost = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/job/getdata');
+      const response = await axios.get('https://jobportal-backend-yi43.onrender.com/job/getdata');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -36,7 +36,7 @@ const RecentJobPost = () => {
               ))}
               <p className='job-count p-1 text-center'>Applicants: {job.applicants.length}</p>
               <Link to={`/candidates/${job._id}`} className='d-flex justify-content-center '  style={{ textDecoration: 'none' }}>
-                <button className='job-moreinfo no-decoration '>View Applicants</button>
+                <button className=' button-login no-decoration '>View Applicants</button>
               </Link>
             </div>
           </Col>

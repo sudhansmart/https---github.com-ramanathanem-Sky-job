@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { Form ,FloatingLabel,Col,FormGroup, Row} from 'react-bootstrap'
+import { Form ,FloatingLabel,Col,FormGroup, Row,Button} from 'react-bootstrap'
 import axios from 'axios';
 
 function Personaldata({handleCloseModal,fetchData}) {
@@ -14,7 +14,7 @@ function Personaldata({handleCloseModal,fetchData}) {
 
       const fetchProfileData = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/profile/specificprofile/${authId}`);
+          const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
          
           setProfile(response.data); // Assuming response.data contains the profile data
         } catch (error) {
@@ -40,7 +40,7 @@ function Personaldata({handleCloseModal,fetchData}) {
         console.log("Personal data",profile)
         try {
           // Update profile data on the server
-          const response = await axios.put(`http://localhost:5000/profile/update/${authId}`, profile);
+          const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/profile/update/${authId}`, profile);
           console.log("Profile Details Updated Successfully!");
           if(response.status == 200){
           fetchData();
@@ -103,8 +103,8 @@ function Personaldata({handleCloseModal,fetchData}) {
                   </Form.Select>
                   </Form.Group>
                   <FormGroup  as={Col} md="4" >
-                  <Form.Label>Date of Birth </Form.Label>
-                  <input
+                  <Form.Label>Date of Birth </Form.Label><br/>
+                  <Form.Control
                       type="date"
                       id="datePicker"
                       name = 'dob'
@@ -117,7 +117,7 @@ function Personaldata({handleCloseModal,fetchData}) {
       
       
        
-        <button type="submit" className='text-center mt-3'>Save Changes</button>
+        <Button type="submit" className='text-center mt-3'>Save Changes</Button>
       </Form>
     </div>
   )

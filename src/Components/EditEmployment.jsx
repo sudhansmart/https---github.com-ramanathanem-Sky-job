@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import "../Style/Employment.css";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button, Col, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import axios from 'axios';
 
-const Employment = ({handleCloseModal}) => {
+const EditEmployment = ({handleCloseModal,employment_id}) => {
   const [authId, setAuthId] = useState(localStorage.getItem('authId'));
   const [showPresent, setShowPresent] = useState(false);
   const [formData, setFormData] = useState({
@@ -16,8 +16,23 @@ const Employment = ({handleCloseModal}) => {
     jobSummary: '',
     startDate: '',
     endDate: '',
-    isCurrent: false // default value for checkbox
+    isCurrent: false 
   });
+
+  useEffect(() => {
+    fetchEducationData();
+  }, []);
+
+  const fetchEducationData = async () => {
+    try {
+      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
+      const existingEmployment = response.data.employment.find(emp => emp._id === employment_id);
+    
+      setFormData(existingEmployment);
+    } catch (error) {
+      console.error('Error fetching education data:', error);
+    }
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -40,34 +55,15 @@ const Employment = ({handleCloseModal}) => {
     if (showPresent) {
       employmentData.isCurrent= true ;
       employmentData.endDate = new Date();
-      
-    const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/employment/${authId}`, employmentData);
-    if(response.status == 201){
-      setFormData({
-        expYear: '',
-        expMonth:'',
-        currentCompanyName: '',
-        designation: '',
-        jobSummary: '',
-        startDate: '',
-        endDate: '',
-        isCurrent: false // default value for checkbox
-      });
+      console.log("submitted-present :",employmentData);
+
+      const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/profile/employment/${authId}/${employment_id}`, employmentData);
+    if(response.status == 200){
       handleCloseModal();
     }
     }else{
-    const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/employment/${authId}`, employmentData);
-        if(response.status == 201){
-          setFormData({
-            expYear: '',
-            expMonth:'',
-            currentCompanyName: '',
-            designation: '',
-            jobSummary: '',
-            startDate: '',
-            endDate: '',
-            isCurrent: false // default value for checkbox
-          });
+      const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/profile/employment/${authId}/${employment_id}`, employmentData);
+        if(response.status == 200){
           handleCloseModal();
         }
   }
@@ -81,29 +77,34 @@ const Employment = ({handleCloseModal}) => {
     <div className='container mt-4'>
       <p className='current-employe'>Is this your current employment?</p>
       <div className='d-flex'>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            onChange={() => setShowPresent(true)}
-          />
-          <label className="form-check-label yes-employe me-5">
-            Yes
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            onChange={() => setShowPresent(false)}
-          />
-          <label className="form-check-label yes-employe">
-            No
-          </label>
-        </div>
-      </div>
+  <div className="form-check">
+    <input
+      className="form-check-input"
+      type="radio"
+      name="iscurrent"
+      value="true"
+      checked={formData.isCurrent === true}
+      onChange={() => setFormData({ ...formData, isCurrent: true })}
+    />
+    <label className="form-check-label yes-employe me-5">
+      Yes
+    </label>
+  </div>
+  <div className="form-check">
+    <input
+      className="form-check-input"
+      type="radio"
+      name="iscurrent"
+      value="false"
+      checked={formData.isCurrent === false}
+      onChange={() => setFormData({ ...formData, isCurrent: false })}
+    />
+    <label className="form-check-label yes-employe">
+      No
+    </label>
+  </div>
+</div>
+
       <Form onSubmit={handleSubmit}>
        
         <Row className='mt-3'>
@@ -195,7 +196,8 @@ const Employment = ({handleCloseModal}) => {
               type="date"
               id="startDate"
               name="startDate"
-              value={formData.startDate}
+            
+              value={formData.startDate ? formData.startDate.split('T')[0] : ''}
               onChange={handleInputChange}
             />
           </FormGroup>
@@ -207,7 +209,8 @@ const Employment = ({handleCloseModal}) => {
                 type="date"
                 id="endDate"
                 name="endDate"
-                value={formData.endDate}
+               
+                value={formData.endDate ? formData.endDate.split('T')[0] : ''}
                 onChange={handleInputChange}
               />
             </FormGroup>}
@@ -219,4 +222,4 @@ const Employment = ({handleCloseModal}) => {
   );
 }
 
-export default Employment;
+export default EditEmployment;

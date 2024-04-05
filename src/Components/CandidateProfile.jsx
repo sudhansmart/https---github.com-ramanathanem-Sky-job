@@ -1,7 +1,7 @@
 import React, { useState, useEffect ,useRef} from 'react';
 import '../Style/CandidateProfile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDay, faDownload, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faCalendarDay, faDownload, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Modal,Form,Col ,Button,Toast,Row} from 'react-bootstrap';
 import ProfileDetails from './ProfileDetails';
 import axios from 'axios';
@@ -12,6 +12,7 @@ import EditEducation from './EditEducation';
 import Personaldata from './Personaldata';
 import AddLanguage from './AddLanguage';
 import Employment from './Employment';
+import EditEmployment from './EditEmployment';
 
 const CandidateProfile = () => {
   const fileInputRef = useRef(null);
@@ -24,20 +25,20 @@ const CandidateProfile = () => {
   const [showSkills,setShowSkills] = useState(false);
    const[showEducation,setShowEducation] =useState(false);
    const[showWorkExperience,setWorkExperience] =useState(false);
+   const[showEditEmployment,setShowEditEmployment] =useState(false);
+   const[employment_id,setEmployment_id] = useState(' ');
    const[showEditEducation,setShowEditEducation] =useState(false);
    const[showAddlanguages,setShowAddlanguages] =useState(false);
    const[education_id,setEducation_id] = useState(' ');
    const[showpersonal,setShowPersonal] =useState(false);
   const [showToast, setShowToast] = useState(false);
   const [languages, setLanguages] = useState([
-    // { id: 1, name: 'English', proficiency: 'Advanced', read: false, write: false, speak: true },
-    // { id: 2, name: 'French', proficiency: 'Intermediate', read: true, write: false, speak: true },
-    // { id: 3, name: 'Spanish', proficiency: 'Beginner', read: false, write: false, speak: false }
+    
   ]);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/profile/specificprofile/${authId}`);
+      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
       setProfileData([response.data]);
       setLanguages(response.data.languages)
     } catch (error) {
@@ -77,7 +78,7 @@ const CandidateProfile = () => {
 
     try {
       
-      const response = await axios.post(`http://localhost:5000/profile/uploadcv/${authId}`, formData, {
+      const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/uploadcv/${authId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -103,6 +104,7 @@ const CandidateProfile = () => {
     setShowPersonal(false);
     setShowAddlanguages(false);
     setWorkExperience(false);
+    setShowEditEmployment(false);
     fetchData();
   };
 
@@ -127,7 +129,7 @@ const CandidateProfile = () => {
 // handle delete and download cv 
 const handleDownload = async (name) => {
   try {
-    const response = await axios.get(`http://localhost:5000/profile/download/${authId}`, {
+    const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/download/${authId}`, {
       responseType: 'blob',
     });
     
@@ -156,7 +158,7 @@ const handleDownload = async (name) => {
 const handleDelete = async (id) => {
   try {
    
-   const response =  await axios.delete(`http://localhost:5000/profile/delete/${id}`);
+   const response =  await axios.delete(`https://jobportal-backend-yi43.onrender.com/profile/delete/${id}`);
      
       if(response.status == 204){
         setShowToast(true); 
@@ -197,7 +199,7 @@ const handleDelete = async (id) => {
     setEducation_id(file_id)
   }
   const handleEducationDelete = async(id)=>{
-    const response =  await axios.delete(`http://localhost:5000/profile/deleteeducation/${authId}/${id}`);
+    const response =  await axios.delete(`https://jobportal-backend-yi43.onrender.com/profile/deleteeducation/${authId}/${id}`);
     console.log(response.data)
     fetchData()
   }
@@ -214,7 +216,7 @@ const handleDelete = async (id) => {
   }
 
   const handlelanguagedel = async (id)=>{
-    const response =  await axios.delete(`http://localhost:5000/profile/deletelanguage/${authId}/${id}`);
+    const response =  await axios.delete(`https://jobportal-backend-yi43.onrender.com/profile/deletelanguage/${authId}/${id}`);
     console.log(response.data)
     fetchData()
   }
@@ -223,6 +225,44 @@ const handleDelete = async (id) => {
       setShowToast(false);
       setDelFeedBack(false);
       setSummaryFeedBack(false)
+    }
+
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const month = date.toLocaleString('default', { month: 'short' });
+      const year = date.getFullYear();
+      return `${month} ${year}`;
+    };
+
+    const calculateDuration = (startDate, endDate) => {
+      const start = new Date(startDate);
+      const end = endDate === 'Present' ? new Date() : new Date(endDate);
+      
+      const diffYear = end.getFullYear() - start.getFullYear();
+      const diffMonth = end.getMonth() - start.getMonth();
+    
+      let years = diffYear;
+      let months = diffMonth;
+    
+      if (months < 0) {
+        years -= 1;
+        months += 12;
+      }
+    
+      return `${years} years ${months} months`;
+    };
+
+    const handleEditEmployment  =(id)=>{
+      setModalShow(true);
+      setEmployment_id(id)
+      setShowEditEmployment(true);
+      
+      console.log("id:",id)
+    }
+    const handleEmploymentDelete = async(id)=>{
+      const response =  await axios.delete(`https://jobportal-backend-yi43.onrender.com/profile/deleteemployment/${authId}/${id}`);
+      console.log(response.data)
+      fetchData()
     }
 
    
@@ -290,7 +330,7 @@ const handleDelete = async (id) => {
           <div key={dataIndex} className='d-flex p-2'>
     {data.keySkills.map((skill, skillIndex) => (
       <div key={skillIndex} className='profile p-2'>
-        <span className='profile-jobskill me-2 p-2'>{skill}</span>
+        <span className='profile-jobskill me-2 p-2'>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
       </div>
     ))}
   </div>
@@ -302,22 +342,35 @@ const handleDelete = async (id) => {
                            <p className='write-education' onClick={handleEmployment}>Add Experience</p>
                      </div><hr/>
                      {profileData.map((data, dataIndex) => {
-  
-                        const sortedEducation = data.education.slice().sort((a, b) => b.startyear - a.startyear);
-                        
-                        return (
-                            <div key={dataIndex} className='p-2'>
-                                {sortedEducation.map((edu, skillIndex) => (
-                                    <div key={skillIndex} className='profile p-1'>
-                                        <p className='degree-education'>{edu.degree}  <i className="bi bi-pencil-fill edit-profile" onClick={()=>handleEditEducation(edu._id)}></i> 
-                                        < FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{cursor:"pointer"}} onClick={()=>handleEducationDelete(edu._id)}/></p>
-                                        <p className='edc-clg'>{edu.collegeName}</p>
-                                        <p className='edc-clg'>{edu.startyear} - {edu.passedout}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        );
-                        })}
+                  const sortedEmployment = data.employment.slice().sort((a, b) => {
+                    const startDateA = new Date(a.startDate);
+                    const startDateB = new Date(b.startDate);
+                    return startDateB - startDateA;
+                  });
+                   
+                   return (
+                     <div key={dataIndex} className='p-2'>
+                       {sortedEmployment.map((work, skillIndex) => (
+                         <div key={skillIndex} className='profile p-1'>
+                           <p className='degree-employment'>
+                             {work.designation}
+                           <span style={{fontSize:'16px'}}>  <i className="bi bi-pencil-fill edit-profile" onClick={() => handleEditEmployment(work._id)}></i> 
+                             <FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{ cursor: "pointer" }} onClick={() => handleEmploymentDelete(work._id)} />
+                             </span> </p>
+                           <p className='company-name'><span style={{color:"#605c5c"}}><FontAwesomeIcon icon={faBuilding}/></span> {work.currentCompanyName}</p>
+                           <p className='edc-clg'>
+                             {formatDate(work.startDate)} - {work.isCurrent ? 'Present' : formatDate(work.endDate)}
+                           </p>
+                           <p className='edc-clg'>
+                             {calculateDuration(work.startDate, work.isCurrent ? 'Present' : work.endDate)}
+                           </p>
+                           <p className='profile-summary'>{work.jobSummary}</p>
+                         </div>
+                       ))}
+                     </div>
+  );
+})}
+
           </div>
         <div>
 </div>
@@ -354,7 +407,7 @@ const handleDelete = async (id) => {
     <div className="row">
       <div className="col">
         <p className='personal-dob'>Date of birth</p>
-        <p className='dob-candidate' >{new Date(data.dob).toLocaleDateString('en-GB')}</p>
+        <p className='dob-candidate' >{data.dob?new Date(data.dob).toLocaleDateString('en-GB'):" "}</p>
         <p className='personal-dob '>Gender</p>
         <p className='dob-candidate ' style={{textTransform:"capitalize"}}>{data.gender}</p>
       </div>
@@ -436,8 +489,10 @@ const handleDelete = async (id) => {
               }
               {
                 showWorkExperience? 
-                                 <Employment/> : " "   
+                                 <Employment handleCloseModal={handleCloseModal} /> : " "   
                }
+               {showEditEmployment?
+                           <EditEmployment  handleCloseModal={handleCloseModal} employment_id={employment_id} /> : " "}
               {showEducation? 
                             <Education handleCloseModal={handleCloseModal}/>    : " "
               }

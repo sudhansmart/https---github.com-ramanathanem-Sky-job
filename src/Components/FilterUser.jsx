@@ -17,12 +17,11 @@ function FilterUser({data,setData}) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/job/getdata');
+      const response = await axios.get('https://jobportal-backend-yi43.onrender.com/job/getdata');
       const filteredData = response.data.filter(entry => entry.category === `${category}`);
       setData(filteredData);
       setJobData(filteredData);
       setOriginalData(filteredData);
-      console.log("fetched data :",filteredData);
     } catch (error) {
       console.error('Error fetching data:', error);
     }

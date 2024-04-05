@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { FloatingLabel ,Form} from 'react-bootstrap';
+import { FloatingLabel ,Form,Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -22,7 +22,7 @@ const ProfileDetails = ({handleCloseModal}) => {
   // Function to fetch profile data from the server
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/profile/specificprofile/${authId}`);
+      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
      
       setProfile(response.data); // Assuming response.data contains the profile data
     } catch (error) {
@@ -49,7 +49,7 @@ const ProfileDetails = ({handleCloseModal}) => {
     e.preventDefault();
     try {
       // Update profile data on the server
-      const response = await axios.put(`http://localhost:5000/profile/update/${authId}`, profile);
+      const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/profile/update/${authId}`, profile);
       console.log("Profile Details Updated Successfully!");
       if(response.status == 200){
       fetchData();
@@ -112,7 +112,7 @@ const ProfileDetails = ({handleCloseModal}) => {
         className="mb-3"
       >
         <Form.Control  type="text" className=' mt-3'
-         onChange={handleOnChange} name='email' value={profile.email} required/>
+         onChange={handleOnChange} name='email' value={profile.email} readOnly/>
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingInput"
@@ -132,7 +132,7 @@ const ProfileDetails = ({handleCloseModal}) => {
       </FloatingLabel>
       
        
-        <button type="submit" className='text-center'>Save Changes</button>
+        <Button type="submit" variant='primary' >Save Changes</Button>
       </Form>
     </div>
   );

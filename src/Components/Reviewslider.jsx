@@ -2,6 +2,7 @@ import React from 'react'
 import review from "../assets/Images/review.png"
 import Carousel from 'react-bootstrap/Carousel';
 import "../Style/Reviewslider.css"
+import invertedquote from '../assets/Images/quote.png'
 const Reviewslider = () => {
     const data=[
         {
@@ -22,11 +23,18 @@ const Reviewslider = () => {
 <div className='image-overlayss'>
 
   <div className="col-sm-6 mt-4 mb-4 ">
-  <div className="card container " style={{height:"300px"}}>
+  <div className="card container " >
   
   <div className="card-body">
     <div className="card-title">
-    <p className="text-center me-2" id='review'>Review <i className="bi bi-star-fill" id='star'></i><i className="bi bi-star-fill" id='star'></i><i className="bi bi-star-fill" id='star'></i><i className="bi bi-star-fill" id='star'></i><i className="bi bi-star-half"id='star'></i></p>
+    <p className="text-center " id='review'>
+      Review 
+    <i className="bi bi-star-fill ms-3" id='star'>
+      </i><i className="bi bi-star-fill ms-1" id='star'></i>
+      <i className="bi bi-star-fill ms-1" id='star'></i>
+      <i className="bi bi-star-fill ms-1" id='star'></i>
+      <i className="bi bi-star-half ms-1"id='star'></i>
+      </p>
     </div>
     <div className="card-text">
     <Carousel controls={false}>
@@ -35,7 +43,7 @@ const Reviewslider = () => {
                 return(
 <Carousel.Item key={data.id} interval={3000}>
             <blockquote>
-                <h4 id='reviews'>{data.content}</h4>
+                <p  id='reviews-slider'>{data.content}</p>
             </blockquote>
         </Carousel.Item>
      
@@ -49,9 +57,13 @@ const Reviewslider = () => {
 </div>
   
   </div>
-  <div className="col-sm-2 ">
-     <img src={review} />
-  
+  <div className="col-sm-2 bg-inverte" >
+     <img src={invertedquote} />
+     <p id='content'>
+     Join the community of 5 
+     crore satisfied job seekers...
+     </p>
+    
   </div>
 
 </div>

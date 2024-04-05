@@ -18,10 +18,10 @@
     font-weight: 600;
     color: #63CCCA;
 }
-.cv-button{
+/* .cv-button{
     background-color: #42858C;
     border: none;
-}
+} */
 @media (max-width:768px) {
     .candidate-data{
       font-size: 14px;

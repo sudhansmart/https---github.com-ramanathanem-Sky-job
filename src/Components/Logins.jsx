@@ -45,7 +45,7 @@ const Logins = ({setUserloggedin,setToken}) => {
         });
         try {
           if (useridValid ) {
-            const response = await axios.post('http://localhost:5000/login/verify',loginFormData)
+            const response = await axios.post('https://jobportal-backend-yi43.onrender.com/login/verify',loginFormData)
               if(response.data == true){
                 setshowOtp(true);
               }
@@ -88,7 +88,7 @@ const Logins = ({setUserloggedin,setToken}) => {
       });
 
       if (useridValid) {
-           const response = await axios.post('http://localhost:5000/signup/verify',signUpFormData)
+           const response = await axios.post('https://jobportal-backend-yi43.onrender.com/signup/verify',signUpFormData)
            setShowSignupmessage(true);
           if(response.data == true ){
             setSignUpFeedback("Registration Successfull.Please Login");
@@ -109,7 +109,7 @@ const Logins = ({setUserloggedin,setToken}) => {
           const sendData = {email:loginFormData.email,
           otp:data.otp}
          try {
-          const response = await axios.post('http://localhost:5000/login/verifyotp',sendData);
+          const response = await axios.post('https://jobportal-backend-yi43.onrender.com/login/verifyotp',sendData);
      
           if(response.status == 200){
             setToken(response.data.token);
@@ -138,25 +138,25 @@ const Logins = ({setUserloggedin,setToken}) => {
 
   return (
     <div className='d-flex justify-content-center'>
-       <div className={`containers mt-4 ${isSignUpActive ? 'right-panel-active' : ''}`} id="container">
+       <div className={`containers-login mt-4 ${isSignUpActive ? 'right-panel-active' : ''}`}>
        {isSignUpActive?  <div className="sign-up-container">
        <h2 className='logintitle text-center mt-5' id='jobsfont'>Register</h2>
-          <form className='mt-5' onSubmit={handleSignUp}>
-            <input type="text" placeholder="Name" className=' mb-3' name='name' value={signUpFormData.name} onChange={handleSignUpOnChange} required />
-            <input type="email" placeholder="Email" className=''  name='email' value={signUpFormData.email} onChange={handleSignUpOnChange}  />
+          <form className='mt-5 form-login' onSubmit={handleSignUp}>
+            <input type="text" placeholder="Name" className='input-login mb-3' name='name' value={signUpFormData.name} onChange={handleSignUpOnChange} required />
+            <input type="email" placeholder="Email" className='input-login'  name='email' value={signUpFormData.email} onChange={handleSignUpOnChange}  />
             {errors.email && <p className="error text-danger">{errors.email}</p>}
-            <button className=' mt-4' type='submit'>Sign Up</button>
+            <button className='button-login mt-4' type='submit'>Sign Up</button>
           </form>
          {showSignupmessage?<div className='text-center mt-5'>{signUpFeedback}</div>:" "}
         </div>
         :  <div className="form-container sign-in-container">
             {showOtp?<h2 className='logintitle text-center mt-5' id='jobsfont'>OTP Verfication</h2>:<h2 className='logintitle text-center mt-5' id='jobsfont'>Login</h2> }
-         {showOtp? <OtpScreen otpError={otpError} handleOtpVerification={handleOtpVerification}/>:<form className='mt-5' onSubmit={handleLogin}>
-            <input type="email" placeholder="Email" className=' mt-3'  onChange={handleloginOnChange}
+         {showOtp? <OtpScreen otpError={otpError} handleOtpVerification={handleOtpVerification}/>:<form className='mt-5 form-login' onSubmit={handleLogin}>
+            <input type="email" placeholder="Email" className='input-login mt-3'  onChange={handleloginOnChange}
                     name ='email'
                     value={loginFormData.email} />
                      {errors.email && <p className="error text-danger" >{errors.email}</p>}
-            <button className='mt-3' type='submit' >Login</button>
+            <button className='button-login mt-3' type='submit' >Login</button>
             {errors.server && <p className="error">{errors.server}</p>}
             {showLoginmessage?<div className='text-center mt-5'>{loginFeedback}</div>:" "}
           </form>}
@@ -164,14 +164,14 @@ const Logins = ({setUserloggedin,setToken}) => {
         </div>}
         <div className="overlay-container">
           <div className="overlay">
-            <div className={`overlay-panel overlay-left ${isSignUpActive ? 'active' : ''}`}>
-              <h1 id='jobsfont'>Welcome Back!</h1>
-              <p id='jobsfont'>To keep connected with us, please login with your personal info</p>
-              <button className="ghost" onClick={handleSignInClick} id='jobsfont'>Login</button>
+            <div className={`overlay-panel overlay-left`}>
+              <h1 className='p-login' >Welcome Back!</h1>
+              <p  className='p-login' >To keep connected with us, please login with your personal info</p>
+              <button className="ghost" onClick={handleSignInClick} >Login</button>
             </div>
-            <div className={`overlay-panel overlay-right ${!isSignUpActive ? 'active' : ''}`}>
-              <h1 id='jobsfont'>Hello, Friend!</h1>
-              <p id='jobsfont'>Enter your personal details and start the journey with us</p>
+            <div className={`overlay-panel overlay-right `}>
+              <h1 className='p-login' >Hello, Friend!</h1>
+              <p className='p-login'  >Enter your personal details and start the journey with us</p>
               <button className="ghost" onClick={handleSignUpClick}>Sign Up</button>
             </div>
           </div>

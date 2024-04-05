@@ -54,7 +54,7 @@ export const Navbar = ({userloggedin,token}) => {
                   </Dropdown.Toggle>
             
                   <Dropdown.Menu>
-                    <Dropdown.Item href='/profile'>Profile Details</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/profile">Profile Details</Dropdown.Item>
                     <Dropdown.Item href="/" onClick={handleSignOut}>Sign-out</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

@@ -8,11 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook,  faHouse, faMagnifyingGlass, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import PostJob from './PostJob';
+import UploadForm from './UploadForm';
 
  const AdminNavbar = ({adminToken}) => {
     const[menuOpen, setOpen]=useState(false)
     const [modalShow, setModalShow] = useState(false);
-
+   
 
     const handleSignOut =()=>{
       localStorage.clear();
@@ -39,9 +40,11 @@ import PostJob from './PostJob';
         <NavLink to="/contact"><FontAwesomeIcon icon={faAddressBook} className='me-1' />Applicants</NavLink>
         </li>
         <li>
-        <NavLink to="/contact"><FontAwesomeIcon icon={faMagnifyingGlass} className='me-1' />Find Candidates</NavLink>
+        <NavLink to="/findcandidate"><FontAwesomeIcon icon={faMagnifyingGlass} className='me-1' />Find Candidates</NavLink>
         </li>
-        
+        <li>
+        <NavLink  to="/addcandidate" className="btn btn-outline-primary"  style={{borderRadius:'20px',fontSize:'12px'}} >Add Candidate</NavLink>
+        </li>
         <li>
         <NavLink  className="btn btn-outline-primary" onClick={()=>setModalShow(true)} style={{borderRadius:'20px',fontSize:'12px'}} >Post a job</NavLink>
         </li>
@@ -88,6 +91,8 @@ import PostJob from './PostJob';
       
       </Modal.Footer>
     </Modal>
+   
+  
     </div>
   )
 }

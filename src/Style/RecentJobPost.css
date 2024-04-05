@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Great+Vibes&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 .recent-bg{
-       background-color: #98D7D0;
+       background-color:#c4d3d1;
+       height : 100%
 }
 .recent-job{
    background-color: white;
