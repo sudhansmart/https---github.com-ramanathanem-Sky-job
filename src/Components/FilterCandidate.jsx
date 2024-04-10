@@ -4,7 +4,7 @@ import '../Style/filterUser.css';
 import { Form, Col, Button, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons';  
+import { faFilter, faRotateRight } from '@fortawesome/free-solid-svg-icons';  
 
 
 
@@ -13,9 +13,12 @@ function FilterCandidate({ filter,handleResetFilters,handleOnChange,handleApplyF
 
   return (
     <>
-    <div className='filteruser p-3'>
+    <div className='filteruser-find p-3'>
+        <h4><FontAwesomeIcon style={{color:'#4d6e8c'}} icon={faFilter}/> Filter</h4>
+        <hr/>
       <Form>
         <Col xs='auto'>
+        <div className='filter-border mb-3'>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <Form.Label>Keyskills</Form.Label>
             <Form.Control
@@ -86,17 +89,8 @@ function FilterCandidate({ filter,handleResetFilters,handleOnChange,handleApplyF
               onChange={handleOnChange}
             />
           </Form.Group>
-          <Form.Group className='mb-3' controlId='formBasicEmail'>
-            <Form.Label>Location</Form.Label>
-            <Form.Control
-              type='text'
-              placeholder='Enter City'
-              className='mr-sm-2'
-              name='location'
-              value={filter.location}
-              onChange={handleOnChange}
-            />
-          </Form.Group>
+          </div>
+          <div className='filter-border mb-3'>
           <Form.Group className='mb-3' controlId='formBasicRange'>
             <Form.Label>Gender</Form.Label>
             <Form.Select
@@ -121,11 +115,29 @@ function FilterCandidate({ filter,handleResetFilters,handleOnChange,handleApplyF
               onChange={handleOnChange}
             />
           </Form.Group>
+          <Form.Group className='mb-3' controlId="validationFormik03">
+                <Form.Label>Notice Period</Form.Label>
+                  <Form.Select
+                     value={filter.noticeperiod || 'Please Select'} // Use the 'value' prop for default value
+                         name='noticeperiod'
+                    onChange={handleOnChange}
+        
+                   aria-label="select Here"
+            >    <option value=" " >Please Select</option>
+                <option value="0" >Immediate Joiner</option>
+                <option value="0-15">0-15</option>
+                <option value="15-30">15-30</option>
+                 <option value="30-45">30-45</option>
+                 <option value="45">45 Above</option>
+                  </Form.Select>
+         </Form.Group>
+         </div>
+         <div className='filter-border mb-3'>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <Form.Label>Find By Name</Form.Label>
             <Form.Control
               type='text'
-             
+              placeholder='Name'
               className='mr-sm-2'
               name='name'
               value={filter.name}
@@ -147,13 +159,14 @@ function FilterCandidate({ filter,handleResetFilters,handleOnChange,handleApplyF
             <Form.Label>Find By Phone</Form.Label>
             <Form.Control
               type='number'
-              placeholder='Enter Phone Number'
+              placeholder='10 Digit Number'
               className='mr-sm-2'
               name='phonenumber'
               value={filter.phonenumber}
               onChange={handleOnChange}
             />
           </Form.Group>
+          </div>
         </Col>
         <Col className='d-flex justify-content-around '>
           <Button variant="secondary" onClick={handleResetFilters}><FontAwesomeIcon icon={faRotateRight}/> Reset</Button>

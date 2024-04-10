@@ -38,7 +38,7 @@ function ApplicantForm() {
   
       formData.append('name', values.name);
       // formData.append('recruiterName', recruiterName);
-      formData.append('email', values.email);
+      formData.append('email', values.email.toLowerCase());
       formData.append('phonenumber', values.phoneNumber);
       formData.append('location', values.location);
       formData.append('clientName', values.clientName);

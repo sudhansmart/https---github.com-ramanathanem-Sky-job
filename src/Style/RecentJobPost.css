@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Great+Vibes&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 .recent-bg{
        background-color:#c4d3d1;
-       height : 100%
 }
 .recent-job{
+   
    background-color: white;
     position: relative;
-    left: 100px;
+    /* left: 100px; */
  margin-top: 50px;
  border-radius: 10px;
 }
@@ -23,14 +23,16 @@
    box-sizing: content-box;
 }
 .job-title{
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.5rem;
+    font-weight: 600;
     letter-spacing: -0.06px;
     letter-spacing: 600;
 }
 .job-company{
     align-items: center;
-    font-size: .875rem;
+    font-size: .975rem;
+    font-weight: 600;
     line-height: 1rem;
     color: #2d2d2d;
     font-family: 'Noto Sans','Helvetica Neue',Helvetica,Arial,sans-serif;

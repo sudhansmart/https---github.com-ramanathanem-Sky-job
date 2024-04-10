@@ -74,12 +74,12 @@ function Candidates() {
     return (
         <div className='d-flex p-3'>
           <FilterAdmin setData={setData}/>
-            <Row  className='w-70'>
+       <Row  className='w-70'>
             {data.map((candidate, index) => (
                 <div className='candidate-main d-flex p-3 justify-content-around align-items-center w-80' key={index}>
                     <div>
                         <h5 className='candidate-name mb-3'>{candidate.candidateName}</h5>
-                        <h5 className='candidate-job mb-2'>{candidate.jobtitle}</h5>
+                        <h5 className='candidate-job mb-2'>{candidate.role}</h5>
                         <h5 className='candidate-email mb-2'>Email: <span style={{color:'#35393C'}}>{candidate.candidateEmail}</span></h5>
                         <h5 className='candidate-email mb-2'>Phone: <span style={{color:'#35393C'}}>{candidate.candidatePhone}</span></h5>
                         <h5 className='candidate-email mb-2'>Location: <span style={{color:'#35393C'}}>{candidate.location}</span></h5>

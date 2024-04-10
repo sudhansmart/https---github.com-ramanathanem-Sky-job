@@ -29,6 +29,9 @@ import Candidates from './Components/Candidates';
 import CandidateProfile from './Components/CandidateProfile';
 import FindCandidates from './Components/FindCandidates';
 import ApplicantForm from './Components/ApplicantForm';
+import FindCandidate from './Components/FindCandidate';
+import FilterCandidateNew from './Components/FilterCandidateNew';
+import ShowFiltered from './Components/ShowFiltered';
 
 
 function App() {
@@ -68,6 +71,8 @@ function App() {
                 <Route path='/findcandidate' element={<FindCandidates/>}/>
                 <Route path='/adminlog' element={<AdminLogin setAdminToken={setAdminToken} />} />
                 <Route path='/addcandidate' element={<ApplicantForm/>}/>
+                <Route path='/develope' element={<FindCandidate/>}/>
+                <Route path='/develope1' element={<ShowFiltered/>}/>
             </Routes>
             </Router>
         </div>

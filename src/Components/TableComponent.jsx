@@ -107,8 +107,8 @@ const TableComponent = ({setFetch,fetch}) => {
 
  
   const sortedData = formdata.sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
+    const dateA = new Date(a.joinedOn);
+    const dateB = new Date(b.joinedOn);
     return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
   });
 
@@ -128,7 +128,7 @@ const TableComponent = ({setFetch,fetch}) => {
     const endDateWithoutTime = endDate ? new Date(endDate).toISOString().split('T')[0] : null;
   
     // Perform date comparison without considering time
-    const dateMatch =
+      const dateMatch =
       startDateWithoutTime &&
       endDateWithoutTime &&
       formattedDate >= new Date(startDateWithoutTime) &&

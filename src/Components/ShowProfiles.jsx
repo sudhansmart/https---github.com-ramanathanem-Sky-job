@@ -4,7 +4,7 @@ import '../Style/candidate.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload,faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleDown, faBuilding, faDownload,faEnvelope,faMagnifyingGlass, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 import FilterCandidate from './FilterCandidate';
 
@@ -51,7 +51,7 @@ const [filter, setFilter] = useState({
 });
 
 const handleOnChange = (e) => {
-  fetchData();
+  // fetchData();
   const { name, value } = e.target;
   setFilter(prevFilter => ({
     ...prevFilter,
@@ -78,10 +78,12 @@ const filterJobData = () => {
 
   // Apply search term filter
   if (filter.skills) {
-      filteredJobs = filteredJobs.filter(user =>
-        user.keySkills && user.keySkills.includes(filter.skills.toLowerCase())
-      ); 
-    }
+    const searchTerm = filter.skills.toLowerCase();
+    filteredJobs = filteredJobs.filter(job =>
+      job.keySkills && job.keySkills.some(skill => skill.toLowerCase().includes(searchTerm))
+    );
+  }
+  
 
   // Apply experience filter
   if (filter.minyear || filter.maxyear) {
@@ -120,11 +122,20 @@ const filterJobData = () => {
   }
 
   // Apply Notice Period filter
+  // if (filter.noticeperiod) {
+  //   filteredJobs = filteredJobs.filter(job =>
+  //     job.noticeperiod && job.noticeperiod === parseInt(filter.noticeperiod)
+  //   );
+  // }
   if (filter.noticeperiod) {
-    filteredJobs = filteredJobs.filter(job =>
-      job.noticeperiod && job.noticeperiod === parseInt(filter.noticeperiod)
-    );
+    const [min, max] = filter.noticeperiod.split('-').map(val => parseInt(val)); 
+    filteredJobs = filteredJobs.filter(job => {
+    const minExperience = min || 0;
+      const maxExperience = max || Infinity;
+      return +job.noticeperiod >= minExperience && +job.noticeperiod <= maxExperience && job.noticeperiod <= "immediate";
+    });
   }
+
 
   // Apply Name filter
   if (filter.name) {
@@ -249,9 +260,9 @@ const handleApplyFilters = () => {
                 <Form.Group controlId="formFile" as={Col} md="4" >
                       <FloatingLabel  
                   controlId="floatingInput"
-                  label="Job Title" 
+                  label="Search Role" 
                 >
-                  <Form.Control type="text" placeholder="Job Title"
+                  <Form.Control type="text" placeholder="Java Developer"
                    name='jobtitle'
                    value={filter.jobtitle}
                    onChange={handleOnChange} />
@@ -281,24 +292,53 @@ const handleApplyFilters = () => {
                filter={filter} 
                handleResetFilters={handleResetFilters}  
                handleOnChange={handleOnChange} handleApplyFilters={handleApplyFilters}/>
-            <Row  style={{height:"100%",width:"80%"}} >
-            {data.map((candidate, index) => (
-                <div className='candidate-main d-flex p-3 justify-content-around align-items-center ' key={index}>
+              {data.length == 0? <p className='text-center w-100 ' style={{fontSize:'30px',fontWeight:"600"}}>No Results Found.</p> : <div  style={{height:"100%",width:"80%"}} >
+            {data.map((candidate, index) => (<div className='candidate-main'>
+                <div className=' d-flex p-3 justify-content-around align-items-center ' key={index}>
+                     <div className='ellipse-9' />
                     <div>
-                        <h5 className='candidate-name mb-3'>{candidate.name}</h5>
-                        <h5 className='candidate-job mb-2'>{candidate.role}</h5>
-                        <h5 className='candidate-email mb-2'>Email: <span style={{color:'#35393C'}}>{candidate.email}</span></h5>
-                        <h5 className='candidate-email mb-2'>Phone: <span style={{color:'#35393C'}}>{candidate.phonenumber}</span></h5>
-                        <h5 className='candidate-email mb-2'>Location: <span style={{color:'#35393C'}}>{candidate.location}</span></h5>
+                        <h5 className='candidate-name'>{candidate.name.replace(/\b\w/g,c=>c.toUpperCase())}</h5>
+                        <h5 className='candidate-job '>{candidate.role}</h5>
+                        <h5 className='candidate-loc mb-2'>{candidate.currentCompany}</h5>
+                        <h5 className='candidate-loc mb-2'>{candidate.location}</h5>
                     </div>
                     <div>
-                        <Button className='cv-button' style={{ fontSize: "14px" }} onClick={() => handleDownload(candidate._id)}> <FontAwesomeIcon icon={faDownload} /> Download CV</Button>
-                        
+                    <p className='experience'>Experience : <span className='years ps-1'> {candidate.experience} years </span> </p>
+                    <p className='experience'>CTC : <span className='years ps-1'> {candidate.currentctc} LPA </span> </p>
+                    <p className='experience'>Notice Period : <span className='years ps-1'> {candidate.noticeperiod} Days </span> </p>
                     </div>
+                    
                 </div>
-               
+                    <div className='d-flex justify-content-evenly p-3'>
+                         
+                    <div  className='datae p-5 '>
+                          <p ><FontAwesomeIcon icon={faEnvelope}/> Email : {candidate.email}</p>
+                          <p><FontAwesomeIcon icon={faBuilding}/> Industry : {candidate.industry}</p>
+                          <p><FontAwesomeIcon icon={faPhone}/> Phone Number : {candidate.phonenumber}</p>
+                    </div>
+                    <div  className='skill1 p-3'>
+                        <h5>Skills : </h5>
+                        <div className='m-3 '>
+                       {candidate.keySkills.map((skill, index) => (
+                            <div className="skill-items" key={index}>
+                              <span className="skills-text" onClick={() => handleSkillEdit(index)}>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
+                             
+                           </div>
+        ))}
+      </div>
+                   </div>
+                    </div>
+                    <div className='d-flex justify-content-center '> 
+                    <button className='button-frame mb-3' onClick={() => handleDownload(candidate._id)}>
+                         <FontAwesomeIcon className='down-arrow' icon={faArrowAltCircleDown}/>
+                       <span className='download-resume'>Download Resume</span>
+                    </button>
+
+                    </div>
+                </div> 
             ))}
-            </Row>
+            
+            </div>}
         </div>
         </>
     );

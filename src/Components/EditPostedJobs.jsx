@@ -1,4 +1,4 @@
-import React,{useState,useRef} from 'react';
+import React,{useState,useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -12,9 +12,25 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function PostJob({setModalShow}) {
+function EditPostedJobs({setModalShow,id}) {
   const navigate = useNavigate();
+  const [jobData, setJobData] = useState(null);
+
+ 
+ 
+  useEffect(() => {
   
+    const fetchJobData = async () => {
+      try {
+        const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/job/specificjob/${id}`);
+        setJobData(response.data);
+      } catch (error) {
+        console.error('Error fetching job data:', error);
+      }
+    };
+
+    fetchJobData();
+  }, [id]);
   
   const schema = yup.object().shape({
     jobtitle: yup.string().required('Job Title is required'),
@@ -35,32 +51,37 @@ function PostJob({setModalShow}) {
     recruiterEmail: yup.string().required('Email is required'),
     primarySkills: yup.string().required('Skills is required'),  
   });
-
-
  
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      console.log("Form Data:", values); // Output form data as an object
-  
-      const formData = values;
-      const response = await axios.post('https://jobportal-backend-yi43.onrender.com/job/upload', formData);
-  
+      console.log("Form Data:", values);
+     
+      const updatedJobData = { ...jobData, ...values };
+      
+      const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/job/postupdate/${id}`, updatedJobData);
+        // const response = await axios.put(`http://localhost:5000/job/postupdate/${id}`, updatedJobData);
+
+
       console.log("Response:", response.data);
-  
+
       if (response.status === 200) {
-        resetForm(); // Reset the form without any arguments
+        resetForm();
         alert("Your Data is Saved Successfully!!");
         navigate('/');
       } else {
-        alert(" server is busy. Please try again later.");
+        alert("Server is busy. Please try again later.");
       }
     } catch (error) {
-      console.error('App.Form API Error:', error);
+      console.error('Error updating job data:', error);
     }
   };
-  
-  
 
+  if (!jobData) {
+    return <div>Loading...</div>;
+  }
+
+ 
+   
  
 
   return (
@@ -70,23 +91,23 @@ function PostJob({setModalShow}) {
       validationSchema={schema}
       onSubmit={(values, { resetForm }) => handleSubmit(values, { resetForm })}
       initialValues={{
-        jobtitle: '',
-        companyName : '',
-        jobtype:'',
-        category:'',
-        gender:'',
-        companyprofile:'',
-        jobdescription:'',
-        experience : '',
-        salary:'',
-        location: '',
-        qualification:'',
-        workmode:'',
-        noticePeriod:'',
-        recruiterName:'',
-        phoneNumber: '',
-        recruiterEmail:'',
-        primarySkills:'',
+        jobtitle:  jobData.jobtitle || '',
+        companyName :jobData.companyName || '',
+        jobtype:jobData.jobtype || '',
+        category:jobData.category || '',
+        gender:jobData.gender || '',
+        companyprofile:jobData.companyprofile || '',
+        jobdescription:jobData.jobdescription || '',
+        experience :jobData.experience || '',
+        salary:jobData.salary || '',
+        location:jobData.location || '',
+        qualification: jobData.qualification || '',
+        workmode: jobData.workmode || '',
+        noticePeriod:jobData.noticePeriod || '',
+        recruiterName:jobData.recruiterName || '',
+        phoneNumber:jobData.phoneNumber || '',
+        recruiterEmail:jobData.recruiterEmail || '',
+        primarySkills:jobData.primarySkills || '',
 
  
       }}
@@ -407,4 +428,4 @@ function PostJob({setModalShow}) {
   );
 }
 
-export default PostJob;
+export default EditPostedJobs;

@@ -26,7 +26,7 @@ const AdminLogin = ({setRole,setAdminToken,setAdminloggedin,setUserloggedin}) =>
     const response = await axios.post("https://jobportal-backend-yi43.onrender.com/admin/login",formData);
         localStorage.setItem('adauthToken', response.data.token);
         setAdminToken(response.data.token)
-        console.log("Login response :",response);
+       
 
     if (response.status ==200){
       alert("Login Sucessful")

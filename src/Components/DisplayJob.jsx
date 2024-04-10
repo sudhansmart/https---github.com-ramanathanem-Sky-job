@@ -99,7 +99,7 @@ function DisplayJob() {
             <p>{item.companyprofile}</p>
             <h5>Job Description</h5>
             <p>{item.jobdescription}</p><hr/>
-            <p className='mt-4' style={{fontWeight:"600"}}>Posted at : 22/01/2024</p>
+            <p className='mt-4' style={{fontWeight:"600"}}>Posted on : {item.postedDate.split('T')[0]}</p>
           </div>
         </div>
       ))}
