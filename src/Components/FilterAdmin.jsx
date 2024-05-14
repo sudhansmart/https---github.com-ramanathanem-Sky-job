@@ -1,158 +1,127 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import '../Style/filterUser.css';
-import { Form, Col, Button } from 'react-bootstrap';
-import { useParams } from 'react-router-dom'
+import { Form, Col, Button, Row } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faRotateRight } from '@fortawesome/free-solid-svg-icons';  
 
-function FilterAdmin({ setData }) {
-  const { jobid } = useParams();
-  const [jobData, setJobData] = useState();
-  const [originalData, setOriginalData] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/job/specificjob/${jobid}`);
-      setData(response.data.applicants);
-      setJobData([response.data]);
-      setOriginalData(response.data);
-    
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+function FilterAdmin({ filter,handleResetFilters,handleOnChange,handleApplyFilters }) {
 
-  const [filter, setFilter] = useState({
-    search: '',
-    experience: '',
-    location: '',
-    workmode: ''
-  });
-
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [name]: value,
-    }));
-  };
-
-  const filterJobData = () => {
-    let filteredJobs = [...jobData];
-    console.log("filter : ", filteredJobs)
-
-    // Apply search term filter
-    if (filter.search) {
-      filteredJobs = filteredJobs.filter((job) =>
-        job.jobtitle && job.jobtitle.toLowerCase().includes(filter.search.toLowerCase())
-      );
-    }
-
-    // Apply experience filter
-    if (filter.experience) {
-      filteredJobs = filteredJobs.filter((job) => {
-        const experienceRange = filter.experience.split('-');
-        const minExperience = parseInt(experienceRange[0]);
-        const maxExperience = parseInt(experienceRange[1]);
-        return job.experience >= minExperience && job.experience <= maxExperience;
-      });
-    }
-
-    // Apply Location filter
-    if (filter.location) {
-      filteredJobs = filteredJobs.filter((job) =>
-        job.location && job.location.toLowerCase().includes(filter.location.toLowerCase())
-      );
-    }
-
-    // Apply Workmode filter
-    if (filter.workmode) {
-      filteredJobs = filteredJobs.filter((job) =>
-        job.workmode && job.workmode.toLowerCase().includes(filter.workmode.toLowerCase())
-      );
-    }
-
-    return filteredJobs;
-  };
-
-  const handleApplyFilters = () => {
-    const filteredData = filterJobData();
-    setData( filteredData.map(job => job.applicants).flat());
-    console.log("Filtered : ", filteredData.map(job => job.applicants).flat());
-  };
-
-  const handleResetFilters = () => {
-    setFilter({
-      search: '',
-      experience: '',
-      location: '',
-      workmode: ''
-    });
-    setData(originalData.applicants);
-  };
 
   return (
-    <div className='filteruser'>
+    <>
+    <div className='filteruser-find p-3'>
+        <h4><FontAwesomeIcon style={{color:'#4d6e8c'}} icon={faFilter}/> Filter</h4>
+        <hr/>
       <Form>
         <Col xs='auto'>
+        <div className='filter-border mb-3'>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
-            <Form.Label>Keywords</Form.Label>
+            <Form.Label>Keyskills</Form.Label>
             <Form.Control
               type='text'
               placeholder='Search'
               className='mr-sm-2'
-              name='search'
-              value={filter.search}
+              name='skills'
+              value={filter.skills}
               onChange={handleOnChange}
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='formBasicRange'>
             <Form.Label>Experience</Form.Label>
+            <Row>
+              <Form.Group className='mb-3' as={Col} md="6" controlId='formBasicRange'>
+                <Form.Control
+                  type='number'
+                  placeholder='Min'
+                  className='mr-sm-2'
+                  name='minyear'
+                  value={filter.minyear}
+                  onChange={handleOnChange}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3' as={Col} md="6" controlId='formBasicRange'>
+                <Form.Control
+                  type='number'
+                  placeholder='Max'
+                  className='mr-sm-2'
+                  name='maxyear'
+                  value={filter.maxyear}
+                  onChange={handleOnChange}
+                />
+              </Form.Group>
+            </Row>
+          </Form.Group>
+          <Form.Group className='mb-3' as={Col} md="12" controlId="validationFormik04">
+            <Form.Label>Category</Form.Label>
             <Form.Select
-              value={filter.experience}
-              name='experience'
+              name='category'
               onChange={handleOnChange}
-              aria-label='select Here'
+              value={filter.category}
+              aria-label="select Here"
             >
-              <option value=''>Select</option>
-              <option value='0-1'>0 - 1 Years</option>
-              <option value='1-2'>1 - 2 Years</option>
-              <option value='2-3'>2 - 3 Years</option>
-              <option value='3-4'>3 - 4 Years</option>
-              <option value='4-5'>4 - 5 Years</option>
-              <option value='0-5'>5+ Years</option>
+              <option value="">Please Select</option>
+              <option value="IT">IT</option>
+              <option value="Bpo">BPO</option>
+              <option value="salesMarketing">Sales & Marketing</option>
+              <option value="CustomerService">Customer Service</option>
+              <option value="Account">Account</option>
+              <option value="DigitalMarketing">Digital Marketing</option>
+              <option value="Healthcare">Health Care</option>
+              <option value="Manufacturing">Manufacturing</option>
+              <option value="Skinclinic">Skin Clinic</option>
+              <option value="HumanResource">Human Resource</option>
+              <option value="Operation">Operation</option>
+              <option value="Miscellaneous">Miscellaneous</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
-            <Form.Label>Location</Form.Label>
+            <Form.Label>Current Company</Form.Label>
             <Form.Control
               type='text'
-              placeholder='Enter City'
+            
               className='mr-sm-2'
-              name='location'
-              value={filter.location}
+              name='currentCompany'
+              value={filter.currentCompany}
               onChange={handleOnChange}
             />
           </Form.Group>
+          </div>
+          <div className='filter-border mb-3'>
           <Form.Group className='mb-3' controlId='formBasicRange'>
-            <Form.Label>Work Mode</Form.Label>
+            <Form.Label>Gender</Form.Label>
             <Form.Select
-              value={filter.workmode}
-              name='workmode'
+              name='gender'
               onChange={handleOnChange}
+              value={filter.gender}
               aria-label='select Here'
             >
               <option value=''>Select</option>
-              <option value='Work From Office'>WFO</option>
-              <option value='Work From Home'>WFH</option>
-              <option value='Hybrid'>Hybrid</option>
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
             </Form.Select>
           </Form.Group>
+         
+          <Form.Group className='mb-3' controlId="validationFormik03">
+                <Form.Label>Notice Period</Form.Label>
+                  <Form.Select
+                     value={filter.noticeperiod || 'Please Select'} // Use the 'value' prop for default value
+                         name='noticeperiod'
+                    onChange={handleOnChange}
+        
+                   aria-label="select Here"
+            >    <option value=" " >Please Select</option>
+                <option value="0" >Immediate Joiner</option>
+                <option value="0-15">0-15</option>
+                <option value="15-30">15-30</option>
+                 <option value="30-45">30-45</option>
+                 <option value="45">45 Above</option>
+                  </Form.Select>
+         </Form.Group>
+         </div>
         </Col>
         <Col className='d-flex justify-content-around '>
           <Button variant="secondary" onClick={handleResetFilters}><FontAwesomeIcon icon={faRotateRight}/> Reset</Button>
@@ -160,6 +129,7 @@ function FilterAdmin({ setData }) {
         </Col>
       </Form>
     </div>
+    </>
   );
 }
 

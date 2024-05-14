@@ -59,9 +59,9 @@ const RecentJobPost = () => {
                        </div>
             </div>
             <hr />
-            {job.primarySkills && job.primarySkills.split('/').map((skill, index) => (
+            {/* {job.primarySkills && job.primarySkills.split('/').map((skill, index) => (
               <p key={index} className='job-skills'><i className="bi bi-dot"></i>{skill}</p>
-            ))}
+            ))} */}
             <p className='job-count p-1 text-center'>Applicants: {job.applicants.length}</p>
             <Link to={`/candidates/${job._id}`} className='d-flex justify-content-center' style={{ textDecoration: 'none' }}>
               <button className='button-login no-decoration'>View Applicants</button>

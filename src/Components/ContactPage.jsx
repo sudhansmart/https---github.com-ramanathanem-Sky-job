@@ -86,7 +86,7 @@ const ContactPage = () => {
               Contact Info
             </div>
             <div className="card-body ">
-              <h5 className="card-title">Contact</h5>
+            
               <p className="card-text">  
           
         
@@ -135,7 +135,7 @@ const ContactPage = () => {
         label="Message"
         className="mb-3"
       >
-        <Form.Control type="text" placeholder="name@example.com"
+        <Form.Control  as="textarea" rows={5} 
            value={contact.message} name='message' onChange={handleSubmitOnChange} />
       </FloatingLabel>
                 
@@ -148,12 +148,11 @@ const ContactPage = () => {
           <div className="col-sm-4"><div className="card mt-5" >
             <div className="card-body">
               <h5 className="card-title">Contact Information</h5>
-
+              <p className="card-text"><i className="bi bi-telephone-fill"></i>  +91 9884521114</p>
               <p className="card-text"><i className="bi bi-telephone-fill"></i>  +91 8610010780</p>
-              <p className="card-text">    <i className="bi bi-envelope-check"></i> skylarkhr@gmail.com</p>
+              <a className="card-text" style={{cursor:"pointer"}}>    <i className="bi bi-envelope-check"></i> contact@skylarkhr.in</a>
               <h5 className="card-title">Social Network</h5>
               <a href="#" className="me-2"><i className="bi bi-whatsapp" id='whatsapps'></i></a>
-            
               <a href="#" className="me-2"><i className="bi bi-facebook" id='facebook'></i></a>
               <a href="#" className="me-2"><i className="bi bi-instagram" id='instagram'></i></a>
               <i class="bi bi-linkedin" id='linkedin'></i>
@@ -161,8 +160,7 @@ const ContactPage = () => {
           
           </div></div>
         </div>
-        <p className='mt-2 contact-foot'>* By providing your phone number, you agree that Indeed may call you about your request.</p>
-     <p className='mt-2 contact-foot'>We respond to most messages within 24 hours. If you do not see the response, check your “junk mail” folder or “spam” folder</p>
+       
       </div>
      <Footer />
     </div>

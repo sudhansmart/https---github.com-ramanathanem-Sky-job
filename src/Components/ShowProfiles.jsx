@@ -4,12 +4,9 @@ import '../Style/candidate.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleDown, faBuilding, faDownload,faEnvelope,faMagnifyingGlass, faPhone } from '@fortawesome/free-solid-svg-icons';
-
+import { faArrowAltCircleDown, faBuilding, faEnvelope,faMagnifyingGlass, faPhone } from '@fortawesome/free-solid-svg-icons';
 import FilterCandidate from './FilterCandidate';
 
-
-// Stop Changes
 
 function ShowProfiles() {
   const [jobData, setJobData] = useState([]);
@@ -63,8 +60,7 @@ const handleOnChange = (e) => {
 const filterJobData = () => {
     
   let filteredJobs = [...jobData];
-  console.log("search console :",filteredJobs)
-  console.log("search trigger :",filter.skills)
+ 
 
 
   // Apply Jobtitle term filter
@@ -122,11 +118,6 @@ const filterJobData = () => {
   }
 
   // Apply Notice Period filter
-  // if (filter.noticeperiod) {
-  //   filteredJobs = filteredJobs.filter(job =>
-  //     job.noticeperiod && job.noticeperiod === parseInt(filter.noticeperiod)
-  //   );
-  // }
   if (filter.noticeperiod) {
     const [min, max] = filter.noticeperiod.split('-').map(val => parseInt(val)); 
     filteredJobs = filteredJobs.filter(job => {
@@ -287,12 +278,14 @@ const handleApplyFilters = () => {
             </Form>
            </div>
         <div className='d-flex p-3'>
-          {/* <FilterAdmin setData={setData}/> */}
+         
           <FilterCandidate  
                filter={filter} 
                handleResetFilters={handleResetFilters}  
                handleOnChange={handleOnChange} handleApplyFilters={handleApplyFilters}/>
-              {data.length == 0? <p className='text-center w-100 ' style={{fontSize:'30px',fontWeight:"600"}}>No Results Found.</p> : <div  style={{height:"100%",width:"80%"}} >
+              {data.length == 0? <p className='text-center w-100 ' style={{fontSize:'30px',fontWeight:"600"}}>No Results Found.</p>
+               :
+               <div  style={{height:"100%",width:"80%"}} >
             {data.map((candidate, index) => (<div className='candidate-main'>
                 <div className=' d-flex p-3 justify-content-around align-items-center ' key={index}>
                      <div className='ellipse-9' />

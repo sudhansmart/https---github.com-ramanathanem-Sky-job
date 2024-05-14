@@ -1,8 +1,5 @@
 import React from 'react'
 import "../Style/findCandidates.css"
-import { Form ,FloatingLabel,Row,Col, Button} from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import ShowProfiles from './ShowProfiles'
 function FindCandidates() {
   return (

@@ -37,7 +37,7 @@ import UploadForm from './UploadForm';
            </NavLink>
             </li>
         <li>
-        <NavLink to="/contact"><FontAwesomeIcon icon={faAddressBook} className='me-1' />Applicants</NavLink>
+        <NavLink to="/contact"><FontAwesomeIcon icon={faAddressBook} className='me-1' />Contact</NavLink>
         </li>
         <li>
         <NavLink to="/findcandidate"><FontAwesomeIcon icon={faMagnifyingGlass} className='me-1' />Find Candidates</NavLink>

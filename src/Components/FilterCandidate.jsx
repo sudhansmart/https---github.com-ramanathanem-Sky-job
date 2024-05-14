@@ -104,17 +104,7 @@ function FilterCandidate({ filter,handleResetFilters,handleOnChange,handleApplyF
               <option value='female'>Female</option>
             </Form.Select>
           </Form.Group>
-          <Form.Group className='mb-3' controlId='formBasicEmail'>
-            <Form.Label>Notice Period</Form.Label>
-            <Form.Control
-              type='number'
-              placeholder='Enter Days'
-              className='mr-sm-2'
-              name='noticeperiod'
-              value={filter.noticeperiod}
-              onChange={handleOnChange}
-            />
-          </Form.Group>
+         
           <Form.Group className='mb-3' controlId="validationFormik03">
                 <Form.Label>Notice Period</Form.Label>
                   <Form.Select
