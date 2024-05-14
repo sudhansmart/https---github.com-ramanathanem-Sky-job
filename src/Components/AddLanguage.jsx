@@ -30,7 +30,7 @@ const AddLanguage = ({handleCloseModal}) => {
       speak: data.speakChecked
     };
 
-    const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/language/${authId}`, newLanguage);
+    const response = await axios.post(`http://103.38.50.64/nodejs/profile/language/${authId}`, newLanguage);
     console.log("response :",response.data);
     setData({
       language: '',

@@ -5,7 +5,10 @@
   .close{
     margin: 0;
   }
-
+.navicon{
+    height: 50px;
+    width: 250px;
+}
 
   nav{
       display: flex;

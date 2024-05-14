@@ -1,6 +1,6 @@
 import React from 'react'
-import hr1 from "../assets/Images/hr1.jpg"
-import Bpo from "../assets/Images/Bpo.jpg"
+import hr1 from "../assets/Images/hr.png"
+import Bpo from "../assets/Images/bpo1.png"
 import It from "../assets/Images/It.jpg"
 import sale from "../assets/Images/sales.png"
 import customer from "../assets/Images/cus.png"
@@ -8,7 +8,7 @@ import account from "../assets/Images/account.png"
 import digital from "../assets/Images/digital2.jpg"
 import health from "../assets/Images/health.jpg"
 import manifacture from "../assets/Images/menifacture.jpg"
-import skin from "../assets/Images/skin.jpg"
+import skin from "../assets/Images/skin1.png"
 import ms2 from "../assets/Images/ms2.png"
 import operation from "../assets/Images/operation.jpg"
 import { Link } from 'react-router-dom'

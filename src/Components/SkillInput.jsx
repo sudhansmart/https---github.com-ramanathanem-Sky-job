@@ -18,7 +18,7 @@ function SkillInput({ handleCloseModal }) {
 
   const fetchSkillsData = async () => {
     try {
-      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
+      const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${authId}`);
       setSkills(response.data.keySkills);
     } catch (error) {
       console.error('Error fetching skills:', error);
@@ -65,7 +65,7 @@ function SkillInput({ handleCloseModal }) {
   const handleFinalSubmit = async () => {
     try {
       // Send skills data to backend
-      const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/skills/${authId}`, { skills });
+      const response = await axios.post(`http://103.38.50.64/nodejs/profile/skills/${authId}`, { skills });
       if (response.status === 201) {
         handleCloseModal(); // Close the modal or perform any other action
       } else {

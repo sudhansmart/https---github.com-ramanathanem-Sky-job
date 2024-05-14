@@ -27,17 +27,20 @@ function ApplicantForm() {
     currentCtc : yup.string().required('Current CTC is required'),
     expectedCtc : yup.string().required('Expected CTC is required'),
     noticePeriod : yup.string().required('Notice Period is required'),
-    
+    skills : yup.string().required('skills is required'), 
   });
  
   const handleSubmit = async (values, { resetForm }) => {
     try {
-    
+        console.log("triggered")
   
       const formData = new FormData();
   
       formData.append('name', values.name);
-      // formData.append('recruiterName', recruiterName);
+      const skillsArray = values.skills.split(',').map(skill => skill.trim());
+      skillsArray.forEach((skill, index) => {
+        formData.append(`skills[${index}]`, skill);
+      });
       formData.append('email', values.email.toLowerCase());
       formData.append('phonenumber', values.phoneNumber);
       formData.append('location', values.location);
@@ -49,9 +52,10 @@ function ApplicantForm() {
       formData.append('expectedCtc', values.expectedCtc);
       formData.append('noticePeriod', values.noticePeriod);
       formData.append('remarks', values.remarks);
+
       formData.append('file', values.file);
   
-      const response = await axios.post('https://jobportal-backend-yi43.onrender.com/file/upload', formData, {
+      const response = await axios.post('http://103.38.50.64/nodejs/file/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -90,6 +94,7 @@ function ApplicantForm() {
         expectedCtc:'',
         noticePeriod:'',
         remarks:'',
+        skills:'',
         file: null,
       }}
     >
@@ -274,13 +279,28 @@ function ApplicantForm() {
                {errors.noticePeriod}
              </Form.Control.Feedback>
            </Form.Group>
-           <Form.Group controlId="formFile" as={Col} md="4" className="mb-3">
+           <Form.Group controlId="formFile" as={Col} md="3" className="mb-3">
             <Form.Label>Upload CV</Form.Label>
               <Form.Control type="file" 
               onChange={(e) => setFieldValue('file', e.target.files[0])}
               accept=".pdf, .doc, .docx" 
               ref={fileInputRef}/>
               </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationFormik13">
+             <Form.Label>Skills</Form.Label>
+             <Form.Control
+               type="text"
+               placeholder="Seperate by comma"
+               name="skills"
+               value={values.skills}
+              onChange={handleChange}
+               isValid={touched.skills && !errors.skills}
+               isInvalid={touched.skills && !!errors.skills}
+             />
+             <Form.Control.Feedback type="invalid">
+               {errors.skills}
+             </Form.Control.Feedback>
+           </Form.Group>
           
          </Row>
          <Row>

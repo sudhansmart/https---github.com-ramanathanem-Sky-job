@@ -18,7 +18,7 @@ const EditEducation = ({ handleCloseModal, education_id }) => {
 
   const fetchEducationData = async () => {
     try {
-      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
+      const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${authId}`);
       const existingEducation = response.data.education.find(edu => edu._id === education_id);
 
       setEducation(existingEducation);
@@ -30,7 +30,7 @@ const EditEducation = ({ handleCloseModal, education_id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/profile/education/${authId}/${education_id}`, education);
+      const response = await axios.put(`http://103.38.50.64/nodejs/profile/education/${authId}/${education_id}`, education);
      
 
       if (response.status === 200) {

@@ -14,7 +14,7 @@ export const Jobcarts = () => {
       
       ];
   return (
-    <div> 
+    <div className='overallbox'> 
           <h2 id='hiring'>Top Hiring Companies!! </h2>
     <div className='bg-color-job '>
          <div >
@@ -25,21 +25,25 @@ export const Jobcarts = () => {
             <div className='col-md-3' key={data.id} >
              
              <div className='job-border m-2 p-2'>
-             <p className='job-time-types  '>{data.type}</p>
-              <div >
-                
-                <h5 className='text-center it-domains'>{data.domain}</h5>
-                </div>
              
-                    <h5 className='text-center data-position'>{data.position}</h5>
-                    <p className='text-center data-exp'>{data.exp}</p>
-                    <p className='text-center data-location-type'><i className="bi bi-geo-alt-fill"></i>{data.location}</p>
-                    <p className='text-center jobs-ctc'>{data.Ctc}</p>
-                    <hr  style={{color:'gray'}}/>
-                    <div className='d-flex justify-content-around p-1'>
+             <div className='d-flex justify-content-end '>
                        
-                  <p className='text-center view-job p-2'>View Job</p>
-                    </div>
+                       <p className='text-center view-job p-2'>View Job</p>
+                         </div>
+              <div className='d-flex justify-content-center'>
+                
+                 <p className='text-center it-domains m-0'>{data.domain.replace(/\b\w/g,c=>c.toLocaleUpperCase())}</p>
+               </div>
+                    <hr/>
+             
+                    <h5 className='text-center data-position'>{data.position.replace(/\b\w/g,c=>c.toLocaleUpperCase())}</h5>
+                    <p className='text-center data-exp'>{data.exp}</p>
+                    <div className='d-flex justify-content-around'>
+                    <p className='text-center data-location-type'><i className="bi bi-geo-alt-fill" style={{color:"red"}}></i> {data.location.replace(/\b\w/g,c=>c.toLocaleUpperCase())}</p>
+                    <p className='text-center data-location-type'>Job : {data.type.replace(/\b\w/g,c=>c.toLocaleUpperCase())}</p></div> 
+                    <p className='text-center jobs-ctc'>{data.Ctc}</p>
+                   
+                    
             </div>
           
             </div>

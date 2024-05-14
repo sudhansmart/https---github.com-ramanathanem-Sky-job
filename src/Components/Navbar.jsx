@@ -23,10 +23,10 @@ export const Navbar = ({userloggedin,token}) => {
     }
   return (
     <>
-    <div className='nav-main p-2 me-3'>
+    <div className='nav-main p-2 me-3 '>
          <nav className='P-2'>
-    <Link to="/" className='title ms-5'><img src={navlogo}/></Link>
-    <div className='menu' onClick={()=> setOpen(!menuOpen)}>
+       <Link to="/" className='title ms-5'><img className='navicon' src={navlogo}/></Link>
+       <div className='menu' onClick={()=> setOpen(!menuOpen)}>
         <span></span>
         <span></span>
         <span></span>
@@ -43,9 +43,7 @@ export const Navbar = ({userloggedin,token}) => {
         <NavLink to="/jobs"><FontAwesomeIcon icon={faComputer} className='me-1'/>Jobs</NavLink></li>
         <li>
         <NavLink to="/contact"><FontAwesomeIcon icon={faAddressBook} className='me-1' />Contact</NavLink></li>
-        <li>
-        <NavLink to="/forms" className="btn btn-outline-primary" style={{borderRadius:'20px',fontSize:'12px'}} >Upload cv</NavLink>
-        </li>
+        
         <li>
         {token?
                   <Dropdown>

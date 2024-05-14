@@ -41,7 +41,7 @@ const Employment = ({handleCloseModal}) => {
       employmentData.isCurrent= true ;
       employmentData.endDate = new Date();
       
-    const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/employment/${authId}`, employmentData);
+    const response = await axios.post(`http://103.38.50.64/nodejs/profile/employment/${authId}`, employmentData);
     if(response.status == 201){
       setFormData({
         expYear: '',
@@ -56,7 +56,7 @@ const Employment = ({handleCloseModal}) => {
       handleCloseModal();
     }
     }else{
-    const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/employment/${authId}`, employmentData);
+    const response = await axios.post(`http://103.38.50.64/nodejs/profile/employment/${authId}`, employmentData);
         if(response.status == 201){
           setFormData({
             expYear: '',

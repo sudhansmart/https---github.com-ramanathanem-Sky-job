@@ -14,7 +14,7 @@ function PdfViewer() {
     <div className='d-flex justify-content-center'>
       {pdfId && (
         <iframe
-          src={`https://jobportal-backend-yi43.onrender.com/file/pdfs/${pdfId}`}
+          src={`http://103.38.50.64/nodejs/file/pdfs/${pdfId}`}
           width= '300'
            height='400'
           title="PDF"

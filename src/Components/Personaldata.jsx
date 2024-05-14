@@ -14,7 +14,7 @@ function Personaldata({handleCloseModal,fetchData}) {
 
       const fetchProfileData = async () => {
         try {
-          const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
+          const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${authId}`);
          
           setProfile(response.data); // Assuming response.data contains the profile data
         } catch (error) {
@@ -40,7 +40,7 @@ function Personaldata({handleCloseModal,fetchData}) {
         console.log("Personal data",profile)
         try {
           // Update profile data on the server
-          const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/profile/update/${authId}`, profile);
+          const response = await axios.put(`http://103.38.50.64/nodejs/profile/update/${authId}`, profile);
           console.log("Profile Details Updated Successfully!");
           if(response.status == 200){
           fetchData();

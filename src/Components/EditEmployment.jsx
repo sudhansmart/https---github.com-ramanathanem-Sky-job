@@ -57,12 +57,12 @@ const EditEmployment = ({handleCloseModal,employment_id}) => {
       employmentData.endDate = new Date();
       console.log("submitted-present :",employmentData);
 
-      const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/profile/employment/${authId}/${employment_id}`, employmentData);
+      const response = await axios.put(`http://103.38.50.64/nodejs/profile/employment/${authId}/${employment_id}`, employmentData);
     if(response.status == 200){
       handleCloseModal();
     }
     }else{
-      const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/profile/employment/${authId}/${employment_id}`, employmentData);
+      const response = await axios.put(`http://103.38.50.64/nodejs/profile/employment/${authId}/${employment_id}`, employmentData);
         if(response.status == 200){
           handleCloseModal();
         }

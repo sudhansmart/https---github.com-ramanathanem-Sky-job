@@ -13,7 +13,7 @@ const RecentJobPost = () => {
   const [ModalShow,setModalShow] = useState(false);
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://jobportal-backend-yi43.onrender.com/job/getdata');
+      const response = await axios.get('http://103.38.50.64/nodejs/job/getdata');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -25,8 +25,8 @@ const RecentJobPost = () => {
   }, []);
 
       const handleDeletePost = async(id)=>{
-           const response = await axios.delete(`https://jobportal-backend-yi43.onrender.com/job/postdelete/${id}`);
-        //  const response = await axios.delete(`http://localhost:5000/job/postdelete/${id}`);
+           const response = await axios.delete(`http://103.38.50.64/nodejs/job/postdelete/${id}`);
+        
          console.log("response :",response);
          alert(response.data.message);
          fetchData();

@@ -23,7 +23,7 @@ useEffect(() => {
 const fetchData = async () => {
   try {
 
-    const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/allprofiles`);
+    const response = await axios.get(`http://103.38.50.64/nodejs/profile/allprofiles`);
     setData(response.data)
     setJobData(response.data);
     setOriginalData(response.data);
@@ -187,7 +187,7 @@ const handleApplyFilters = () => {
     const handleDownload = async (candidateId) => {
 
         try {
-          const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/file/download/${candidateId}`, {
+          const response = await axios.get(`http://103.38.50.64/nodejs/file/download/${candidateId}`, {
             responseType: 'blob',
           });
            console.log("download res : ",response)
@@ -227,7 +227,7 @@ const handleApplyFilters = () => {
         setData(newData);
 
         try {
-            const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/post/update/${jobid}`, {
+            const response = await axios.put(`http://103.38.50.64/nodejs/post/update/${jobid}`, {
                 status: value,
                 candidateId : candidateId
             });

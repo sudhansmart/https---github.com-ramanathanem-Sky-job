@@ -8,7 +8,7 @@ import digital from "../assets/Images/digital1.png"
 import health from "../assets/Images/medical.png"
 import manifacture from "../assets/Images/building.png"
 import skin from "../assets/Images/skin1.png"
-import hr1 from "../assets/Images/hr2.png"
+import hr1 from "../assets/Images/hr.png"
 import operation from "../assets/Images/operation1.png"
 import ms2 from "../assets//Images/ms3.png"
 import { Link } from 'react-router-dom';
@@ -36,7 +36,7 @@ function JobsCategory() {
     
     const fetchOpeningsData = async () => {
   
-      const response = await fetch('https://jobportal-backend-yi43.onrender.com/job/getdata');
+      const response = await fetch('http://103.38.50.64/nodejs/job/getdata');
       const data = await response.json();
     
       setOpeningsData(data);
@@ -46,9 +46,9 @@ function JobsCategory() {
   }, []);
 
   return (
-    <div>
-      <h1 className='text-center mt-5' id='jobsfont'>
-        BROWSE JOBS BY CATEGORY
+    <div className='overallbox'>
+      <h1 className='text-start ' id='jobsfont'>
+        Browse by Category
       </h1>
       <div className='container text-center'>
         <div className='row mb-4' id='icon'>
@@ -58,13 +58,14 @@ function JobsCategory() {
               <div className='col-md-3 mt-3' key={data.id}>
                 <div className='card mb-3' style={{ cursor: "pointer" }} >
                   <div className='card-body text-center'>
-                    <h5 id='jobsfont mt-2' style={{ fontSize: "17px" }} className='card-title'>{data.name}</h5>
-                    <img className='mt-2' src={data.img} alt={data.name} />
-                    <p className='openings mt-3'>{opening ? opening.length : 0} Openings</p>
+                  <img className='mt-2' style={{height:"80px",width:"80px"}} src={data.img} alt={data.name} />
+                    <h5 id='jobsfont' style={{ fontSize: "17px", fontWeight:"700" }} className='card-title mt-3'>{data.name}</h5>
+                    
+                    <p className='openings mt-3'>No of  Openings : <span>{opening ? opening.length : 0}</span></p>
                  
                   </div>
                   <Link to={`${data.path}/${data.category}`}>
-                    <button className='btn btn-outline-secondary mb-3' id='jobsfont' style={{ fontSize: "14px" }}>{data.name}</button>
+                    <button className='btn btn-outline-secondary mb-3' id='jobsfont' style={{ fontSize: "14px" }}>View jobs</button>
                   </Link>
                 </div>
               </div>

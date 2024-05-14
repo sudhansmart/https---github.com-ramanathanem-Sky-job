@@ -42,10 +42,12 @@ const TableComponent = ({setFetch,fetch}) => {
   const [formdata, setFormdata] = useState([]);
    
   const fetchData = async () => {
+    console.log("table fetching")
     try {
-      const response = await axios.get('https://jobportal-backend-yi43.onrender.com/file/getdata');
+      const response = await axios.get('http://103.38.50.64/nodejs/file/getdata');
       const filteredata = response.data.filter(data => data.hasOwnProperty('clientName') )
       setFormdata(filteredata);
+      console.log("fetched :",filteredData)
     } catch (error) {
       console.error('Error fetching data:', error.message);
     }
@@ -54,7 +56,7 @@ const TableComponent = ({setFetch,fetch}) => {
 
   useEffect(() => {
     fetchData();
-   
+    
   }, [fetch]);
  
 
@@ -64,15 +66,16 @@ const TableComponent = ({setFetch,fetch}) => {
     setFetch(false)
   }
   const handleClose = () =>{
+    setFetch(true);
      setShowModal(false);
-     setFetch(true);
+    
 
   }
   const handleDownload = async (data) => {
     console.log("Download :",data)
     try {
       const id = data._id
-      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/file/download/${id}`, {
+      const response = await axios.get(`http://103.38.50.64/nodejs/file/download/${id}`, {
         responseType: 'blob',
       });
       console.log("response of download : ",response)
@@ -260,7 +263,7 @@ const TableComponent = ({setFetch,fetch}) => {
           <Modal.Title>Edit Form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <EditForm  candidateId={candidateId} handleClose={handleClose}/>
+           <EditForm fetch={fetch} candidateId={candidateId} handleClose={handleClose}/>
         </Modal.Body>
         <Modal.Footer>
         </Modal.Footer>

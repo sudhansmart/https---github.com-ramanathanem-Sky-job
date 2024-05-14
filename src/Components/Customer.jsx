@@ -10,7 +10,7 @@ function Customer() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://jobportal-backend-yi43.onrender.com/job/getdata'); 
+            const response = await axios.get('http://103.38.50.64/nodejs/job/getdata'); 
             const filteredData = response.data.filter(entry => entry.category === "Customerservice");
             setData(filteredData);
         } catch (error) {

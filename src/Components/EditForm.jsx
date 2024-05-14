@@ -1,34 +1,30 @@
 import React,{useState,useEffect}from 'react'
 import { Button,Col,Form,Row } from 'react-bootstrap'
 import axios from 'axios';
-function EditForm({ candidateId,handleClose }) {
+function EditForm({ candidateId,handleClose,fetch }) {
     const [formDatas, setFormDatas] = useState({
         name: '',
         email: '',
-        phoneNumber: '',
+        phonenumber: '',
         location: '',
-        qualification: '',
         clientName: '',
-        position: '',
+        role: '',
         currentCompany: '',
-        overAllExp: '',
-        relevantExp: '',
-        currentCtc: '',
-        expectedCtc: '',
-        noticePeriod: '',
-        interviewMode: '',
+        experience: '',
+        currentctc: '',
+        expectedctc: '',
+        noticeperiod: '',
         remarks: '',
-        file: null,
       });
-
-      const [selectedProduct, setSelectedProduct] = useState(null);
+      
+    
 
       const fetchData = async () => {
         try {
-          const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/candidate/${candidateId}`);
+          const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${candidateId}`);
           setFormDatas(response.data);
-          console.log("res :",response.data);
-          console.log("sel Products :",selectedProduct);
+          // console.log("res :",response.data);
+         
     
         } catch (error) {
           console.error('Error fetching candidate data:', error.message);
@@ -38,7 +34,9 @@ function EditForm({ candidateId,handleClose }) {
     
       useEffect(() => {
         fetchData();
-      }, [candidateId]);
+      }, [fetch]);
+
+    
 
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,33 +45,17 @@ function EditForm({ candidateId,handleClose }) {
 
       const handleEditSave = async (e)=>{
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('name', formDatas.name);
-        formData.append('email', formDatas.email);
-        formData.append('phoneNumber', formDatas.phoneNumber);
-        formData.append('location', formDatas.location);
-        formData.append('qualification', formDatas.qualification);
-        formData.append('clientName', formDatas.clientName);
-        formData.append('position', formDatas.position);
-        formData.append('currentCompany', formDatas.currentCompany);
-        formData.append('overAllExp', formDatas.overAllExp);
-        formData.append('relevantExp', formDatas.relevantExp);
-        formData.append('currentCtc', formDatas.currentCtc);
-        formData.append('expectedCtc', formDatas.expectedCtc);
-        formData.append('noticePeriod', formDatas.noticePeriod);
-        formData.append('interviewMode', formDatas.interviewMode);
-        formData.append('remarks', formDatas.remarks);
-        formData.append('file', formDatas.file);
+      
         try {
-            console.log("submit :",formData)
-           const response = await axios.put(`https://jobportal-backend-yi43.onrender.com/candidate/update/${candidateId}`, formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                },
-              });
-        
-              alert('Candidate data updated successfully!'); 
-              handleClose()       
+           
+           const response = await axios.put(`http://103.38.50.64/nodejs/profile/update/${candidateId}`
+          // const response = await axios.put(`http://localhost:5000/profile/update/${candidateId}`
+           , formDatas );
+           if(response.status == 200){
+               alert('Candidate data updated successfully!'); 
+               handleClose()  
+           }
+                      
         } catch (error) {
             console.error('EDIT API Error:', error);
         }
@@ -106,8 +88,8 @@ function EditForm({ candidateId,handleClose }) {
   <Form.Label>Mobile No</Form.Label>
   <Form.Control
     type="number"
-    name="phoneNumber"
-    value={formDatas.phoneNumber}
+    name="phonenumber"
+    value={formDatas.phonenumber}
     onChange={handleChange}
   />
 </Form.Group>
@@ -123,17 +105,6 @@ function EditForm({ candidateId,handleClose }) {
 </Form.Group>
 </Row>
 <Row className="mb-3">
-
-<Form.Group as={Col} md="3" controlId="validationFormik05">
-  <Form.Label>Qualification</Form.Label>
-  <Form.Control
-    type="text"
-    placeholder=""
-    name="qualification"
-    value={formDatas.qualification}
-    onChange={handleChange}
-  />
-</Form.Group>
 <Form.Group as={Col} md="3" controlId="validationFormik06">
   <Form.Label>Client Name</Form.Label>
   <Form.Control
@@ -149,8 +120,8 @@ function EditForm({ candidateId,handleClose }) {
   <Form.Control
     type="text"
     placeholder=""
-    name="position"
-    value={formDatas.position}
+    name="role"
+    value={formDatas.role}
     onChange={handleChange}
   />
 </Form.Group>
@@ -164,105 +135,57 @@ function EditForm({ candidateId,handleClose }) {
     onChange={handleChange}
   />
 </Form.Group>
+<Form.Group as={Col} md="3" controlId="validationFormik09">
+ <Form.Label>Over All Experience</Form.Label>
+ <Form.Control
+   type="number"
+   placeholder=""
+   name="experience"
+   value={formDatas.experience}
+   onChange={handleChange}
+  
+ /> 
+</Form.Group>
 </Row>
 <Row className="mb-3">
 
-<Form.Group as={Col} md="2" controlId="validationFormik09">
- <Form.Label>Over All Experience</Form.Label>
- <Form.Control
-   type="text"
-   placeholder=""
-   name="overAllExp"
-   value={formDatas.overAllExp}
-   onChange={handleChange}
-   onBlur={(e) => {
-    const { name, value } = e.target;
-    handleChange({ target: { name, value: value.toUpperCase() } });
-  }}
- /> 
-</Form.Group>
-<Form.Group as={Col} md="2" controlId="validationFormik10">
- <Form.Label>Relevant Experience</Form.Label>
- <Form.Control
-   type="text"
-   placeholder=""
-   name="relevantExp"
-   value={formDatas.relevantExp}
-   onChange={handleChange}
-   onBlur={(e) => {
-    const { name, value } = e.target;
-    handleChange({ target: { name, value: value.toUpperCase() } });
-  }}
- />
-</Form.Group>
 <Form.Group as={Col} md="2" controlId="validationFormik11">
  <Form.Label>Current CTC</Form.Label>
  <Form.Control
-   type="text"
+   type="number"
    placeholder=""
-   name="currentCtc"
-   value={formDatas.currentCtc}
+   name="currentctc"
+   value={formDatas.currentctc}
    onChange={handleChange}
-   onBlur={(e) => {
-    const { name, value } = e.target;
-    handleChange({ target: { name, value: value.toUpperCase() } });
-  }}
+  
  />
 </Form.Group>
 <Form.Group as={Col} md="2" controlId="validationFormik12">
  <Form.Label>Expected CTC</Form.Label>
  <Form.Control
-   type="text"
+   type="number"
    placeholder=""
-   name="expectedCtc"
-   value={formDatas.expectedCtc}
+   name="expectedctc"
+   value={formDatas.expectedctc}
    onChange={handleChange}
-   onBlur={(e) => {
-    const { name, value } = e.target;
-    handleChange({ target: { name, value: value.toUpperCase() } });
-  }}
+   
  />
 
 </Form.Group>
 <Form.Group as={Col} md="2" controlId="validationFormik13">
  <Form.Label>Notice Period</Form.Label>
  <Form.Control
-   type="text"
+   type="number"
    placeholder=""
-   name="noticePeriod"
-   value={formDatas.noticePeriod}
+   name="noticeperiod"
+   value={formDatas.noticeperiod}
   onChange={handleChange}
  />
 </Form.Group>
-<Form.Group as={Col} md="2" controlId="validationFormik13">
-<Form.Label>Interview Mode</Form.Label>
-<Form.Select
-value={formDatas.interviewMode || 'Please Select'} // Use the 'value' prop for default value
-name='interviewMode'
-onChange={handleChange}
-aria-label="select Here"
->
-<option value="" >Please Select</option>
-<option value="Walk-in">Walk-in</option>
-<option value="Virtual">Virtual</option>
-<option value="Telephonic">Telephonic</option>
-</Form.Select>
-</Form.Group>
+
 </Row>
 <Row>
-<Form.Group controlId="formFile" as={Col} md="4" className="mb-3">
-<Form.Label>Upload CV</Form.Label>
- 
-<Form.Control
-  type="file"
-  onChange={(e) => {
-    handleChange(e); // Handle change to update other form fields
-    setFormDatas((prevFormData) => ({ ...prevFormData, file: e.target.files[0] }));
-  }}
-  accept=".pdf, .doc, .docx"
-/>
-<span style={{color:'red'}}>{formDatas.cvpath}</span>
-</Form.Group>
+
 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
 <Form.Label>Remarks</Form.Label>
 <Form.Control as="textarea"

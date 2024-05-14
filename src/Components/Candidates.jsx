@@ -22,7 +22,7 @@ function Candidates() {
     const fetchUserProfiles = async (applicants) => {
       try {
         const userProfilePromises = applicants.map(profile =>
-          axios.get(`http://localhost:5000/profile/specificprofile/${profile.candidateId}`)
+          axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${profile.candidateId}`)
         );
         const userProfilesData = await Promise.all(userProfilePromises);
         const userProfiles = userProfilesData.map(response => response.data);
@@ -36,7 +36,7 @@ function Candidates() {
     
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/job/specificjob/${jobid}`);
+        const response = await axios.get(`http://103.38.50.64/nodejs/job/specificjob/${jobid}`);
     
       
         setOriginalData(response.data);
@@ -175,14 +175,20 @@ const handleApplyFilters = () => {
     const handleDownload = async (candidateId) => {
       console.log("triggered")
         try {
-          // const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/file/download/${candidateId}/${jobid}`, {
-            const response = await axios.get(`http://localhost:5000/file/download/${candidateId}/${jobid}`, {
+         
+            const response = await axios.get(`http://103.38.50.64/nodejs/file/download/${candidateId}/${jobid}`, {
             responseType: 'blob',
           });
           
           if (response.status === 201) {
             alert("Candidate CV not available. Please upload.");
-          } else {
+          } if (response.status === 202) {
+            alert("Candidate  not available. Please check.");
+          }
+          if (response.status === 204) {
+            alert("Candidate  not Applied this job.");
+          }
+          else {
             const blob = new Blob([response.data]);
             const link = document.createElement('a');
       

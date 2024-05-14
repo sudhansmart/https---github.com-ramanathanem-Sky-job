@@ -45,7 +45,7 @@ const Logins = ({setUserloggedin,setToken}) => {
         });
         try {
           if (useridValid ) {
-            const response = await axios.post('https://jobportal-backend-yi43.onrender.com/login/verify',loginFormData)
+            const response = await axios.post('http://103.38.50.64/nodejs/login/verify',loginFormData)
               if(response.data == true){
                 setshowOtp(true);
               }
@@ -88,7 +88,7 @@ const Logins = ({setUserloggedin,setToken}) => {
       });
 
       if (useridValid) {
-           const response = await axios.post('https://jobportal-backend-yi43.onrender.com/signup/verify',signUpFormData)
+           const response = await axios.post('http://103.38.50.64/nodejs/signup/verify',signUpFormData)
            setShowSignupmessage(true);
           if(response.data == true ){
             setSignUpFeedback("Registration Successfull.Please Login");
@@ -109,7 +109,7 @@ const Logins = ({setUserloggedin,setToken}) => {
           const sendData = {email:loginFormData.email,
           otp:data.otp}
          try {
-          const response = await axios.post('https://jobportal-backend-yi43.onrender.com/login/verifyotp',sendData);
+          const response = await axios.post('http://103.38.50.64/nodejs/login/verifyotp',sendData);
      
           if(response.status == 200){
             setToken(response.data.token);
@@ -170,8 +170,8 @@ const Logins = ({setUserloggedin,setToken}) => {
               <button className="ghost" onClick={handleSignInClick} >Login</button>
             </div>
             <div className={`overlay-panel overlay-right `}>
-              <h1 className='p-login' >Hello, Friend!</h1>
-              <p className='p-login'  >Enter your personal details and start the journey with us</p>
+              <h1 className='p-login' >Welcome!</h1>
+              <p className='p-login' style={{fontSize:'25px'}} >your gateway to senior-level careers</p>
               <button className="ghost" onClick={handleSignUpClick}>Sign Up</button>
             </div>
           </div>

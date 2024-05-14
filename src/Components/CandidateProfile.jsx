@@ -38,9 +38,10 @@ const CandidateProfile = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
+      const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${authId}`);
       setProfileData([response.data]);
-      setLanguages(response.data.languages)
+      setLanguages(response.data.languages);
+      console.log("fetching :",response.datao)
     } catch (error) {
       console.log("Error occurred while fetching profile data:", error.message);
     }
@@ -78,7 +79,7 @@ const CandidateProfile = () => {
 
     try {
       
-      const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/uploadcv/${authId}`, formData, {
+      const response = await axios.post(`http://103.38.50.64/nodejs/profile/uploadcv/${authId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -129,7 +130,7 @@ const CandidateProfile = () => {
 // handle delete and download cv 
 const handleDownload = async (name) => {
   try {
-    const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/download/${authId}`, {
+    const response = await axios.get(`http://103.38.50.64/nodejs/profile/download/${authId}`, {
       responseType: 'blob',
     });
     
@@ -158,7 +159,7 @@ const handleDownload = async (name) => {
 const handleDelete = async (id) => {
   try {
    
-   const response =  await axios.delete(`https://jobportal-backend-yi43.onrender.com/profile/delete/${id}`);
+   const response =  await axios.delete(`http://103.38.50.64/nodejs/profile/delete/${id}`);
      
       if(response.status == 204){
         setShowToast(true); 
@@ -199,7 +200,7 @@ const handleDelete = async (id) => {
     setEducation_id(file_id)
   }
   const handleEducationDelete = async(id)=>{
-    const response =  await axios.delete(`https://jobportal-backend-yi43.onrender.com/profile/deleteeducation/${authId}/${id}`);
+    const response =  await axios.delete(`http://103.38.50.64/nodejs/profile/deleteeducation/${authId}/${id}`);
     console.log(response.data)
     fetchData()
   }
@@ -216,7 +217,7 @@ const handleDelete = async (id) => {
   }
 
   const handlelanguagedel = async (id)=>{
-    const response =  await axios.delete(`https://jobportal-backend-yi43.onrender.com/profile/deletelanguage/${authId}/${id}`);
+    const response =  await axios.delete(`http://103.38.50.64/nodejs/profile/deletelanguage/${authId}/${id}`);
     console.log(response.data)
     fetchData()
   }
@@ -260,8 +261,7 @@ const handleDelete = async (id) => {
       console.log("id:",id)
     }
     const handleEmploymentDelete = async(id)=>{
-      const response =  await axios.delete(`https://jobportal-backend-yi43.onrender.com/profile/deleteemployment/${authId}/${id}`);
-      console.log(response.data)
+      const response =  await axios.delete(`http://103.38.50.64/nodejs/profile/deleteemployment/${authId}/${id}`);
       fetchData()
     }
 

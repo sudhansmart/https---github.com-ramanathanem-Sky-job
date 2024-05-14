@@ -23,7 +23,7 @@ const AdminLogin = ({setRole,setAdminToken,setAdminloggedin,setUserloggedin}) =>
    const handleSubmit = async(e)=>{
     e.preventDefault();
    try {
-    const response = await axios.post("https://jobportal-backend-yi43.onrender.com/admin/login",formData);
+    const response = await axios.post("http://103.38.50.64/nodejs/admin/login",formData);
         localStorage.setItem('adauthToken', response.data.token);
         setAdminToken(response.data.token)
        

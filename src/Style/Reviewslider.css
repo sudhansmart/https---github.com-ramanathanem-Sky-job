@@ -1,41 +1,51 @@
 
-.image-overlayss{
-    display: flex;
-    align-items: center;    
-    justify-content: space-around;
-    width: 100%;
-    height: 100%;
-    padding: 2%;
-    --tw-bg-opacity:1;
-    background-color: rgb(31 130 104/var(--tw-bg-opacity));
+.testtitle{
+  color: #222;
+  font-size: 2.7em;
 }
-#review{
-    font-family: 'Varela Round', sans-serif;
-    font-size: 24px;
-    color: '#505050';
-    border-color: var(--chakra-colors-chakra-border-color);
+.testmain{
+  display: flex;
+  text-align: center;
+  justify-content: space-evenly;
+}
+.reviewname{
+  color: blue;
+  font-size: 1.75rem;
+}
+.contents{
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px 0px rgba(168, 153, 168, 1);
+}
+.imagedata{
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  background-color: cadetblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reviewername{
+  color: whitesmoke;
+  font-size: 6.75rem;
+}
+.item{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+
 }
 @media (max-width:768px) {
-    #review{
-        font-family: 'Varela Round', sans-serif;
-        font-size: 18px;
-        color: '#505050';
-        border-color: var(--chakra-colors-chakra-border-color);
-    }
-    #reviews-slider{
-        font-size: 10px;
-    }
+  .testmain{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+  }
 }
-#reviews{
-    font-family: 'Varela Round', sans-serif;
-    font-size: 19px;
-    letter-spacing: 0.5px;
-    color: rgba(0, 0, 0, 0.644);
-}
-#star{
-    color:  #ffad3b;
-}
-#content{
-    font-size: 32px;
- font-family: 'Varela Round', sans-serif;
-}
+
+
+
+

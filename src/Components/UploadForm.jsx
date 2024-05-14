@@ -48,7 +48,7 @@ function UploadForm({setCandiShow}) {
   
    
   
-      const response = await axios.post('https://jobportal-backend-yi43.onrender.com/file/upload', formData, {
+      const response = await axios.post('http://103.38.50.64/nodejs/file/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

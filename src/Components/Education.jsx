@@ -20,7 +20,7 @@ const Education = ({handleCloseModal}) => {
   const fetchEducationData = async () => {
     try {
       
-      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
+      const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${authId}`);
       const existingEducation = response.data.education;
 
      
@@ -35,7 +35,7 @@ const Education = ({handleCloseModal}) => {
    
 
     try {
-        const response = await axios.post(`https://jobportal-backend-yi43.onrender.com/profile/education/${authId}`, education);
+        const response = await axios.post(`http://103.38.50.64/nodejs/profile/education/${authId}`, education);
        
 
         if(response.status == 201){
