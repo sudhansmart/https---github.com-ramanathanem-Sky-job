@@ -1,73 +1,107 @@
-import React,{useState} from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Button, Offcanvas } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
-import navlogo from "../assets/Images/sky2.png"
-import "../Style/Navbar.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAddressBook, faBell, faComputer, faHouse, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
-import { faUser } from '@fortawesome/free-regular-svg-icons'
+import navlogo from "../assets/Images/skylarklogo1.png";
+import "../Style/Navbar.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faUser,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
+export const Navbar = ({ token, userloggedin }) => {
+  const [authId, setAuthId] = useState(null);
+  const [profileData, setProfileData] = useState({});
+  const [show, setShow] = useState(false);
 
-
-export const Navbar = ({userloggedin,token}) => {
-    const[menuOpen, setOpen]=useState(false)
-
-
-    const handleClose =()=>{
-      setModalShow(false)
+  const fetchData = async (id) => {
+    try {
+      const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${id}`);
+      setProfileData(response.data);
+      console.log("fetching :", response.data);
+    } catch (error) {
+      console.log("Error occurred while fetching profile data:", error.message);
     }
+  };
 
-    const handleSignOut =()=>{
-      localStorage.clear();
+  useEffect(() => {
+    const id = localStorage.getItem('authId');
+    setAuthId(id);
+  }, [userloggedin]);
 
+  useEffect(() => {
+    if (authId) {
+      fetchData(authId);
     }
+  }, [authId]);
+
+  const handleSignOut = () => {
+    localStorage.clear();
+  };
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <>
-    <div className='nav-main p-2 me-3 '>
-         <nav className='P-2'>
-       <Link to="/" className='title ms-5'><img className='navicon' src={navlogo}/></Link>
-       <div className='menu' onClick={()=> setOpen(!menuOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    
-    <ul className={menuOpen ?"open":"close"}>
+      <div className='nav-main'>
+        <Link to="/" className='title ms-5'>
+          <img className='navicon' src={navlogo} alt="Skylark Logo" />
+        </Link>
+        <Button variant="primary" onClick={handleShow} className="d-md-none">
+          <FontAwesomeIcon icon={faBars} />
+        </Button>
+        <div className='close d-none d-md-flex justify-content-around'>
+          <NavLink className="bglink" to="/">Home</NavLink>
+          <NavLink className="bglink" to="/jobs">Jobs</NavLink>
+          <NavLink className="bglink" to="/contact">Contact</NavLink>
+        </div>
+        {token ? (
+          <Dropdown className="d-none d-md-block">
+            <Dropdown.Toggle variant="light" id="dropdown-basic">
+              <FontAwesomeIcon icon={faUser} /> Hi!, {profileData.name}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to="/profile">Profile Details</Dropdown.Item>
+              <Dropdown.Item href="/" onClick={handleSignOut}>Sign-out</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        ) : (
+          <div className="d-none d-md-block">
+            <Link to="/adminlog">
+              <Button className='btns'>Employer Login</Button>
+            </Link>
+            <Link to="/logs">
+              <Button className='btns me-5'>Candidate Login</Button>
+            </Link>
+          </div>
+        )}
+      </div>
 
-  
-        <li>
-              <NavLink to="/">  <FontAwesomeIcon icon={faHouse} className='me-1'/>Home
-           </NavLink>
-            </li>
-        <li>
-        <NavLink to="/jobs"><FontAwesomeIcon icon={faComputer} className='me-1'/>Jobs</NavLink></li>
-        <li>
-        <NavLink to="/contact"><FontAwesomeIcon icon={faAddressBook} className='me-1' />Contact</NavLink></li>
-        
-        <li>
-        {token?
-                  <Dropdown>
-                  <Dropdown.Toggle variant="light" id="dropdown-basic">
-                  <FontAwesomeIcon icon={faUser}/> Profile
-                  </Dropdown.Toggle>
-            
-                  <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/profile">Profile Details</Dropdown.Item>
-                    <Dropdown.Item href="/" onClick={handleSignOut}>Sign-out</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-        
-        
-        :<NavLink to="/logs">
-         
-          <FontAwesomeIcon icon={faRightToBracket} className='me-1' />        
-             Signup/Signin</NavLink>}
-        </li>
-           
-    </ul>
-   </nav>
-    </div>
-        
+      <Offcanvas show={show} onHide={handleClose} className="d-md-none">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body className='canvas'>
+          <NavLink className="bglink" to="/" onClick={handleClose}>Home</NavLink>
+          <NavLink className="bglink" to="/jobs" onClick={handleClose}>Jobs</NavLink>
+          <NavLink className="bglink" to="/contact" onClick={handleClose}>Contact</NavLink>
+          {token ? (
+            <>
+              <NavLink className="bglink" to="/profile" onClick={handleClose}>Profile Details</NavLink>
+              <Button variant="link text-decoration-none" onClick={() => { handleSignOut(); handleClose(); }}><FontAwesomeIcon icon={faRightFromBracket} /> Sign-out</Button>
+            </>
+          ) : (
+            <div className='mob-nav d-flex justify-content-center'>
+              <Link to="/adminlog" onClick={handleClose}>
+                <Button className='btns'>Employer Login</Button>
+              </Link>
+              <Link to="/logs" onClick={handleClose}>
+                <Button className='btns me-5'>Candidate Login</Button>
+              </Link>
+            </div>
+          )}
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
-  )
-}
+  );
+};

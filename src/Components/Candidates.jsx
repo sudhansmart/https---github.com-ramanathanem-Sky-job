@@ -22,7 +22,7 @@ function Candidates() {
     const fetchUserProfiles = async (applicants) => {
       try {
         const userProfilePromises = applicants.map(profile =>
-          axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${profile.candidateId}`)
+          axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${profile.candidateId}`)
         );
         const userProfilesData = await Promise.all(userProfilePromises);
         const userProfiles = userProfilesData.map(response => response.data);
@@ -36,7 +36,7 @@ function Candidates() {
     
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://103.38.50.64/nodejs/job/specificjob/${jobid}`);
+        const response = await axios.get(`https://www.skylarkjobs.com/nodejs/job/specificjob/${jobid}`);
     
       
         setOriginalData(response.data);
@@ -173,10 +173,10 @@ const handleApplyFilters = () => {
 
 
     const handleDownload = async (candidateId) => {
-      console.log("triggered")
+     
         try {
          
-            const response = await axios.get(`http://103.38.50.64/nodejs/file/download/${candidateId}/${jobid}`, {
+            const response = await axios.get(`https://www.skylarkjobs.com/nodejs/file/download/${candidateId}/${jobid}`, {
             responseType: 'blob',
           });
           
@@ -193,14 +193,13 @@ const handleApplyFilters = () => {
             const link = document.createElement('a');
       
             // Find the candidate by candidateId
-            const findcandidate = data.find(candidate => candidate.candidateId === candidateId);
-      
+            const findcandidate = data.find(candidate => candidate._id === candidateId);
             if (!findcandidate) {
               console.error('Candidate not found');
               return;
             }
       
-            const fileName = `${findcandidate.candidateName.replace(/\s+/g, '_')}_CV.pdf`; // Replace whitespace with underscores
+            const fileName = `${findcandidate.name.replace(/\s+/g, '_')}_CV.pdf`; // Replace whitespace with underscores
       
             link.href = window.URL.createObjectURL(blob);
             link.download = fileName;

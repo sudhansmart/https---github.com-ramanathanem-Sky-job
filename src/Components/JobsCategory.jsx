@@ -20,7 +20,7 @@ function JobsCategory() {
     { id: 2, name: 'Bpo', img: Bpo, path: "/Bpo",category:"Bpo" },
     { id: 3, name: 'Sale & Marketing', img: sale, path: "/Sale",category:"salesMarketing" },
     { id: 4, name: 'Customer service', img: customer1, path: "/Cs" ,category:"Customerservice"},
-    { id: 5, name: 'Account', img: account, path: "/Account",category:"Account" },
+    { id: 5, name: 'Accounts', img: account, path: "/Account",category:"Account" },
     { id: 6, name: 'Digital Marketing', img: digital, path: "/Digital",category:"DigitalMarketing" },
     { id: 7, name: 'Health care', img: health, path: "/Health",category:"Healthcare" },
     { id: 8, name: 'Manufacturing', img: manifacture, path: "/Manufacturing",category:"Manufacturing" },
@@ -36,7 +36,7 @@ function JobsCategory() {
     
     const fetchOpeningsData = async () => {
   
-      const response = await fetch('http://103.38.50.64/nodejs/job/getdata');
+      const response = await fetch('https://www.skylarkjobs.com/nodejs/job/getdata');
       const data = await response.json();
     
       setOpeningsData(data);

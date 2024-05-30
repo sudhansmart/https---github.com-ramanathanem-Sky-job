@@ -25,7 +25,7 @@ const EditEmployment = ({handleCloseModal,employment_id}) => {
 
   const fetchEducationData = async () => {
     try {
-      const response = await axios.get(`https://jobportal-backend-yi43.onrender.com/profile/specificprofile/${authId}`);
+      const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${authId}`);
       const existingEmployment = response.data.employment.find(emp => emp._id === employment_id);
     
       setFormData(existingEmployment);
@@ -57,12 +57,12 @@ const EditEmployment = ({handleCloseModal,employment_id}) => {
       employmentData.endDate = new Date();
       console.log("submitted-present :",employmentData);
 
-      const response = await axios.put(`http://103.38.50.64/nodejs/profile/employment/${authId}/${employment_id}`, employmentData);
+      const response = await axios.put(`https://www.skylarkjobs.com/nodejs/profile/employment/${authId}/${employment_id}`, employmentData);
     if(response.status == 200){
       handleCloseModal();
     }
     }else{
-      const response = await axios.put(`http://103.38.50.64/nodejs/profile/employment/${authId}/${employment_id}`, employmentData);
+      const response = await axios.put(`https://www.skylarkjobs.com/nodejs/profile/employment/${authId}/${employment_id}`, employmentData);
         if(response.status == 200){
           handleCloseModal();
         }
@@ -146,7 +146,7 @@ const EditEmployment = ({handleCloseModal,employment_id}) => {
         <FormGroup>
           <FloatingLabel
             controlId="floatingInput"
-            label="Current Company Name"
+            label={formData.isCurrent? "Current Company Name" :"Company Name"}
             className="mb-3"
           >
             <Form.Control
@@ -201,7 +201,7 @@ const EditEmployment = ({handleCloseModal,employment_id}) => {
               onChange={handleInputChange}
             />
           </FormGroup>
-          <p className='mt-3 me-3'>To</p>
+          <p className='mt-3 me-3 ms-3'>To</p>
           {showPresent ?
             <p className='mt-3 me-3'>Present</p> :
             <FormGroup as={Col} md="4" className='mt-2'>

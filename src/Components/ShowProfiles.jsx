@@ -23,7 +23,7 @@ useEffect(() => {
 const fetchData = async () => {
   try {
 
-    const response = await axios.get(`http://103.38.50.64/nodejs/profile/allprofiles`);
+    const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/allprofiles`);
     setData(response.data)
     setJobData(response.data);
     setOriginalData(response.data);
@@ -177,17 +177,13 @@ const handleApplyFilters = () => {
   setData(filteredData);
   console.log("filter :",filteredData)
 };
-
-
-
-
-
-
+   
 
     const handleDownload = async (candidateId) => {
+    
 
         try {
-          const response = await axios.get(`http://103.38.50.64/nodejs/file/download/${candidateId}`, {
+          const response = await axios.get(`https://www.skylarkjobs.com/nodejs/file/download/${candidateId}`, {
             responseType: 'blob',
           });
            console.log("download res : ",response)
@@ -227,7 +223,7 @@ const handleApplyFilters = () => {
         setData(newData);
 
         try {
-            const response = await axios.put(`http://103.38.50.64/nodejs/post/update/${jobid}`, {
+            const response = await axios.put(`https://www.skylarkjobs.com/nodejs/post/update/${jobid}`, {
                 status: value,
                 candidateId : candidateId
             });
@@ -286,7 +282,7 @@ const handleApplyFilters = () => {
               {data.length == 0? <p className='text-center w-100 ' style={{fontSize:'30px',fontWeight:"600"}}>No Results Found.</p>
                :
                <div  style={{height:"100%",width:"80%"}} >
-            {data.map((candidate, index) => (<div className='candidate-main'>
+            {data.map((candidate, index) => (<div key={index}  className='candidate-main'>
                 <div className=' d-flex p-3 justify-content-around align-items-center ' key={index}>
                      <div className='ellipse-9' />
                     <div>
@@ -313,7 +309,7 @@ const handleApplyFilters = () => {
                         <h5>Skills : </h5>
                         <div className='m-3 '>
                        {candidate.keySkills.map((skill, index) => (
-                            <div className="skill-items" key={index}>
+                            <div  className="skill-items" key={index}>
                               <span className="skills-text" onClick={() => handleSkillEdit(index)}>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
                              
                            </div>

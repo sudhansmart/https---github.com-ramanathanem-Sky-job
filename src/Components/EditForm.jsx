@@ -21,7 +21,7 @@ function EditForm({ candidateId,handleClose,fetch }) {
 
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${candidateId}`);
+          const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${candidateId}`);
           setFormDatas(response.data);
           // console.log("res :",response.data);
          
@@ -48,7 +48,7 @@ function EditForm({ candidateId,handleClose,fetch }) {
       
         try {
            
-           const response = await axios.put(`http://103.38.50.64/nodejs/profile/update/${candidateId}`
+           const response = await axios.put(`https://www.skylarkjobs.com/nodejs/profile/update/${candidateId}`
           // const response = await axios.put(`http://localhost:5000/profile/update/${candidateId}`
            , formDatas );
            if(response.status == 200){

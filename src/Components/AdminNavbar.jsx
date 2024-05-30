@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown';
-import navlogo from "../assets/Images/sky2.png"
+import navlogo from "../assets/Images/skylarklogo1.png"
 import { Modal } from 'react-bootstrap';
-import "../Style/Navbar.css"
+import "../Style/AdminNavbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook,  faHouse, faMagnifyingGlass, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
@@ -22,14 +22,14 @@ import UploadForm from './UploadForm';
   return (
     <div className='nav-main p-2 me-3'>
          <nav className='P-2'>
-    <Link to="/" className='title ms-5'><img src={navlogo}/></Link>
+    <Link to="/" className='title ms-5'><img className='navicon' src={navlogo}/></Link>
     <div className='menu' onClick={()=> setOpen(!menuOpen)}>
         <span></span>
         <span></span>
         <span></span>
     </div>
     
-    <ul className={menuOpen ?"open":"close"}>
+    <ul className={menuOpen ?"open":"adclose"}>
 
   
         <li>

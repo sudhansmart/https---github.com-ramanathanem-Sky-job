@@ -30,6 +30,8 @@ import CandidateProfile from './Components/CandidateProfile';
 import FindCandidates from './Components/FindCandidates';
 import ApplicantForm from './Components/ApplicantForm';
 
+import StepFormNew from './Components/StepFormNew';
+
 
 
 function App() {
@@ -43,7 +45,7 @@ function App() {
     return (
         <div>
             <Router>
-            {adminToken ? <AdminNavbar adminToken={adminToken} /> : <Navbar userloggedin={userloggedin} token={token} />}
+            {adminToken ? <AdminNavbar adminToken={adminToken} /> : <Navbar  userloggedin={userloggedin} token={token} />}
             <Routes>
                 <Route path='/' element={adminToken ? <AdminHome /> : <Home setAdmin={setAdmin} />} />
                 <Route path='/profile' element={<CandidateProfile/>}/>
@@ -69,7 +71,7 @@ function App() {
                 <Route path='/findcandidate' element={<FindCandidates/>}/>
                 <Route path='/adminlog' element={<AdminLogin setAdminToken={setAdminToken} />} />
                 <Route path='/addcandidate' element={<ApplicantForm/>}/>
-               
+                <Route path='/devmode' element={<StepFormNew/>}/>
             </Routes>
             </Router>
         </div>

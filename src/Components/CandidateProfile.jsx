@@ -1,7 +1,7 @@
 import React, { useState, useEffect ,useRef} from 'react';
 import '../Style/CandidateProfile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding, faCalendarDay, faDownload, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faBriefcase, faBuilding, faCalendarDay, faDownload, faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Modal,Form,Col ,Button,Toast,Row} from 'react-bootstrap';
 import ProfileDetails from './ProfileDetails';
 import axios from 'axios';
@@ -13,6 +13,18 @@ import Personaldata from './Personaldata';
 import AddLanguage from './AddLanguage';
 import Employment from './Employment';
 import EditEmployment from './EditEmployment';
+
+import propic from '../assets/Images/dummypropic.png'
+import probrief from   '../assets/Images/pro-brief.png'
+import procall from   '../assets/Images/pro-call.png'
+import promail from   '../assets/Images/pro-mail.png'
+import proLocation from   '../assets/Images/pro-location.png'
+import procalender from   '../assets/Images/pro-calender.png'
+import prorupee from   '../assets/Images/pro-rupee.png'
+import resumepic from '../assets/Images/cv.png'
+
+
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const CandidateProfile = () => {
   const fileInputRef = useRef(null);
@@ -35,13 +47,17 @@ const CandidateProfile = () => {
   const [languages, setLanguages] = useState([
     
   ]);
+  const[page,setPage]=useState(0);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${authId}`);
+     if (authId){
+        
+      const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${authId}`);
       setProfileData([response.data]);
       setLanguages(response.data.languages);
-      console.log("fetching :",response.datao)
+      console.log("fetching :",response.data)
+      }
     } catch (error) {
       console.log("Error occurred while fetching profile data:", error.message);
     }
@@ -79,7 +95,7 @@ const CandidateProfile = () => {
 
     try {
       
-      const response = await axios.post(`http://103.38.50.64/nodejs/profile/uploadcv/${authId}`, formData, {
+      const response = await axios.post(`https://www.skylarkjobs.com/nodejs/profile/uploadcv/${authId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -92,6 +108,8 @@ const CandidateProfile = () => {
     } catch (error) {
       console.error('Error uploading file:', error);
     }
+   }
+   const handleClose =()=>{
    }
 
   const handleCloseModal = () => {
@@ -130,7 +148,7 @@ const CandidateProfile = () => {
 // handle delete and download cv 
 const handleDownload = async (name) => {
   try {
-    const response = await axios.get(`http://103.38.50.64/nodejs/profile/download/${authId}`, {
+    const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/download/${authId}`, {
       responseType: 'blob',
     });
     
@@ -159,7 +177,7 @@ const handleDownload = async (name) => {
 const handleDelete = async (id) => {
   try {
    
-   const response =  await axios.delete(`http://103.38.50.64/nodejs/profile/delete/${id}`);
+   const response =  await axios.delete(`https://www.skylarkjobs.com/nodejs/profile/delete/${id}`);
      
       if(response.status == 204){
         setShowToast(true); 
@@ -200,8 +218,8 @@ const handleDelete = async (id) => {
     setEducation_id(file_id)
   }
   const handleEducationDelete = async(id)=>{
-    const response =  await axios.delete(`http://103.38.50.64/nodejs/profile/deleteeducation/${authId}/${id}`);
-    console.log(response.data)
+    const response =  await axios.delete(`https://www.skylarkjobs.com/nodejs/profile/deleteeducation/${authId}/${id}`);
+    
     fetchData()
   }
 
@@ -217,7 +235,7 @@ const handleDelete = async (id) => {
   }
 
   const handlelanguagedel = async (id)=>{
-    const response =  await axios.delete(`http://103.38.50.64/nodejs/profile/deletelanguage/${authId}/${id}`);
+    const response =  await axios.delete(`https://www.skylarkjobs.com/nodejs/profile/deletelanguage/${authId}/${id}`);
     console.log(response.data)
     fetchData()
   }
@@ -261,201 +279,14 @@ const handleDelete = async (id) => {
       console.log("id:",id)
     }
     const handleEmploymentDelete = async(id)=>{
-      const response =  await axios.delete(`http://103.38.50.64/nodejs/profile/deleteemployment/${authId}/${id}`);
+      const response =  await axios.delete(`https://www.skylarkjobs.com/nodejs/profile/deleteemployment/${authId}/${id}`);
       fetchData()
     }
 
    
   return (
     <>
-    <div className='p-5' >
-    {profileData.map((data, index) => (
-        <div key={index} >
-          <div className='profile-info p-5'>
-            <h5 className='profile-name'>{data.name.toUpperCase()} <i className="bi bi-pencil-fill edit-profile" onClick={handleEditProfile}></i></h5>
-            <h5 className='profile-role'>{data.role}</h5>
-            <hr />
-            <div className="row">
-              <div className="col">
-                <p className='profile-contact'><i className="bi bi-geo-alt-fill" style={{ fontSize: '14px', color: '#717b9e' }}></i> {data.location}</p>
-                <p className='profile-contact'><i className="bi bi-suitcase-lg-fill profile-explogo"></i> {data.experience} Years</p>
-                <p className='profile-contact'><i className="bi bi-currency-rupee"></i> {data.currentctc} LPA</p>
-              </div>
-              <div className="col">
-                <p className='profile-contact'><i className="bi bi-telephone-fill "></i> {data.phonenumber}  </p>
-                <p className='profile-contact'><i className="bi bi-envelope-arrow-up-fill"></i> {data.email} </p>
-                <p className='profile-contact'><FontAwesomeIcon icon={faCalendarDay} /> {data.noticeperiod} Days</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-          <div className='upload-cv mt-3 p-5'>
-                 {profileData.map((data, index) => (
-                   <div key={index}>
-                     <p className='profile-resume'>Resume</p>
-                     <hr />
-                     {data.cvname && (
-                       <>
-                         <p className='profile-pdf'>{getCVName(data.cvname)}</p>
-                         <p className='profile-pdfdate'>{getUploadDate(data.cvname)}</p>
-                       </>
-                     )}
-                     <span className='cv-icon text-primary'>
-                       <FontAwesomeIcon onClick={()=>handleDownload(data.name)} icon={faDownload} />
-                     </span>
-                     <span className='cv-icon text-danger'>
-                       <i className="bi bi-trash3-fill" onClick={()=>handleDelete(data._id)}  > </i>
-                     </span>
-                     <div className='upload-profilecv mt-3 p-4 text-center'>
-                       <span className='btn btn-outline-primary pro-cv' onClick={handleUpload}>Upload CV</span>
-                       <p className='format mt-3'>Supported Formats: doc, docx, rtf, pdf, upto 2 MB</p>
-                     </div>
-                   </div>
-                 ))}
-                </div>
-                
-         
-                {profileData.map((data, index) => (
-               <div key={index} className='profile mt-3 p-4 '>
-                     <p className='profile-resume'>Profile summary <i className="bi bi-pencil-fill edit-profile" onClick={handlesummary}></i></p><hr/>
-                     <p className='profile-summary '>{data.profileSummary}</p>
-                </div>
-                ))}
-
-
-         <div className='keyskill mt-3 p-3'>
-                 <p className='profile-key p-3'>Key Skill <i className="bi bi-pencil-fill edit-profile" onClick={handleSkills}></i></p><hr/>
-                 {profileData.map((data, dataIndex) => (
-          <div key={dataIndex} className='d-flex p-2'>
-    {data.keySkills.map((skill, skillIndex) => (
-      <div key={skillIndex} className='profile p-2'>
-        <span className='profile-jobskill me-2 p-2'>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
-      </div>
-    ))}
-  </div>
-))}
-         </div>
-         <div className='edu p-4 mt-3'>
-                    <div className='d-flex justify-content-between'>
-                           <p className='profile-keys p-1'>Work Experience </p>
-                           <p className='write-education' onClick={handleEmployment}>Add Experience</p>
-                     </div><hr/>
-                     {profileData.map((data, dataIndex) => {
-                  const sortedEmployment = data.employment.slice().sort((a, b) => {
-                    const startDateA = new Date(a.startDate);
-                    const startDateB = new Date(b.startDate);
-                    return startDateB - startDateA;
-                  });
-                   
-                   return (
-                     <div key={dataIndex} className='p-2'>
-                       {sortedEmployment.map((work, skillIndex) => (
-                         <div key={skillIndex} className='profile p-1'>
-                           <p className='degree-employment'>
-                             {work.designation}
-                           <span style={{fontSize:'16px'}}>  <i className="bi bi-pencil-fill edit-profile" onClick={() => handleEditEmployment(work._id)}></i> 
-                             <FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{ cursor: "pointer" }} onClick={() => handleEmploymentDelete(work._id)} />
-                             </span> </p>
-                           <p className='company-name'><span style={{color:"#605c5c"}}><FontAwesomeIcon icon={faBuilding}/></span> {work.currentCompanyName}</p>
-                           <p className='edc-clg'>
-                             {formatDate(work.startDate)} - {work.isCurrent ? 'Present' : formatDate(work.endDate)}
-                           </p>
-                           <p className='edc-clg'>
-                             {calculateDuration(work.startDate, work.isCurrent ? 'Present' : work.endDate)}
-                           </p>
-                           <p className='profile-summary'>{work.jobSummary}</p>
-                         </div>
-                       ))}
-                     </div>
-  );
-})}
-
-          </div>
-        <div>
-</div>
-
-         
-             <div className='edu p-4 mt-3'>
-                    <div className='d-flex justify-content-between'>
-                           <p className='profile-keys p-1'>Education </p>
-                           <p className='write-education' onClick={handleeducation}>Add Education</p>
-                     </div><hr/>
-                     {profileData.map((data, dataIndex) => {
-  
-                        const sortedEducation = data.education.slice().sort((a, b) => b.startyear - a.startyear);
-                        
-                        return (
-                            <div key={dataIndex} className='p-2'>
-                                {sortedEducation.map((edu, skillIndex) => (
-                                    <div key={skillIndex} className='profile p-1'>
-                                        <p className='degree-education'>{edu.degree}  <i className="bi bi-pencil-fill edit-profile" onClick={()=>handleEditEducation(edu._id)}></i> 
-                                        < FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{cursor:"pointer"}} onClick={()=>handleEducationDelete(edu._id)}/></p>
-                                        <p className='edc-clg'>{edu.collegeName}</p>
-                                        <p className='edc-clg'>{edu.startyear} - {edu.passedout}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        );
-                        })}
-          </div>
-        <div>
-</div>
-{profileData.map((data, dataIndex) => (
-  <div key={dataIndex} className='personal p-4 mt-3'>
-    <p className='personal-details'>Personal details <i className="bi bi-pencil-fill edit-profile" onClick={()=>handlepersonal()}></i></p>
-    <div className="row">
-      <div className="col">
-        <p className='personal-dob'>Date of birth</p>
-        <p className='dob-candidate' >{data.dob?new Date(data.dob).toLocaleDateString('en-GB'):" "}</p>
-        <p className='personal-dob '>Gender</p>
-        <p className='dob-candidate ' style={{textTransform:"capitalize"}}>{data.gender}</p>
-      </div>
-      <div className="col">
-        <p className='personal-dob'>Preferred Location</p>
-        <p className='dob-candidate' style={{textTransform:"capitalize"}}>{data.preferredLocation}</p>
-        <p className='personal-dob'>Industry</p>
-        <p className='dob-candidate' style={{textTransform:"capitalize"}}>{data.industry}</p>
-      </div>
-    </div>
-  </div>
-))}
-
-             <div>
-</div>
-
-
- 
-    <div className='profile-table mt-3 p-3'>
-    <div className='d-flex justify-content-between'>
-                           <p className='profile-keys p-1'>Languages Known </p>
-                           <p className='write-education' onClick={handleAddLanguage}>Add Language</p>
-                     </div><hr/>
-    <table className='w-100'>
-      <thead   className='text-center'>
-        <tr >
-          <th></th>
-          <th>Proficiency</th>
-          <th>Read</th>
-          <th>Write</th>
-          <th>Speak</th>
-        </tr>
-      </thead>
-      <tbody className='text-center'> 
-        {languages.map(language => (
-          <tr key={language._id}>
-            <td>{language.language}</td>
-            <td>{language.proficiency}</td>
-            <td><input type="checkbox" checked={language.read}  readOnly /></td>
-            <td><input type="checkbox" checked={language.write} readOnly /></td>
-            <td><input type="checkbox" checked={language.speak} readOnly /></td>
-            <td> < FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{cursor:"pointer"}} onClick={()=>handlelanguagedel(language._id)} /></td> 
-          </tr>
-        ))}
-      </tbody>
-    </table>
-          </div>
-</div>
+   
 <Modal
             show={modalShow}
             size='lg'
@@ -503,7 +334,7 @@ const handleDelete = async (id) => {
                         <Personaldata handleCloseModal={handleCloseModal} fetchData={fetchData}/> :  " "
                         }
               {showAddlanguages?
-                           <AddLanguage handleCloseModal={handleCloseModal} /> : " "
+                           <AddLanguage handleCloseModal={handleCloseModal} handleClose={handleClose} page={page} setPage={setPage} /> : " "
                            }
 
                  
@@ -520,7 +351,183 @@ const handleDelete = async (id) => {
           </Toast>: " "}
          
         </Col>
-      </Row>
+      </Row> 
+
+      {profileData.length == 0?   
+              <div className="containers1">
+              <div className="loading-wave">
+              <div className="loading-bar"></div>
+              <div className="loading-bar"></div>
+              <div className="loading-bar"></div>
+              <div className="loading-bar"></div>
+            </div>
+            
+            </div>     
+          
+                                    :
+      <div  className='d-flex flex-row mb-5' >
+      {profileData.map((data, index) => (
+        <div className='profile' key={index}> 
+              <div className='top-sec'>
+                 <FontAwesomeIcon className="edit-icon" onClick={handleEditProfile} icon={faPencil}/>
+              </div>
+              <div className='d-flex justify-content-center'>
+                 <img className='propic' src={propic} />
+              </div>
+              <div className='text-center'>
+                <h5 className='pro-name'>{data.name.toUpperCase()}</h5>
+              
+                <p className='pro-desig'>
+                        {data.role ? data.role.replace(/\b\w/g, c => c.toUpperCase()) : " "} 
+               </p>
+
+              </div>
+              <div className='pro-details text-start p-3'>
+                <p  className='pro-text'><img className='pro-icons' src={probrief}/> {data.experience ? data.experience : 0} Years</p>
+                <p  className='pro-text'><img className='pro-icons' src={procall}/> {data.phonenumber} </p>
+                <p  className='pro-text'><img className='pro-icons' src={promail}/> {data.email}</p>
+                <p  className='pro-text'><img className='pro-icons' src={proLocation}/> {data.location}</p> 
+                <p  className='pro-text'><img className='pro-icons' src={procalender}/> {data.noticeperiod?data.noticeperiod : 0} Days</p>
+                <p  className='pro-text'><img className='pro-icons' src={prorupee}/> {data.currentctc ? data.currentctc : 0 } LPA</p>  
+              </div>     
+        </div>))}
+          <div className='sidesec-main'>
+          {profileData.map((data, index) => (
+               <div className='aboutme'  key={index}>
+                  <h4 className='abouttxt'>About Me <i className="bi bi-pencil-fill edit-profile" onClick={handlesummary}></i></h4>
+                  <p className='profile-summary'>{data.profileSummary}</p>
+               </div>
+               ))}
+                 {profileData.map((data, index) => (
+               <div className='aboutme mt-3' key={index}> 
+             
+               <h4 className='abouttxt'>Resume</h4>
+              
+               <div className='resume'>
+                <div className='resumepart-1'>
+                <img className='cvpic' src={resumepic}/>
+                <div className='text-center'>
+                      
+                           <p className='profile-pdf m-0'>{data.cvname? getCVName(data.cvname): " "}</p>
+                           <p className='profile-pdfdate m-0'>{data.cvname?  getUploadDate(data.cvname): " "}</p>
+                </div>
+                         </div>
+                        <div className='upload-profilecv  text-center'>
+                       <span className='btn btn-outline-light  pro-cv' onClick={handleUpload}>Upload CV</span>
+                       <p className='format text-light mt-3 mb-0'>Supported Formats: doc, docx, rtf, pdf, upto 2 MB</p>
+                     </div>
+               </div>
+               {data.cvname !== " "?   <div className='mt-2'>
+                     <Button className='me-3' onClick={()=>handleDownload(data.name)}> <FontAwesomeIcon  icon={faDownload} /> Download</Button>
+                     <Button variant='danger' onClick={()=>handleDelete(data._id)}> <i className="bi bi-trash3-fill"  > </i>Delete</Button>
+                   </div>  : " "}
+                    
+               </div>))} 
+               <div className='keyskill-main mt-3'> 
+                  <div className='keyskills'>
+                   <h4 className='keytitle'>Keyskills <i className="bi bi-pencil-fill edit-profile-blue" onClick={handleSkills}></i></h4>
+                
+                  </div>
+                  {profileData.map((data, dataIndex) => (
+                        <div key={dataIndex} className='d-flex p-2'>
+                  {data.keySkills.map((skill, skillIndex) => (
+                    <div key={skillIndex} className='profilekey p-2'>
+                      <span className='profile-jobskill me-2 p-2'>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
+                    </div>
+                       ))}
+                </div>
+                       ))}
+               </div>
+               <div className='keyskill-main mt-3'> 
+                  <div className='keyskills d-flex justify-content-between'>
+                   <h4 className='keytitle'>Work Experience</h4>
+                   <p className='write-education' onClick={handleEmployment}>Add Experience</p>
+                  </div>
+                  {profileData.map((data, dataIndex) => {
+                  const sortedEmployment = data.employment.slice().sort((a, b) => {
+                    const startDateA = new Date(a.startDate);
+                    const startDateB = new Date(b.startDate);
+                    return startDateB - startDateA;
+                  });
+                   
+                   return (
+                     <div key={dataIndex} className='p-2'>
+                       {sortedEmployment.map((work, skillIndex) => (
+                         <div key={skillIndex} className= 'profile2 p-1 m-4'>
+                           <p className='degree-employment'>
+                             {work.designation.replace(/\b\w/g,c=>c.toUpperCase())}
+                           <span style={{fontSize:'16px'}}>  <i className="bi bi-pencil-fill edit-profile" onClick={() => handleEditEmployment(work._id)}></i> 
+                             <FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{ cursor: "pointer" }} onClick={() => handleEmploymentDelete(work._id)} />
+                             </span> </p>
+                           <p className='company-name'><span style={{color:"#605c5c"}}><FontAwesomeIcon icon={faBuilding}/></span> {work.currentCompanyName}</p>
+                           <p className='edc-clg'>
+                             {formatDate(work.startDate)} - {work.isCurrent ? 'Present' : formatDate(work.endDate)}
+                           </p>
+                           <p className='edc-clg'>
+                             {calculateDuration(work.startDate, work.isCurrent ? 'Present' : work.endDate)}
+                           </p>
+                           <p className='profile-summary'>{work.jobSummary}</p>
+                         </div>
+                       ))}
+                     </div>
+  );
+})}
+               </div>
+               <div className='keyskill-main mt-3'> 
+                  <div className='keyskills d-flex justify-content-between'>
+                   <h4 className='keytitle'>Education</h4>
+                   <p className='write-education' onClick={handleeducation}>Add Education</p>
+                  </div>
+                  {profileData.map((data, dataIndex) => {
+  
+  const sortedEducation = data.education.slice().sort((a, b) => b.startyear - a.startyear);
+  
+  return (
+      <div key={dataIndex} className='p-2'>
+          {sortedEducation.map((edu, skillIndex) => (
+              <div key={skillIndex} className='profile2 p-1 m-4'>
+                  <p className='degree-education'>{edu.degree}  <i className="bi bi-pencil-fill edit-profile" onClick={()=>handleEditEducation(edu._id)}></i> 
+                  < FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{cursor:"pointer"}} onClick={()=>handleEducationDelete(edu._id)}/></p>
+                  <p className='edc-clg'>{edu.collegeName}</p>
+                  <p className='edc-clg'>{edu.startyear} - {edu.passedout}</p>
+              </div>
+          ))}
+      </div>
+  );
+  })}
+                  </div>
+                  <div className='keyskill-main mt-3'> 
+                  <div className='keyskills d-flex justify-content-between'>
+                   <h4 className='keytitle'>Languages Known</h4>
+                   <p className='write-education' onClick={handleAddLanguage}>Add Language</p>
+                  </div>
+                  <table className='w-100  p-5'>
+      <thead   className='text-center'>
+        <tr >
+          <th></th>
+          <th>Proficiency</th>
+          <th>Read</th>
+          <th>Write</th>
+          <th>Speak</th>
+        </tr>
+      </thead>
+      <tbody className='text-center'> 
+        {languages.map(language => (
+          <tr key={language._id}>
+            <td>{language.language}</td>
+            <td>{language.proficiency}</td>
+            <td><input type="checkbox" checked={language.read}  readOnly /></td>
+            <td><input type="checkbox" checked={language.write} readOnly /></td>
+            <td><input type="checkbox" checked={language.speak} readOnly /></td>
+            <td> < FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{cursor:"pointer"}} onClick={()=>handlelanguagedel(language._id)} /></td> 
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+                  </div>   
+          </div>
+      </div> }
        
 </>     
   )

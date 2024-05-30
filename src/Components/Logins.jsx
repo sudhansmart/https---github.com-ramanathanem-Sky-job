@@ -45,7 +45,7 @@ const Logins = ({setUserloggedin,setToken}) => {
         });
         try {
           if (useridValid ) {
-            const response = await axios.post('http://103.38.50.64/nodejs/login/verify',loginFormData)
+            const response = await axios.post('https://www.skylarkjobs.com/nodejs/login/verify',loginFormData)
               if(response.data == true){
                 setshowOtp(true);
               }
@@ -88,7 +88,7 @@ const Logins = ({setUserloggedin,setToken}) => {
       });
 
       if (useridValid) {
-           const response = await axios.post('http://103.38.50.64/nodejs/signup/verify',signUpFormData)
+           const response = await axios.post('https://www.skylarkjobs.com/nodejs/signup/verify',signUpFormData)
            setShowSignupmessage(true);
           if(response.data == true ){
             setSignUpFeedback("Registration Successfull.Please Login");
@@ -109,7 +109,7 @@ const Logins = ({setUserloggedin,setToken}) => {
           const sendData = {email:loginFormData.email,
           otp:data.otp}
          try {
-          const response = await axios.post('http://103.38.50.64/nodejs/login/verifyotp',sendData);
+          const response = await axios.post('https://www.skylarkjobs.com/nodejs/login/verifyotp',sendData);
      
           if(response.status == 200){
             setToken(response.data.token);
@@ -140,25 +140,25 @@ const Logins = ({setUserloggedin,setToken}) => {
     <div className='d-flex justify-content-center'>
        <div className={`containers-login mt-4 ${isSignUpActive ? 'right-panel-active' : ''}`}>
        {isSignUpActive?  <div className="sign-up-container">
-       <h2 className='logintitle text-center mt-5' id='jobsfont'>Register</h2>
-          <form className='mt-5 form-login' onSubmit={handleSignUp}>
+       <h2 className='logintitle text-center mt-4' >Register</h2>
+          <form className='mt-4 form-login' onSubmit={handleSignUp}>
             <input type="text" placeholder="Name" className='input-login mb-3' name='name' value={signUpFormData.name} onChange={handleSignUpOnChange} required />
             <input type="email" placeholder="Email" className='input-login'  name='email' value={signUpFormData.email} onChange={handleSignUpOnChange}  />
             {errors.email && <p className="error text-danger">{errors.email}</p>}
-            <button className='button-login mt-4' type='submit'>Sign Up</button>
+            <button className='button-login mt-3' type='submit'>Sign Up</button>
           </form>
-         {showSignupmessage?<div className='text-center mt-5'>{signUpFeedback}</div>:" "}
+         {showSignupmessage?<div className='feedback text-center mt-1'>{signUpFeedback}</div>:" "}
         </div>
         :  <div className="form-container sign-in-container">
-            {showOtp?<h2 className='logintitle text-center mt-5' id='jobsfont'>OTP Verfication</h2>:<h2 className='logintitle text-center mt-5' id='jobsfont'>Login</h2> }
-         {showOtp? <OtpScreen otpError={otpError} handleOtpVerification={handleOtpVerification}/>:<form className='mt-5 form-login' onSubmit={handleLogin}>
+            {showOtp?<h2 className='logintitle text-center mt-3' >OTP Verfication</h2>:<h2 className='logintitle text-center mt-5' >Login</h2> }
+         {showOtp? <OtpScreen otpError={otpError} handleOtpVerification={handleOtpVerification}/>:<form className='mt-3 form-login' onSubmit={handleLogin}>
             <input type="email" placeholder="Email" className='input-login mt-3'  onChange={handleloginOnChange}
                     name ='email'
                     value={loginFormData.email} />
                      {errors.email && <p className="error text-danger" >{errors.email}</p>}
             <button className='button-login mt-3' type='submit' >Login</button>
             {errors.server && <p className="error">{errors.server}</p>}
-            {showLoginmessage?<div className='text-center mt-5'>{loginFeedback}</div>:" "}
+            {showLoginmessage?<div className='feedback text-center mt-5'>{loginFeedback}</div>:" "}
           </form>}
        
         </div>}
@@ -171,7 +171,7 @@ const Logins = ({setUserloggedin,setToken}) => {
             </div>
             <div className={`overlay-panel overlay-right `}>
               <h1 className='p-login' >Welcome!</h1>
-              <p className='p-login' style={{fontSize:'25px'}} >your gateway to senior-level careers</p>
+              <p className='p2-login'  >your gateway to senior-level careers</p>
               <button className="ghost" onClick={handleSignUpClick}>Sign Up</button>
             </div>
           </div>

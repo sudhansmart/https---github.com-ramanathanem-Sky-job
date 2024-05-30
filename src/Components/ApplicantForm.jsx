@@ -55,7 +55,7 @@ function ApplicantForm() {
 
       formData.append('file', values.file);
   
-      const response = await axios.post('http://103.38.50.64/nodejs/file/upload', formData, {
+      const response = await axios.post('https://www.skylarkjobs.com/nodejs/file/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

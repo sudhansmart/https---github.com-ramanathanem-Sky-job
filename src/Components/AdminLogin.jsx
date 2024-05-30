@@ -2,7 +2,7 @@ import { faChevronRight, faKey, faUser } from '@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React,{useState}from 'react';
 import {Navbar, Image } from 'react-bootstrap'
-import logo from '../assets/Images/sky1.png'
+import logo from '../assets/Images/skylarklogo1.png'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../Style/adminLogin.css'
@@ -23,7 +23,7 @@ const AdminLogin = ({setRole,setAdminToken,setAdminloggedin,setUserloggedin}) =>
    const handleSubmit = async(e)=>{
     e.preventDefault();
    try {
-    const response = await axios.post("http://103.38.50.64/nodejs/admin/login",formData);
+    const response = await axios.post("https://www.skylarkjobs.com/nodejs/admin/login",formData);
         localStorage.setItem('adauthToken', response.data.token);
         setAdminToken(response.data.token)
        
@@ -50,7 +50,7 @@ const AdminLogin = ({setRole,setAdminToken,setAdminloggedin,setUserloggedin}) =>
         <div className="screen__content">
         <div className="social-login">
           <Navbar.Brand href="#home">
-            <Image  src={logo} className='logo'/></Navbar.Brand>
+            <Image  src={logo} className='admin-logo'/></Navbar.Brand>
           </div>
           <form onSubmit={handleSubmit} className="login">
             <div className="login__field">

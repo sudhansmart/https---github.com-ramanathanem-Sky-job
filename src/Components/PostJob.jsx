@@ -43,7 +43,7 @@ function PostJob({setModalShow}) {
       console.log("Form Data:", values); // Output form data as an object
   
       const formData = values;
-      const response = await axios.post('http://103.38.50.64/nodejs/job/upload', formData);
+      const response = await axios.post('https://www.skylarkjobs.com/nodejs/job/upload', formData);
   
       console.log("Response:", response.data);
   

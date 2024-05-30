@@ -20,8 +20,8 @@ export const Footer = ({setAdmin}) => {
     navigate('/adminlog')
   }
   return (
- <div className='footer-main p-4'>
-    <div className='footer-main1 p-4'>
+ <div className='footer-main'>
+    <div className='footer-main1 '>
       <div className='footer-logo'>
       <img className='logosky mb-3' src={Footerlogo}/>
       <p className='logo-text'>Empowering professionals and advancing careers <br/>Your portal to senior-level opportunities</p>
@@ -35,8 +35,9 @@ export const Footer = ({setAdmin}) => {
            </NavLink>
       </div>
       <div className='part-3 text-center'>
-         <h4 className='footer-word mb-3' >Mid & Senior Level Hiring</h4>
-         <Button className='footer-button mb-4' style={{color:"black"}}>Register Now <FontAwesomeIcon className='rightarrow' icon={faChevronRight} /><FontAwesomeIcon  className='rightarrow' icon={faChevronRight} /></Button>
+        <Link to="/logs">
+         <Button className='footer-button mb-4'  style={{color:"black" }}>Register Now <FontAwesomeIcon className='rightarrow' icon={faChevronRight} /><FontAwesomeIcon  className='rightarrow' icon={faChevronRight} /></Button>
+         </Link>
          <div className='follow'>
              <p className='text-light'>Follow us on</p>
              <div className='d-flex justify-content-center'>
@@ -51,7 +52,7 @@ export const Footer = ({setAdmin}) => {
 
     </div>
     <hr style={{color:"white"}}/>
-    <div className='d-flex justify-content-evenly'>
+    <div className='bottom-section'>
         <p className='text-light'>Copyright <FontAwesomeIcon icon={faCopyright}/> 2024 Skylark Hr Solutions Pvt Ltd</p>
         <div>
         <NavLink className="footerlink1"  to="/"> Privacy Policy

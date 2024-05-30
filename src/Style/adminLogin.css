@@ -1,4 +1,7 @@
-
+.admin-logo{
+	height: 50px;
+    width: 250px;
+}
 .loginPage {
 	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
   font-family: Raleway, sans-serif;
@@ -28,6 +31,7 @@
 
 .screen__background {		
 	position: absolute;
+	overflow: hidden;
 	top: 0;
 	left: 0;
 	right: 0;

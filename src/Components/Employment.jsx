@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { Button, Col, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import axios from 'axios';
 
-const Employment = ({handleCloseModal}) => {
+const Employment = ({handleCloseModal,setPage,page}) => {
   const [authId, setAuthId] = useState(localStorage.getItem('authId'));
   const [showPresent, setShowPresent] = useState(false);
   const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ const Employment = ({handleCloseModal}) => {
       employmentData.isCurrent= true ;
       employmentData.endDate = new Date();
       
-    const response = await axios.post(`http://103.38.50.64/nodejs/profile/employment/${authId}`, employmentData);
+    const response = await axios.post(`https://www.skylarkjobs.com/nodejs/profile/employment/${authId}`, employmentData);
     if(response.status == 201){
       setFormData({
         expYear: '',
@@ -54,9 +54,10 @@ const Employment = ({handleCloseModal}) => {
         isCurrent: false // default value for checkbox
       });
       handleCloseModal();
+      setPage(page+1)
     }
     }else{
-    const response = await axios.post(`http://103.38.50.64/nodejs/profile/employment/${authId}`, employmentData);
+    const response = await axios.post(`https://www.skylarkjobs.com/nodejs/profile/employment/${authId}`, employmentData);
         if(response.status == 201){
           setFormData({
             expYear: '',
@@ -69,6 +70,7 @@ const Employment = ({handleCloseModal}) => {
             isCurrent: false // default value for checkbox
           });
           handleCloseModal();
+          setPage(page+1)
         }
   }
 
@@ -115,12 +117,13 @@ const Employment = ({handleCloseModal}) => {
               className="mb-3"
             >
               <Form.Control
-                type="text"
+                type="number"
+                className="number-input"
                 placeholder="Enter Experience"
                 name="expYear"
                 value={formData.expYear}
                 onChange={handleInputChange}
-              />
+              required />
             </FloatingLabel>
           </FormGroup>
           <FormGroup as={Col} md='6'>
@@ -132,20 +135,21 @@ const Employment = ({handleCloseModal}) => {
               
             >
               <Form.Control
-                type="text"
+                type="number"
+                className="number-input"
                 placeholder="Enter Experience"
                 name="expMonth"
               value={formData.expMonth}
               onChange={handleInputChange}
-              />
+              required />
             </FloatingLabel>
           </FormGroup>
         </Row>
-        {/* Current Company Name */}
-        <FormGroup>
-          <FloatingLabel
+        <Row>
+        <FormGroup as={Col} md='6'>
+          <FloatingLabel 
             controlId="floatingInput"
-            label="Current Company Name"
+            label={showPresent? "Current Company Name" :"Company Name"}
             className="mb-3"
           >
             <Form.Control
@@ -154,12 +158,12 @@ const Employment = ({handleCloseModal}) => {
               name="currentCompanyName"
               value={formData.currentCompanyName}
               onChange={handleInputChange}
-            />
+           required />
           </FloatingLabel>
         </FormGroup>
-        {/* Designation */}
-        <FormGroup>
-          <FloatingLabel
+       
+        <FormGroup as={Col} md='6'>
+          <FloatingLabel 
             controlId="floatingInput"
             label="Designation"
             className="mb-3"
@@ -170,9 +174,10 @@ const Employment = ({handleCloseModal}) => {
               name="designation"
               value={formData.designation}
               onChange={handleInputChange}
-            />
+            required />
           </FloatingLabel>
         </FormGroup>
+        </Row>
         {/* Job Summary */}
         <FormGroup>
           <FloatingLabel controlId="floatingTextarea2" label="Job Summary">
@@ -197,9 +202,9 @@ const Employment = ({handleCloseModal}) => {
               name="startDate"
               value={formData.startDate}
               onChange={handleInputChange}
-            />
+           required  />
           </FormGroup>
-          <p className='mt-3 me-3'>To</p>
+          <p className='mt-3 me-3 ms-3'>To</p>
           {showPresent ?
             <p className='mt-3 me-3'>Present</p> :
             <FormGroup as={Col} md="4" className='mt-2'>
@@ -209,7 +214,7 @@ const Employment = ({handleCloseModal}) => {
                 name="endDate"
                 value={formData.endDate}
                 onChange={handleInputChange}
-              />
+              required />
             </FormGroup>}
         </div>
        

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { FloatingLabel, Form,Col, Row,Button } from 'react-bootstrap';
 
-const AddLanguage = ({handleCloseModal}) => {
+const AddLanguage = ({handleCloseModal,setPage,page,handleClose}) => {
   const [authId, setAuthId] = useState(localStorage.getItem('authId'));
   const [data, setData] = useState({
     language: '',
@@ -30,7 +30,7 @@ const AddLanguage = ({handleCloseModal}) => {
       speak: data.speakChecked
     };
 
-    const response = await axios.post(`http://103.38.50.64/nodejs/profile/language/${authId}`, newLanguage);
+    const response = await axios.post(`https://www.skylarkjobs.com/nodejs/profile/language/${authId}`, newLanguage);
     console.log("response :",response.data);
     setData({
       language: '',
@@ -39,12 +39,13 @@ const AddLanguage = ({handleCloseModal}) => {
       writeChecked: false,
       speakChecked: false
     });
-    handleCloseModal()
+    handleCloseModal();
+    handleClose();
+    setPage(page+1)
   };
 
   return (
     <div>
-
       <div>
         <FloatingLabel controlId="floatingInput" label="Language" className="mb-3">
           <Form.Control type="text" className=' mt-3' onChange={handleOnChange} name='language' value={data.language} required />

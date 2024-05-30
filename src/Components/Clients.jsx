@@ -15,12 +15,13 @@ const Clients = () => {
 <div className='line'></div> 
 </div>
 <hr/>
-<div className="clients d-flex justify-content-evenly ">
-  <img src={infosys}/>
-  <img src={Accenture}/>
-  <img src={Wipro}/>
-  <img src={survey}/>
-         </div>
+<marquee > 
+<div className="clients d-flex justify-content-evenly">
+  <img className='clientlogo' src={infosys}/>
+  <img className='clientlogo' src={Accenture}/>
+  <img className='clientlogo' src={Wipro}/>
+  <img className='clientlogo' src={survey}/>
+ </div></marquee>
     </div>
   )
 }

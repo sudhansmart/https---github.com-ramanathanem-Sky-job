@@ -130,3 +130,13 @@
 .button-17:disabled {
   box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
 }
+
+.card{
+  height: 100% !important;
+}
+@media screen and (max-width: 470px) {
+  .mob-card{
+    padding: 1rem!important;
+  }
+  
+}

@@ -12,3 +12,11 @@
     padding: 3%;
     border-radius: 10px;
 }
+.filteruser{
+    width: 25%;
+}
+@media screen and (max-width: 470px) {
+    .filteruser {
+        width: 100%;
+    }
+}

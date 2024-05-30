@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {Button, Form} from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap';
 import "../Style/Logins.css";
 
-const OtpScreen = ({handleOtpVerification,otpError}) => {
-  const [otp, setOtp] = useState(['', '', '', '', '', '']); 
-  const otpInputRefs = Array.from({ length: 6 }, () => React.createRef());
+const OtpScreen = ({ handleOtpVerification, otpError }) => {
+  const [otp, setOtp] = useState(['', '', '', '']);
+  const otpInputRefs = Array.from({ length: 4 }, () => React.createRef());
 
   useEffect(() => {
     otpInputRefs[0].current.focus();
@@ -26,16 +26,20 @@ const OtpScreen = ({handleOtpVerification,otpError}) => {
 
   const handleKeyDown = (e, index) => {
     const keyCode = e.which || e.keyCode;
-    if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105)) {
-      handleOtpChange(index, String.fromCharCode(keyCode));
-    } else if (keyCode === 8 && index > 0 && otp[index] === '') {
-      // Handle backspace to move focus to the previous input field
-      otpInputRefs[index - 1].current.focus();
-    } else {
-      // Clear the current value on invalid input
+
+    if (keyCode === 8) { // Handle backspace
       const newOtp = [...otp];
       newOtp[index] = '';
       setOtp(newOtp);
+
+      if (index > 0) {
+        otpInputRefs[index - 1].current.focus();
+      }
+    } else if (keyCode === 13) { // Handle Enter key
+      e.preventDefault();
+      if (index === otp.length - 1) {
+        handleSubmit(e);
+      }
     }
   };
 
@@ -44,16 +48,19 @@ const OtpScreen = ({handleOtpVerification,otpError}) => {
     const enteredOtp = otp.join('');
     const otpdata = { otp: enteredOtp };
     handleOtpVerification(otpdata);
-    setOtp(['', '', '', '', '', '']);
-   
+    setOtp(['', '', '', '']);
+    otpInputRefs[0].current.focus();
   };
 
   return (
-    <div className='otp-screen bg-white' >
-      <p style={{display:'flex',justifyContent:'center'}} >Please check your Registered Mail.<br/>Enter the Valid OTP Here</p>
-      <Form className='otp-screen-field'  onSubmit={handleSubmit}>
+    <div className='otp-screen bg-white'>
+      <p style={{ display: 'flex', justifyContent: 'center' }}>
+        Please check your Registered Mail.Enter the Valid OTP Here
+      </p>
+      <Form className='otp-screen-field' onSubmit={handleSubmit}>
         {otp.map((digit, index) => (
-          <input className='otp-screen-control'
+          <input
+            className='otp-screen-control'
             key={index}
             ref={otpInputRefs[index]}
             type="text"
@@ -64,9 +71,9 @@ const OtpScreen = ({handleOtpVerification,otpError}) => {
             required
           />
         ))}
-        <Button variant='primary' type="submit" style={{marginLeft :'10px'}}>Verify</Button>
+        <Button className='otp-screen-button' variant='primary' type="submit" style={{ marginLeft: '8px' }}>Verify</Button>
       </Form>
-      {otpError?<p className="error text-danger">Please Enter the valid OTP...</p>: ' '}
+      {otpError ? <p className="error text-danger">Please Enter the valid OTP...</p> : ' '}
     </div>
   );
 };

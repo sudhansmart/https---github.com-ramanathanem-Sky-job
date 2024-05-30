@@ -44,7 +44,7 @@ const TableComponent = ({setFetch,fetch}) => {
   const fetchData = async () => {
     console.log("table fetching")
     try {
-      const response = await axios.get('http://103.38.50.64/nodejs/file/getdata');
+      const response = await axios.get('https://www.skylarkjobs.com/nodejs/file/getdata');
       const filteredata = response.data.filter(data => data.hasOwnProperty('clientName') )
       setFormdata(filteredata);
       console.log("fetched :",filteredData)
@@ -72,10 +72,10 @@ const TableComponent = ({setFetch,fetch}) => {
 
   }
   const handleDownload = async (data) => {
-    console.log("Download :",data)
+   
     try {
       const id = data._id
-      const response = await axios.get(`http://103.38.50.64/nodejs/file/download/${id}`, {
+      const response = await axios.get(`https://www.skylarkjobs.com/nodejs/file/download/${id}`, {
         responseType: 'blob',
       });
       console.log("response of download : ",response)
@@ -90,7 +90,7 @@ const TableComponent = ({setFetch,fetch}) => {
     
       const contentDisposition = response.headers['content-disposition'];
       const fileNameMatch = contentDisposition && contentDisposition.match(/filename=(.+)/);
-      const fileName = fileNameMatch ? fileNameMatch[1] : 'CV.pdf';
+      const fileName = fileNameMatch ? fileNameMatch[1] :`${data.name}.pdf`;
   
     
       link.download = fileName;
@@ -118,7 +118,7 @@ const TableComponent = ({setFetch,fetch}) => {
   // Filtered and paginated data
   const filteredData = sortedData.filter((item) => {
     const nameMatch = item.name.toLowerCase().includes(searchText.toLowerCase());
-    // const designationMatch = item.role.toLowerCase().includes(searchText.toLowerCase());
+    const designationMatch = item.role.toLowerCase().includes(searchText.toLowerCase());
     const clientMatch = item.clientName && item.clientName.toLowerCase().includes(searchText.toLowerCase());
 
   

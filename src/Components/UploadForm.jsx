@@ -48,7 +48,7 @@ function UploadForm({setCandiShow}) {
   
    
   
-      const response = await axios.post('http://103.38.50.64/nodejs/file/upload', formData, {
+      const response = await axios.post('https://www.skylarkjobs.com/nodejs/file/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -158,37 +158,6 @@ function UploadForm({setCandiShow}) {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-           
-            {/* <Form.Group as={Col} md="3" controlId="validationFormik05">
-              <Form.Label>Qualification</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                name="qualification"
-                value={values.qualification}
-                onChange={handleChange}
-                isValid={touched.qualification && !errors.qualification}
-                isInvalid={touched.qualification && !!errors.qualification}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.qualification}
-              </Form.Control.Feedback>
-            </Form.Group> */}
-            {/* <Form.Group as={Col} md="3" controlId="validationFormik06">
-              <Form.Label>Date of Birth (dd-mm-yyyy)</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                name="dob"
-                value={values.dob}
-                onChange={handleChange}
-                isValid={touched.dob && !errors.dob}
-                isInvalid={touched.dob && !!errors.dob}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.dob}
-              </Form.Control.Feedback>
-            </Form.Group> */}
             <Form.Group as={Col} md="3" controlId="validationFormik07">
               <Form.Label>Preferred Location</Form.Label>
               <Form.Control
@@ -204,21 +173,7 @@ function UploadForm({setCandiShow}) {
                 {errors.preferredLocation}
               </Form.Control.Feedback>
             </Form.Group>
-            {/* <Form.Group as={Col} md="3" controlId="validationFormik08">
-              <Form.Label>Current Company</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                name="currentCompany"
-                value={values.currentCompany}
-                onChange={handleChange}
-                isValid={touched.currentCompany && !errors.currentCompany}
-                isInvalid={touched.currentCompany && !!errors.currentCompany}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.currentCompany}
-              </Form.Control.Feedback>
-            </Form.Group> */}
+  
           </Row>
           <Row className="mb-3">
            
@@ -241,25 +196,6 @@ function UploadForm({setCandiShow}) {
                {errors.overAllExp}
              </Form.Control.Feedback>
            </Form.Group>
-           {/* <Form.Group as={Col} md="2" controlId="validationFormik10">
-             <Form.Label>Relevant Experience</Form.Label>
-             <Form.Control
-               type="text"
-               placeholder=""
-               name="relevantExp"
-               value={values.relevantExp}
-               onChange={handleChange}
-               onBlur={(e) => {
-                const { name, value } = e.target;
-                handleChange({ target: { name, value: value.toUpperCase() } });
-              }}
-               isValid={touched.relevantExp && !errors.relevantExp}
-               isInvalid={touched.relevantExp && !!errors.relevantExp}
-             />
-             <Form.Control.Feedback type="invalid">
-               {errors.relevantExp}
-             </Form.Control.Feedback>
-           </Form.Group> */}
            <Form.Group as={Col} md="2" controlId="validationFormik11">
              <Form.Label>Current CTC</Form.Label>
              <Form.Control
@@ -279,25 +215,6 @@ function UploadForm({setCandiShow}) {
                {errors.currentCtc}
              </Form.Control.Feedback>
            </Form.Group>
-           {/* <Form.Group as={Col} md="2" controlId="validationFormik12">
-             <Form.Label>Expected CTC</Form.Label>
-             <Form.Control
-               type="text"
-               placeholder=""
-               name="expectedCtc"
-               value={values.expectedCtc}
-               onChange={handleChange}
-               onBlur={(e) => {
-                const { name, value } = e.target;
-                handleChange({ target: { name, value: value.toUpperCase() } });
-              }}
-               isValid={touched.expectedCtc && !errors.expectedCtc}
-               isInvalid={touched.expectedCtc && !!errors.expectedCtc}
-             />
-             <Form.Control.Feedback type="invalid">
-               {errors.expectedCtc}
-             </Form.Control.Feedback>
-           </Form.Group> */}
            <Form.Group as={Col} md="2" controlId="validationFormik13">
              <Form.Label>Notice Period</Form.Label>
              <Form.Control
@@ -340,13 +257,7 @@ function UploadForm({setCandiShow}) {
               accept=".pdf, .doc, .docx" 
               ref={fileInputRef} className='mt-3'/>
       </Form.Group>
-      {/* <Form.Group className="mb-3" as={Col} md="8"  controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Skills</Form.Label>
-        <Form.Control as="textarea"
-         name="skills"
-         value={values.skills}
-         onChange={handleChange} rows={3} />
-      </Form.Group> */}
+
          </Row>
          <div className='d-flex' style={{justifyContent:'space-evenly'}}>
            <Button variant="secondary" onClick={()=>setCandiShow(false)} ><FontAwesomeIcon icon={faLeftLong} /> Back</Button>

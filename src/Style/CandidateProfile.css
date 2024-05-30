@@ -1,229 +1,256 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Great+Vibes&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans+Sora+Sompeng:wght@400..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Great+Vibes&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans+Sora+Sompeng:wght@400..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
-.profile-info{
-    background-color: aliceblue ;
+
+
+
+.profile{
+    margin: 3%;
     border-radius: 10px;
+    border: rgb(244, 242, 242) solid 1px;
+    width: 23%;
+    height: auto;
+    box-shadow: 1px 1px 6px 0px rgb(230, 226, 230);
 }
-.profile-name{
-    font-size: xxx-large;
-     color: #15317E;
-    font-family: "Noto Sans Sora Sompeng", sans-serif;
-     font-optical-sizing: auto;
-      font-weight: 600;
-     font-style: normal;
- 
+.experience{
+    margin: 3%;
 }
-
-@media (max-width : 768px) {
-    .profile-name{
-        font-size:x-large;
-      
-     
-    }
+.top-sec{
+    height: 80px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #4c72d3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+    box-shadow: 0px 1px 4px 0px rgb(73, 73, 73);
 }
-
-.profile-contact{
-    font-size: large;
-    font-weight:500;
+.edit-icon{
+    color: #4c72d3;
+    background-color: white;
+    padding: 7px;
+    border-radius: 30px;
+}
+.propic{
+    width: 180px;
+    border-radius: 50%;
+    position: relative;
+    top: -50px;
+    
    
-    color: #1d2859;
-    font-family: Satoshi,"Satoshi Fallback";
-
 }
-.upload-cv{
-    background-color: aliceblue ;
+.pro-text{
+   font-size:1rem ;
+   color: #6a6868;
+}
+.pro-name{
+    font-size: 25px;
+    font-weight: 600;
+}
+.pro-desig{
+    font-weight: 600;
+}
+.pro-icons{
+    width: 30px;
+}
+.pro-details{
+    font-size: small;
+    font-weight: 600;
+}
+.aboutme{
+    padding: 2%;
+    border: #bfbfbf solid 1px;
     border-radius: 10px;
+    box-shadow: 0px 1.5px 2px 0px #bfbfbf;
+
 }
-
-.profile-resume{
-    font-size: x-large;
-    font-weight: 500;
-    font-family: Roboto,sans-serif;
+.sidesec-main{
+    width: 77%;
+    padding: 3% 2% 0px 0px;
 }
+.abouttxt{
+    font-size: 25px;
+    font-weight: 600;
+}
+.keytitle{
+    font-size: 25px;
+    font-weight: 600;
+    color: #fff;
+}
+.profile-summary{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #878787;
+  font-size: 20px;
+  word-wrap: break-word; /* Older property, still widely supported */
+  overflow-wrap: break-word; /* Newer property, recommended */
+  white-space: pre-wrap;
+}
+.profile-summary::first-letter {
+    margin-left: 5.5rem;
+  }
+.resume{
+    height: 100px;
+    width: 100%;
+    background-color: #4c72d3;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.cvpic{
+    height: 100px ;
+}
+.upload-profilecv{
+    
+    
+    cursor: pointer;
+    font-weight: 100;
+  }
+  .pro-cv{
+    color: #4c72d3 !important;
+    background-color: whitesmoke !important;
+  }
 
-
-
-
-.profile-pdf{
+  .profile-pdf{
     font-weight: 700;
     font-size: 16px;
     line-height: 20px;
-    color: #121224;
+    color: #ffff;
     font-family: Roboto,sans-serif;
 }
 .profile-pdfdate{
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
-    color: #121224;
+    color: #ffff;
     font-family: Roboto,sans-serif;
 }
-.cv-icon{
-    font-size: large;
-    font-weight: 600;
-    cursor: pointer;
-    margin: 2px;
-  
+.resumepart-1{
+    display: flex;
+    align-items: center;
 }
-.upload-profilecv{
-  border-style: groove;
-  color: #666 ;
-  cursor: pointer;
-  font-weight: 100;
-}
-
-.profile{
-    background-color: aliceblue ;
+.keyskill-main{
+ 
+    border: #bfbfbf solid 1px;
     border-radius: 10px;
+    box-shadow: 0px 1.5px 2px 0px #bfbfbf; 
+
+}
+.keyskills{
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 0px 1.5px 2px 0px #bfbfbf; 
+    background-color: #4c72d3;
+    height: 60px;
+    padding: 2%;
 }
 
-.profile-summary{
-    font-size: large;
-    color: #665f5f;
-    font-weight: 500;
-}
-.profile-summary::first-letter {
-    margin-left: 5.5rem; /* Adjust the space as needed */
-  }
+.profilekey .profile-jobskill{
+    background: #fff;
+    padding: 4.5px 8px;
+    border: 1px solid var(--N400);
+    border-radius: 50px;
+    background-color: #4c72d3;
+    color: #fff;
+    max-width: 515px;
+    font-family: Roboto,sans-serif ;
+    }
+    .edit-profile{
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0 12px;
+        text-align: center;
+        color: #717b9e;
+    }
+    .edit-profile-blue{
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0 12px;
+        text-align: center;
+        color: #ffff;
+    }
+    .write-education{
+        font-family: Roboto,sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        color: #ffff;
+        cursor: pointer;
+    } 
 
-.keyskill{
-    background-color: aliceblue;
-    border-radius: 10px;
-}
-.profile-key{
-    font-size: x-large;
-    font-weight: 500;
-    color: #121224;
-    font-family: Roboto,sans-serif;
-}
-
-
-.profile .profile-jobskill{
-background: #fff;
-padding: 4.5px 8px;
-border: 1px solid var(--N400);
-border-radius: 50px;
-background-color: #474d6a31;
-max-width: 515px;
-font-family: Roboto,sans-serif ;
-}
-.profile-education{
-    height: 400px;
-    width: 1260px;
-}
-.pro-bgg{
-    background-color: #fff;
+    .degree-employment{
+        font-size: xx-large;
+        line-height:18px ;
+        font-weight: 700;
+        color: #121224;
+        font-family: Roboto,sans-serif;
+    }
+    .company-name{
+           font-size: large;
+           color: navy;
+    }
+    .edc-clg{
+        word-wrap: break-word;
+        font-size: 16px;
+        font-family: Roboto,sans-serif;
+        font-weight: 500;
+        line-height: 18px;
     
-}
-.profile-keys{
-    font-size: x-large;
-    font-weight: 500;
-    line-height: 18px;
-    color: #121224;
-    font-family: Roboto,sans-serif;
-}
-.edu{
-    background-color: aliceblue;
-   border-radius: 10px;
-   
-   font-family: Roboto,sans-serif;
-}
-.degree-education{
-    font-size: large;
-    line-height:18px ;
-    font-weight: 700;
-    color: #121224;
-    font-family: Roboto,sans-serif;
-}
-.degree-employment{
-    font-size: xx-large;
-    line-height:18px ;
-    font-weight: 700;
-    color: #121224;
-    font-family: Roboto,sans-serif;
-}
-.company-name{
-       font-size: large;
-       color: navy;
-}
-.edc-clg{
-    word-wrap: break-word;
-    font-size: 16px;
-    font-family: Roboto,sans-serif;
-    font-weight: 500;
-    line-height: 18px;
+    }
+    .degree-education{
+        font-size: large;
+        line-height:18px ;
+        font-weight: 700;
+        color: #121224;
+        font-family: Roboto,sans-serif;
+    }
 
-}
-.edit-profile{
-    font-size: 16px;
-    cursor: pointer;
-    padding: 0 12px;
-    text-align: center;
-    color: #717b9e;
-}
-.profile-explogo {
-    font-size: 14px;
-    font-family: fontIcons;
-}
 
-.profile-sign{
-   background-color: #47b749;
-  border-radius: 40px;
-}
-
-.format{
-    color: #717b9e;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 18px;
-    font-family:  Roboto,sans-serif;
-}
-.write-education{
-    font-family: Roboto,sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: #275df5;
-    cursor: pointer;
-}
-
-.personal-details{
-    color: #121224;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 18px;
-}
-.personal-dob{
-color: #717b9e;
-font-size: 14px;
-font-weight: 500;
-line-height: 18px;
-}
-.dob-candidate{
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 18px;
-    color: #474d6a;
-}
-.personal{
-   
-    background-color: aliceblue;
-   border-radius: 10px;
-   font-family: Roboto,sans-serif;
-}
-.profile-language{
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    color: #717b9e;
-    border-bottom: 1px solid #e7e7f1;
-}
-
-.lang{
-    font-size: 14px;
-    color: #474d6a;
-    font-weight: 700;
-}
-.profile-table{
-    background-color: aliceblue;
-    border-radius: 10px;
-}
+    .containers1{
+        display:flex;
+        height:100vh;
+        width:100%;
+        justify-content:center;
+        align-items:center;
+      }
+      .loading-wave {
+        width: 300px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+      
+      .loading-bar {
+        width: 20px;
+        height: 10px;
+        margin: 0 5px;
+        background-color: #3498db;
+        border-radius: 5px;
+        animation: loading-wave-animation 1s ease-in-out infinite;
+      }
+      
+      .loading-bar:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      
+      .loading-bar:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      
+      .loading-bar:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      
+      @keyframes loading-wave-animation {
+        0% {
+          height: 10px;
+        }
+      
+        50% {
+          height: 50px;
+        }
+      
+        100% {
+          height: 10px;
+        }
+      }
+      

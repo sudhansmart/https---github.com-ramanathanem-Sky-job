@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import '../Style/Jobcarts.css'
 export const Jobcarts = () => {
     const Data = [
-        { id: 1, domain:'HR', position:'Sr.HR Opns Manager', exp:'10+ Experience Hr Generalist Rols',location:'chennai',Ctc:'Upto 15LPA',type:"Full Time"},
-        { id: 2,  domain:'Bpo', position:'SOLUTION ARCHITECT', exp:'10+ Experience Banking in Domain',location:'chennai',Ctc:'Upto 35LPA',type:"Full Time"},
-        { id: 3,  domain:'Account', position:'SOLUTION ARCHITECT', exp:'10+ Experience Banking in Domain',location:'chennai',Ctc:'Upto 35LPA',type:"Full Time"},
-        { id: 4, domain:'Sale & Marketing', position:'SOLUTION ARCHITECT', exp:'10+ Experience Banking in Domain',location:'chennai',Ctc:'Upto 35LPA',type:"Full Time"},
-        { id: 5, domain:'Customer Service', position:'SOLUTION ARCHITECT', exp:'10+ Experience Banking in Domain',location:'chennai',Ctc:'Upto 35LPA',type:"Full Time"},
-        { id: 6, domain:'Customer Service', position:'SOLUTION ARCHITECT', exp:'10+ Experience Banking in Domain',location:'chennai',Ctc:'Upto 35LPA',type:"Full Time"},
-        { id: 7,  domain:'IT', position:'SOLUTION ARCHITECT', exp:'10+ Experience Banking in Domain',location:'chennai',Ctc:'Upto 35LPA',type:"Full Time"},
-        { id: 8,  domain:'Customer Service', position:'SOLUTION ARCHITECT', exp:'10+ Experience Banking in Domain',location:'chennai',Ctc:'Upto 35LPA',type:"Full Time"},
+        { id: 1, domain:'IT', position:'Oracle GCP', exp:'6 Years Experience i',location:'chennai',Ctc:'Upto 24LPA',type:"Full Time"},
+        { id: 2,  domain:'IT', position:'Python Alteryx', exp:'5 years Experience ',location:'chennai',Ctc:'Upto 19LPA',type:"Full Time"},
+        { id: 3,  domain:'BPO', position:'401K Senior Analyst', exp:'5 years Experience',location:'Bangalore',Ctc:'Upto 15LPA',type:"Full Time"},
+        { id: 4,  domain:'Human Resource', position:'HR Operations', exp:'6 Years Experience',location:'chennai',Ctc:'Upto 12LPA',type:"Full Time"},
+        { id: 5, domain:'Sale & Marketing', position:'SOLUTION ARCHITECT', exp:'3 Years Experience ',location:'chennai',Ctc:'Upto 35LPA',type:"Full Time"},
+        { id: 6, domain:'Digital Marketing', position:'Content Writer', exp:'3 Years Experience',location:'chennai',Ctc:'Upto 6LPA',type:"Full Time"},
+        { id: 7, domain:'Digital Marketing ', position:'Digital Marketing Specialist', exp:'3 Years Experience',location:'chennai',Ctc:'Upto 6LPA',type:"Full Time"},
+        { id: 8,  domain:'Account', position:'Finance Manager', exp:'8+ Experience Banking in Domain',location:'chennai',Ctc:'Upto 15LPA',type:"Full Time"},
       
       ];
   return (
@@ -21,8 +21,9 @@ export const Jobcarts = () => {
       
         <div className='container mt-4 p-3' >
         <div className='row mb-4 ' >
-        {Data.map((data) => (
-            <div className='col-md-3' key={data.id} >
+        {Data.map((data,index) => (
+         
+            <div className='trail col-md-3' key={index}  >
              
              <div className='job-border m-2 p-2'>
              
@@ -45,8 +46,8 @@ export const Jobcarts = () => {
                    
                     
             </div>
-          
             </div>
+           
                ))}
                
         </div>

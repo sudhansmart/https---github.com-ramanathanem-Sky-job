@@ -18,7 +18,7 @@ function SkillInput({ handleCloseModal }) {
 
   const fetchSkillsData = async () => {
     try {
-      const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${authId}`);
+      const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${authId}`);
       setSkills(response.data.keySkills);
     } catch (error) {
       console.error('Error fetching skills:', error);
@@ -32,15 +32,13 @@ function SkillInput({ handleCloseModal }) {
   const handleSkillSubmit = (event) => {
     event.preventDefault();
     if (skill.trim() !== '') {
-      const lowercaseSkill = skill.trim().toLowerCase(); // Convert skill to lowercase
+      const lowercaseSkill = skill.trim().toLowerCase();
       if (editIndex !== null) {
-        // If editing an existing skill
         const updatedSkills = [...skills];
         updatedSkills[editIndex] = lowercaseSkill;
         setSkills(updatedSkills);
         setEditIndex(null);
       } else {
-        // If adding a new skill
         setSkills([...skills, lowercaseSkill]);
       }
       setSkill('');
@@ -65,7 +63,7 @@ function SkillInput({ handleCloseModal }) {
   const handleFinalSubmit = async () => {
     try {
       // Send skills data to backend
-      const response = await axios.post(`http://103.38.50.64/nodejs/profile/skills/${authId}`, { skills });
+      const response = await axios.post(`https://www.skylarkjobs.com/nodejs/profile/skills/${authId}`, { skills });
       if (response.status === 201) {
         handleCloseModal(); // Close the modal or perform any other action
       } else {

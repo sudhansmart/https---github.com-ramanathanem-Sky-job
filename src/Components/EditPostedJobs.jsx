@@ -22,7 +22,7 @@ function EditPostedJobs({setModalShow,id}) {
   
     const fetchJobData = async () => {
       try {
-        const response = await axios.get(`http://103.38.50.64/nodejs/job/specificjob/${id}`);
+        const response = await axios.get(`https://www.skylarkjobs.com/nodejs/job/specificjob/${id}`);
         setJobData(response.data);
       } catch (error) {
         console.error('Error fetching job data:', error);
@@ -58,8 +58,8 @@ function EditPostedJobs({setModalShow,id}) {
      
       const updatedJobData = { ...jobData, ...values };
       
-      const response = await axios.put(`http://103.38.50.64/nodejs/job/postupdate/${id}`, updatedJobData);
-        // const response = await axios.put(`http://103.38.50.64/nodejs/job/postupdate/${id}`, updatedJobData);
+      const response = await axios.put(`https://www.skylarkjobs.com/nodejs/job/postupdate/${id}`, updatedJobData);
+        // const response = await axios.put(`https://www.skylarkjobs.com/nodejs/job/postupdate/${id}`, updatedJobData);
 
 
       console.log("Response:", response.data);

@@ -13,7 +13,7 @@ const RecentJobPost = () => {
   const [ModalShow,setModalShow] = useState(false);
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://103.38.50.64/nodejs/job/getdata');
+      const response = await axios.get('https://www.skylarkjobs.com/nodejs/job/getdata');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -25,7 +25,7 @@ const RecentJobPost = () => {
   }, []);
 
       const handleDeletePost = async(id)=>{
-           const response = await axios.delete(`http://103.38.50.64/nodejs/job/postdelete/${id}`);
+           const response = await axios.delete(`https://www.skylarkjobs.com/nodejs/job/postdelete/${id}`);
         
          console.log("response :",response);
          alert(response.data.message);
@@ -55,7 +55,7 @@ const RecentJobPost = () => {
                        </div>
                        <div>
                            <FontAwesomeIcon onClick={()=>handleEditPost(job._id)} className='text-primary me-2' icon={faPenToSquare}/> 
-                            <FontAwesomeIcon onClick={()=>handleDeletePost(job._id)} className='text-danger' icon={faTrash}/>
+                            {/* <FontAwesomeIcon onClick={()=>handleDeletePost(job._id)} className='text-danger' icon={faTrash}/> */}
                        </div>
             </div>
             <hr />

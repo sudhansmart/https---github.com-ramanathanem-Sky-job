@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, FloatingLabel, Row, Col, Button } from 'react-bootstrap';
 import axios from 'axios';
 
+
 const EditEducation = ({ handleCloseModal, education_id }) => {
   const [authId, setAuthId] = useState(localStorage.getItem('authId'));
   const [education, setEducation] = useState({
@@ -18,7 +19,7 @@ const EditEducation = ({ handleCloseModal, education_id }) => {
 
   const fetchEducationData = async () => {
     try {
-      const response = await axios.get(`http://103.38.50.64/nodejs/profile/specificprofile/${authId}`);
+      const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${authId}`);
       const existingEducation = response.data.education.find(edu => edu._id === education_id);
 
       setEducation(existingEducation);
@@ -30,7 +31,7 @@ const EditEducation = ({ handleCloseModal, education_id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://103.38.50.64/nodejs/profile/education/${authId}/${education_id}`, education);
+      const response = await axios.put(`https://www.skylarkjobs.com/nodejs/profile/education/${authId}/${education_id}`, education);
      
 
       if (response.status === 200) {
@@ -91,9 +92,10 @@ const EditEducation = ({ handleCloseModal, education_id }) => {
 
         <Row>
           <Col md='6'>
-            <FloatingLabel controlId='startyear' label='Start' className='mb-3'>
+            <FloatingLabel controlId='startyear' label='Start Year' className='mb-3'>
               <Form.Control
                 type='number'
+                className="number-input"
                 placeholder='Enter Year of Starting'
                 onChange={handleChange}
                 value={education.startyear}
@@ -104,9 +106,10 @@ const EditEducation = ({ handleCloseModal, education_id }) => {
           </Col>
 
           <Col md='6'>
-            <FloatingLabel controlId='passedout' label='Passed Out' className='mb-3'>
+            <FloatingLabel controlId='passedout' label='Passed Out Year' className='mb-3'>
               <Form.Control
                 type='number'
+                className="number-input"
                 placeholder='Enter Year of Passing'
                 onChange={handleChange}
                 value={education.passedout}
