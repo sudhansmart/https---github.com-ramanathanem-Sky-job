@@ -203,3 +203,25 @@ body .main-container .steps-container .step .label.loading {
 .process-icon{
     height: 20px;
 }
+
+@media  screen and (max-width: 470px) {
+  .main-container {
+    min-width: 370px;
+  }
+  .label{
+        font-size: 12px;
+  }
+  .main-container .steps-container .step.in-progress {
+    width: 40px;
+    height: 20px;
+  }
+  .main-container .steps-container .step.in-progress .preloader {
+    height: 13px;
+    width: 13px;
+  }
+  .main-container .steps-container .step.completed {
+    width: 40px;
+    height: 20px;
+  }
+  
+}

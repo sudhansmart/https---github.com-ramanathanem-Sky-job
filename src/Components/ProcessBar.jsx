@@ -64,9 +64,27 @@ function ProcessBar({page}) {
           
         </div>}
 
-        {/* <div className="line prev-step-in-progress"></div> */}
         <div className="line completed"></div>
          {page === 3?
+        <div className="step in-progress">
+            <div className="preloader"></div>
+            <div className="label loading">
+                Add Skills
+            </div>
+        </div>:
+         <div className="step completed">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
+            </svg>
+            <div className="label completed">
+                 Add Skills
+            </div>
+          
+        </div>}
+
+        {/* <div className="line prev-step-in-progress"></div> */}
+        <div className="line completed"></div>
+         {page === 4?
               <div className="step in-progress">
             <div className="preloader"></div>
             <div className="label loading">

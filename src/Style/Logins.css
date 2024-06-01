@@ -3,7 +3,8 @@
 .error{
 	margin-top: 3px;
 }
-
+.form-wrap{
+	display: none;}
 
 .button-login {
 	border-radius: 10px;
@@ -225,7 +226,13 @@
 	flex-direction: row;
   }
   
-@media (max-width : 768px) {
+@media (max-width : 470px) {
+	.containers-login{
+		display: none;
+	}
+	.form-wrap{
+		display: block;}
+
 	.otp-screen-field{
 		display: flex;
 		align-items: center;

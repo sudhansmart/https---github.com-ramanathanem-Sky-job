@@ -382,7 +382,7 @@ const handleDelete = async (id) => {
                </p>
 
               </div>
-              <div className='pro-details text-start p-3'>
+              <div className='pro-details text-start'>
                 <p  className='pro-text'><img className='pro-icons' src={probrief}/> {data.experience ? data.experience : 0} Years</p>
                 <p  className='pro-text'><img className='pro-icons' src={procall}/> {data.phonenumber} </p>
                 <p  className='pro-text'><img className='pro-icons' src={promail}/> {data.email}</p>
@@ -413,31 +413,31 @@ const handleDelete = async (id) => {
                 </div>
                          </div>
                         <div className='upload-profilecv  text-center'>
-                       <span className='btn btn-outline-light  pro-cv' onClick={handleUpload}>Upload CV</span>
-                       <p className='format text-light mt-3 mb-0'>Supported Formats: doc, docx, rtf, pdf, upto 2 MB</p>
+                       <span className='pro-cv btn btn-outline-light  ' onClick={handleUpload}>Upload CV</span>
+                       <p className='format text-light mb-0'>Supported Formats: doc, docx, rtf, pdf, upto 2 MB</p>
                      </div>
                </div>
                {data.cvname !== " "?   <div className='mt-2'>
-                     <Button className='me-3' onClick={()=>handleDownload(data.name)}> <FontAwesomeIcon  icon={faDownload} /> Download</Button>
-                     <Button variant='danger' onClick={()=>handleDelete(data._id)}> <i className="bi bi-trash3-fill"  > </i>Delete</Button>
+                     <Button className='mobbtn me-3' onClick={()=>handleDownload(data.name)}> <FontAwesomeIcon  icon={faDownload} /> Download</Button>
+                     <Button className='mobbtn' variant='danger' onClick={()=>handleDelete(data._id)}> <i className="bi bi-trash3-fill"  > </i>Delete</Button>
                    </div>  : " "}
                     
                </div>))} 
                <div className='keyskill-main mt-3'> 
-                  <div className='keyskills'>
-                   <h4 className='keytitle'>Keyskills <i className="bi bi-pencil-fill edit-profile-blue" onClick={handleSkills}></i></h4>
-                
-                  </div>
-                  {profileData.map((data, dataIndex) => (
-                        <div key={dataIndex} className='d-flex p-2'>
-                  {data.keySkills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className='profilekey p-2'>
-                      <span className='profile-jobskill me-2 p-2'>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
-                    </div>
-                       ))}
-                </div>
-                       ))}
-               </div>
+  <div className='keyskills'>
+    <h4 className='keytitle'>Keyskills <i className="bi bi-pencil-fill edit-profile-blue" onClick={handleSkills}></i></h4>
+  </div>
+  {profileData.map((data, dataIndex) => (
+    <div key={dataIndex} className='mainkeys d-flex p-2'>
+      {data.keySkills.map((skill, skillIndex) => (
+        <div key={skillIndex} className='profilekey'>
+          <span className='profile-jobskill me-2 p-2'>{skill.replace(/\b\w/g, c => c.toUpperCase())}</span>
+        </div>
+      ))}
+    </div>
+  ))}
+</div>
+
                <div className='keyskill-main mt-3'> 
                   <div className='keyskills d-flex justify-content-between'>
                    <h4 className='keytitle'>Work Experience</h4>
@@ -453,12 +453,13 @@ const handleDelete = async (id) => {
                    return (
                      <div key={dataIndex} className='p-2'>
                        {sortedEmployment.map((work, skillIndex) => (
-                         <div key={skillIndex} className= 'profile2 p-1 m-4'>
-                           <p className='degree-employment'>
-                             {work.designation.replace(/\b\w/g,c=>c.toUpperCase())}
-                           <span style={{fontSize:'16px'}}>  <i className="bi bi-pencil-fill edit-profile" onClick={() => handleEditEmployment(work._id)}></i> 
-                             <FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{ cursor: "pointer" }} onClick={() => handleEmploymentDelete(work._id)} />
-                             </span> </p>
+                         <div key={skillIndex} className= 'profile2 '>
+                           <div className='degree-employment'>
+                              <p className='emp-title'>{work.designation.replace(/\b\w/g,c=>c.toUpperCase())}</p>
+                              
+                             <div className='edit-emp' style={{fontSize:'16px'}}>  <i className="bi bi-pencil-fill edit-profile-emp" onClick={() => handleEditEmployment(work._id)}></i> 
+                             <FontAwesomeIcon icon={faTrashCan} className='edit-profile-emp text-danger' style={{ cursor: "pointer" }} onClick={() => handleEmploymentDelete(work._id)} />
+                             </div> </div>
                            <p className='company-name'><span style={{color:"#605c5c"}}><FontAwesomeIcon icon={faBuilding}/></span> {work.currentCompanyName}</p>
                            <p className='edc-clg'>
                              {formatDate(work.startDate)} - {work.isCurrent ? 'Present' : formatDate(work.endDate)}
@@ -485,7 +486,7 @@ const handleDelete = async (id) => {
   return (
       <div key={dataIndex} className='p-2'>
           {sortedEducation.map((edu, skillIndex) => (
-              <div key={skillIndex} className='profile2 p-1 m-4'>
+              <div key={skillIndex} className='profile2  '>
                   <p className='degree-education'>{edu.degree}  <i className="bi bi-pencil-fill edit-profile" onClick={()=>handleEditEducation(edu._id)}></i> 
                   < FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{cursor:"pointer"}} onClick={()=>handleEducationDelete(edu._id)}/></p>
                   <p className='edc-clg'>{edu.collegeName}</p>
@@ -516,9 +517,9 @@ const handleDelete = async (id) => {
           <tr key={language._id}>
             <td>{language.language}</td>
             <td>{language.proficiency}</td>
-            <td><input type="checkbox" checked={language.read}  readOnly /></td>
-            <td><input type="checkbox" checked={language.write} readOnly /></td>
-            <td><input type="checkbox" checked={language.speak} readOnly /></td>
+            <td><input className='checkbox' type="checkbox" checked={language.read}  readOnly /></td>
+            <td><input className='checkbox' type="checkbox" checked={language.write} readOnly /></td>
+            <td><input className='checkbox' type="checkbox" checked={language.speak} readOnly /></td>
             <td> < FontAwesomeIcon icon={faTrashCan} className='text-danger' style={{cursor:"pointer"}} onClick={()=>handlelanguagedel(language._id)} /></td> 
           </tr>
         ))}

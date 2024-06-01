@@ -114,7 +114,7 @@ const Employment = ({handleCloseModal,setPage,page}) => {
             <FloatingLabel
               controlId="floatingInput"
               label="Year"
-              className="mb-3"
+              className="year mb-3"
             >
               <Form.Control
                 type="number"
@@ -136,7 +136,7 @@ const Employment = ({handleCloseModal,setPage,page}) => {
             >
               <Form.Control
                 type="number"
-                className="number-input"
+                className="month"
                 placeholder="Enter Experience"
                 name="expMonth"
               value={formData.expMonth}
@@ -194,29 +194,34 @@ const Employment = ({handleCloseModal,setPage,page}) => {
         </FormGroup>
         {/* Work Period */}
         <FormLabel>Work Period</FormLabel>
-        <div className='d-flex'>
-          <FormGroup as={Col} md="4" className='mt-2'>
-            <Form.Control
-              type="date"
-              id="startDate"
-              name="startDate"
-              value={formData.startDate}
-              onChange={handleInputChange}
-           required  />
-          </FormGroup>
-          <p className='mt-3 me-3 ms-3'>To</p>
-          {showPresent ?
-            <p className='mt-3 me-3'>Present</p> :
-            <FormGroup as={Col} md="4" className='mt-2'>
-              <Form.Control
-                type="date"
-                id="endDate"
-                name="endDate"
-                value={formData.endDate}
-                onChange={handleInputChange}
-              required />
-            </FormGroup>}
-        </div>
+        <div className='row align-items-center'>
+  <FormGroup as={Col} xs="12" md="4" className='mt-2'>
+    <Form.Control
+      type="date"
+      id="startDate"
+      name="startDate"
+      value={formData.startDate}
+      onChange={handleInputChange}
+      required
+    />
+  </FormGroup>
+  <p className='mt-3 me-3 ms-3 col-auto'>To</p>
+  {showPresent ? (
+    <p className='mt-3 me-3 col-auto'>Present</p>
+  ) : (
+    <FormGroup as={Col} xs="12" md="4" className='mt-2'>
+      <Form.Control
+        type="date"
+        id="endDate"
+        name="endDate"
+        value={formData.endDate}
+        onChange={handleInputChange}
+        required
+      />
+    </FormGroup>
+  )}
+</div>
+
        
         <Button type="submit" className="skill-add-button mt-3">Add</Button>
       </Form>

@@ -17,7 +17,6 @@ export const Navbar = ({ token, userloggedin }) => {
     try {
       const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${id}`);
       setProfileData(response.data);
-      console.log("fetching :", response.data);
     } catch (error) {
       console.log("Error occurred while fetching profile data:", error.message);
     }
@@ -47,7 +46,7 @@ export const Navbar = ({ token, userloggedin }) => {
         <Link to="/" className='title ms-5'>
           <img className='navicon' src={navlogo} alt="Skylark Logo" />
         </Link>
-        <Button variant="primary" onClick={handleShow} className="d-md-none">
+        <Button variant="primary" onClick={handleShow} className="d-md-none me-3">
           <FontAwesomeIcon icon={faBars} />
         </Button>
         <div className='close d-none d-md-flex justify-content-around'>

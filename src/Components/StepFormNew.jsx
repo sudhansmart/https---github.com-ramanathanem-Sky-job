@@ -50,7 +50,7 @@ function StepFormNew({handleClose}) {
           if (authId) {
           const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${authId}`);
           setFormData(response.data);
-          console.log("respose:",response.data) }
+         }
         } catch (error) {
           console.log("Error occurred in Profile Details fetching :", error.message);
         }
@@ -104,7 +104,7 @@ function StepFormNew({handleClose}) {
                                  className="color-text mb-3"
                                >
                        <Form.Control type="text" placeholder="Job Title"
-                        onChange={handleOnChange} name='role' value={formData.role} required />
+                        onChange={handleOnChange} name='role' value={formData.role || ""} required />
                      </FloatingLabel>
                      </Col>
                      <Col>
@@ -114,7 +114,7 @@ function StepFormNew({handleClose}) {
                                  className="color-text mb-3"
                                >
                        <Form.Control type="text" placeholder="Location" 
-                       onChange={handleOnChange} name='location' value={formData.location} required/>
+                       onChange={handleOnChange} name='location' value={formData.location  || ""} required/>
                      </FloatingLabel>
                      </Col>
                    </Row>
@@ -127,7 +127,7 @@ function StepFormNew({handleClose}) {
                                >
                        <Form.Control type="number" placeholder="Phone Number" 
                         className="number-input"
-                        onChange={handleOnChange} name='phonenumber' value={formData.phonenumber} required/>
+                        onChange={handleOnChange} name='phonenumber' value={formData.phonenumber  || ""} required/>
                      </FloatingLabel>
                      </Col>
                      <Col>
@@ -138,7 +138,7 @@ function StepFormNew({handleClose}) {
                                >
                        <Form.Control type="number" placeholder="Experience" 
                        className="number-input" 
-                       onChange={handleOnChange} name='experience' value={formData.experience} required/>
+                       onChange={handleOnChange} name='experience' value={formData.experience  || ""} required/>
                      </FloatingLabel>
                      </Col>
                    </Row>
@@ -150,7 +150,7 @@ function StepFormNew({handleClose}) {
                                  className="color-text mb-3"
                                >
                        <Form.Control type="number" placeholder="Current CTC" 
-                        className="number-input" onChange={handleOnChange} name='currentctc' value={formData.currentctc} required/>
+                        className="number-input" onChange={handleOnChange} name='currentctc' value={formData.currentctc  || ""} required/>
                      </FloatingLabel>
                      </Col>
                      <Col>
@@ -160,7 +160,7 @@ function StepFormNew({handleClose}) {
                                  className="color-text mb-3"
                                >
                        <Form.Control type="number" placeholder="Notice Period" 
-                       className="number-input" onChange={handleOnChange} name='noticeperiod' value={formData.noticeperiod} required />
+                       className="number-input" onChange={handleOnChange} name='noticeperiod' value={formData.noticeperiod  || ""} required />
                      </FloatingLabel>
                      </Col>
                    </Row>
@@ -203,7 +203,7 @@ function StepFormNew({handleClose}) {
           </div>: " "}
           {page===3?<div className='right-form'>
                    <SkillInput handleCloseModal={handleCloseModal} />
-                  
+                   <p className='text-danger float-end mt-3'>Note: Your profile will be filtered by key skills, so please add them one by one. Add at least 5 skills.</p>
               
           </div>: " "}
           {page===4?<div className='right-form'>

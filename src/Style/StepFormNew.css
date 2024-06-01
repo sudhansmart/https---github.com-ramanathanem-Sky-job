@@ -45,3 +45,21 @@
 .addspace{
     padding: 2%;
 }
+@media screen and (max-width: 470px) {
+    .left-imge{
+       display: none;  
+    }
+    .righthalf{
+        width: 100%;    
+        border-radius: 10px;
+       
+    }
+    .stepnew-main{ 
+        display: flex;
+        flex-direction: column;
+       padding: 1%;
+     }
+     .lefthalf{
+        width: 100%;
+     }
+} 

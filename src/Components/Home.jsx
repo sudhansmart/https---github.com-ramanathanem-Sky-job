@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react'
 import "../Style/Home.css"
 import { Footer } from './Footer'
 import JobsCategory from './JobsCategory'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import Card from './Card'
 import navlogo from "../assets/Images/skylarklogo1.png";
 import { Jobcarts } from './Jobcarts'
@@ -9,7 +11,8 @@ import Clients from './Clients'
 import ReviewSlider from './ReviewSlider'
 import axios from 'axios';
 import banner from "../assets/Images/hme-img.png"
-import {  Modal } from 'react-bootstrap';
+import { Link} from 'react-router-dom'
+import { Button, Modal } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import StepFormNew from './StepFormNew'
 
@@ -103,6 +106,9 @@ export const Home = ({setAdmin}) => {
            <p className='top-headerword' >Welcome to Skylark Jobs</p>
              <h1 className='hearderword'>Gateway for <br/> Mid & Senior level hiring</h1>
              <p className='hearderwords mt-4'>Elevate your career,soar to success</p>
+             <Link to="/logs">
+               <Button className='footer-button mb-4'  style={{color:"black" }}>Register Now <FontAwesomeIcon className='rightarrow' icon={faChevronRight} /><FontAwesomeIcon  className='rightarrow' icon={faChevronRight} /></Button>
+         </Link>
         </div>
 
         <img src={banner} className='headerimg'/>

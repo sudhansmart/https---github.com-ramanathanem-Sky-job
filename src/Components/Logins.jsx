@@ -3,6 +3,7 @@ import "../Style/Logins.css";
 import axios from 'axios';
 import OtpScreen from './OtpScreen';
 import { useNavigate } from 'react-router-dom';
+import MobileLogin from './MobileLogin';
 
 const Logins = ({setUserloggedin,setToken}) => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
@@ -68,6 +69,7 @@ const Logins = ({setUserloggedin,setToken}) => {
             ...prevFormData,
             [name]: value,
         }));
+        console.log(loginFormData);
     };
 
     const handleSignUpOnChange = (e) => {
@@ -138,6 +140,7 @@ const Logins = ({setUserloggedin,setToken}) => {
 
   return (
     <div className='d-flex justify-content-center'>
+   
        <div className={`containers-login mt-4 ${isSignUpActive ? 'right-panel-active' : ''}`}>
        {isSignUpActive?  <div className="sign-up-container">
        <h2 className='logintitle text-center mt-4' >Register</h2>
@@ -176,6 +179,23 @@ const Logins = ({setUserloggedin,setToken}) => {
             </div>
           </div>
         </div>
+      </div>
+      
+      <div className='showMobile-responsive'>
+              <MobileLogin 
+              loginFormData={loginFormData}
+              signUpFormData={signUpFormData}
+              handleloginOnChange={handleloginOnChange}
+              handleSignUpOnChange={handleSignUpOnChange}
+              handleLogin={handleLogin}
+              handleSignUp={handleSignUp}
+              signUpFeedback={signUpFeedback}
+              loginFeedback={loginFeedback}
+              showOtp={showOtp}
+              otpError={otpError}
+              handleOtpVerification={handleOtpVerification}
+              />
+             
       </div>
     </div>
   );
