@@ -30,7 +30,7 @@ function Reviewslider() {
         <div key={data.id} className="contents col-sm-3">
           <div className="test-body">
             <div className="item">
-              {/* <img className='mb-2' src="https://livedemo00.template-help.com/wt_prod-10943/images/testimonials-1-120x120.jpg" /> */}
+            
               <div className='imagedata mb-3'>
                 <p className='reviewername m-0'>
                   {data.name.charAt(0).replace(/\b\w/g, c => c.toLocaleUpperCase())}

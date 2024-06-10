@@ -1,6 +1,5 @@
 
 import React from 'react'
-import Jobrole from './Jobrole'
 import JobsCategory from './JobsCategory'
 
 

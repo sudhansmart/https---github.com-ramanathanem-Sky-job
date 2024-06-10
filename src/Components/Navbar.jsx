@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import navlogo from "../assets/Images/skylarklogo1.png";
 import "../Style/Navbar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUser,faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 export const Navbar = ({ token, userloggedin }) => {
@@ -35,6 +35,7 @@ export const Navbar = ({ token, userloggedin }) => {
 
   const handleSignOut = () => {
     localStorage.clear();
+    window.location.reload();
   };
 
   const handleClose = () => setShow(false);

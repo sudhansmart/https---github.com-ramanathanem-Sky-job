@@ -1,7 +1,6 @@
-/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,100,200,300');
 
-/* Reset default styles */
+
 
     
 
@@ -53,7 +52,9 @@ body {
 }
 
 .form-wrap .tabs h3 a.active {
-  background-color: #fff;
+  background-color: #0101fe;
+  text-decoration: none;
+  color: #ffff;
 }
 
 .form-wrap .tabs-content {
@@ -170,6 +171,7 @@ body {
 
   .form-wrap form .button {
     font-size: 18px;
+    border-radius: 8px;
   }
 }
 
@@ -189,5 +191,6 @@ body {
 
   .form-wrap form .button {
     font-size: 16px;
+            border-radius: 8px;
   }
 }

@@ -92,13 +92,14 @@ function SkillInput({ handleCloseModal }) {
             placeholder="Enter Skill"
             value={skill}
             onChange={handleSkillChange}
+            required
           />
         </Form.Group>
         <Button variant="primary" type="submit" className="skill-add-button mt-3">
           {editIndex !== null ? 'Save' : 'Add'}
         </Button>
       </Form>
-      {skills.length > 0 && (
+      {skills.length >= 3 && (
         <Button variant="success" onClick={handleFinalSubmit} className="mt-3 float-end">
           Submit Skills
         </Button>

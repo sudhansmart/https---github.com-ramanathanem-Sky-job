@@ -16,18 +16,18 @@ import "../Style/Jobrole.css"
 
 function JobsCategory() {
   const Data = [
-    { id: 1, name: 'IT', img: It, path: "/It",category:"IT" },
-    { id: 2, name: 'Bpo', img: Bpo, path: "/Bpo",category:"Bpo" },
-    { id: 3, name: 'Sale & Marketing', img: sale, path: "/Sale",category:"salesMarketing" },
-    { id: 4, name: 'Customer service', img: customer1, path: "/Cs" ,category:"Customerservice"},
-    { id: 5, name: 'Accounts', img: account, path: "/Account",category:"Account" },
-    { id: 6, name: 'Digital Marketing', img: digital, path: "/Digital",category:"DigitalMarketing" },
-    { id: 7, name: 'Health care', img: health, path: "/Health",category:"Healthcare" },
-    { id: 8, name: 'Manufacturing', img: manifacture, path: "/Manufacturing",category:"Manufacturing" },
-    { id: 9, name: 'Skin clinic', img: skin, path: "/Skin" ,category:"Skinclinic"},
-    { id: 10, name: 'Human Resource', img: hr1, path: "/Hr",category:"HumanResource" },
-    { id: 11, name: 'Operation', img: operation, path: "/Operation" ,category:"Operation"},
-    { id: 12, name: 'Miscellaneous', img: ms2, path: "/Ms",category:"Miscellaneous" },
+    { id: 1, name: 'IT', img: It, path: "/jobdetails",category:"IT" },
+    { id: 2, name: 'BPO', img: Bpo, path: "/jobdetails",category:"BPO" },
+    { id: 3, name: 'Sales & Marketing', img: sale, path: "/jobdetails",category:"Sales & Marketing" },
+    { id: 4, name: 'Customer Service', img: customer1, path: "/jobdetails" ,category:"Customer Service"},
+    { id: 5, name: 'Accounts', img: account, path: "/jobdetails",category:"Accounts" },
+    { id: 6, name: 'Digital Marketing', img: digital, path: "/jobdetails",category:"Digital Marketing" },
+    { id: 7, name: 'Health Care', img: health, path: "/jobdetails",category:"Healthcare" },
+    { id: 8, name: 'Manufacturing', img: manifacture, path: "/jobdetails",category:"Manufacturing" },
+    { id: 9, name: 'Skin Clinic', img: skin, path: "/jobdetails" ,category:"Skin Clinic"},
+    { id: 10, name: 'Human Resources', img: hr1, path: "/jobdetails",category:"Human Resources" },
+    { id: 11, name: 'Operations', img: operation, path: "/jobdetails" ,category:"Operations"},
+    { id: 12, name: 'Miscellaneous', img: ms2, path: "/jobdetails",category:"Miscellaneous" },
   ];
 
   const [openingsData, setOpeningsData] = useState([]);

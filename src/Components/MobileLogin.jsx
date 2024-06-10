@@ -44,6 +44,7 @@ const MobileLogin = ({loginFormData,signUpFormData,handleloginOnChange,handleSig
               placeholder="Name"
               value={signUpFormData.name}
               onChange={handleSignUpOnChange}
+              required
             />
             <input
               type="email"
@@ -52,6 +53,7 @@ const MobileLogin = ({loginFormData,signUpFormData,handleloginOnChange,handleSig
               placeholder="Email"
               value={signUpFormData.email}
               onChange={handleSignUpOnChange}
+              required
             />
             <input type="submit" className="button" value="Sign Up" />
           </form>
@@ -71,14 +73,12 @@ const MobileLogin = ({loginFormData,signUpFormData,handleloginOnChange,handleSig
               placeholder="Email"
               value={loginFormData.email}
               onChange={handleloginOnChange}
+              required
             />
         
             <input type="submit" className="button" value="Get OTP" />
           </form>}
-          <div className="help-text">
-            <p>{loginFeedback}</p>
-            
-          </div>
+         
         </div>
       </div>
     </div>

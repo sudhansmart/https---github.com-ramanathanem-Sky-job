@@ -1,6 +1,5 @@
 #jobsfont{
     font-family: "Roboto", sans-serif;
-    
     font-style: normal;
     font-size: 2rem;
     color: '#505050';
@@ -9,7 +8,8 @@
     color: brown;
 }
 .openings{
-    background-color: #87ceeb69;  
+    color: white;
+    background-color:#4747fe;  
     font-weight: 500; 
 }
 .card{
@@ -17,4 +17,12 @@
     margin: 2%;
     border-radius: 10px;
     box-shadow: 1px 1px 6px 0px rgba(168, 153, 168, 1);
+}
+
+@media screen and (max-width: 470px) {
+    #jobsfont{
+        font-size: 1.75rem;
+        
+    }
+    
 }

@@ -19,7 +19,8 @@
 }
 @media screen and (max-width: 470px) {
     .clientheading{
-        font-size: 16px;  
+        font-size: 22px;
+        font-weight: bold;  
     } 
 
 .clientlogo{

@@ -143,6 +143,24 @@
     .candidate-email{
     font-size: 12px;
     }
+   
+    .filterbtn{
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000; 
+      width: auto;
+      background-color: #0000009c;
+      color: aliceblue;
+       border-radius: 50% ;
+       padding: 10px;
+    }
+    .filter-icon{
+      height: 40px;
+    }
+    .hidefilter{
+      display: none;
+    }
 
 }
 
@@ -158,4 +176,5 @@
     z-index: 207;
     border-radius: 50%;
   }
+  
   

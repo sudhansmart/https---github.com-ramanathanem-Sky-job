@@ -56,7 +56,8 @@ const CandidateProfile = () => {
       const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${authId}`);
       setProfileData([response.data]);
       setLanguages(response.data.languages);
-      console.log("fetching :",response.data)
+      console.log("fetching :",response.data);
+      
       }
     } catch (error) {
       console.log("Error occurred while fetching profile data:", error.message);
@@ -219,8 +220,11 @@ const handleDelete = async (id) => {
   }
   const handleEducationDelete = async(id)=>{
     const response =  await axios.delete(`https://www.skylarkjobs.com/nodejs/profile/deleteeducation/${authId}/${id}`);
+     if(response.status == 200){
+      fetchData()
+     }
+
     
-    fetchData()
   }
 
   const handlepersonal =()=>{
@@ -372,7 +376,7 @@ const handleDelete = async (id) => {
                  <FontAwesomeIcon className="edit-icon" onClick={handleEditProfile} icon={faPencil}/>
               </div>
               <div className='d-flex justify-content-center'>
-                 <img className='propic' src={propic} />
+                 <img className='propic' src={propic} alt='User-Profile' />
               </div>
               <div className='text-center'>
                 <h5 className='pro-name'>{data.name.toUpperCase()}</h5>
@@ -383,12 +387,12 @@ const handleDelete = async (id) => {
 
               </div>
               <div className='pro-details text-start'>
-                <p  className='pro-text'><img className='pro-icons' src={probrief}/> {data.experience ? data.experience : 0} Years</p>
-                <p  className='pro-text'><img className='pro-icons' src={procall}/> {data.phonenumber} </p>
-                <p  className='pro-text'><img className='pro-icons' src={promail}/> {data.email}</p>
-                <p  className='pro-text'><img className='pro-icons' src={proLocation}/> {data.location}</p> 
-                <p  className='pro-text'><img className='pro-icons' src={procalender}/> {data.noticeperiod?data.noticeperiod : 0} Days</p>
-                <p  className='pro-text'><img className='pro-icons' src={prorupee}/> {data.currentctc ? data.currentctc : 0 } LPA</p>  
+                <p  className='pro-text'><img className='pro-icons' src={probrief} alt='briefcase-icon'/> {data.experience ? data.experience : 0} Years</p>
+                <p  className='pro-text'><img className='pro-icons' src={procall} alt='phone-icon'/> {data.phonenumber} </p>
+                <p  className='pro-text'><img className='pro-icons' src={promail} alt='email-icon'/> {data.email}</p>
+                <p  className='pro-text'><img className='pro-icons' src={proLocation} alt='location-icon'/> {data.location}</p> 
+                <p  className='pro-text'><img className='pro-icons' src={procalender} alt='calender-icon'/> {data.noticeperiod?data.noticeperiod : 0} Days</p>
+                <p  className='pro-text'><img className='pro-icons' src={prorupee} alt='rupee-icon'/> {data.currentctc ? data.currentctc : 0 } LPA</p>  
               </div>     
         </div>))}
           <div className='sidesec-main'>
@@ -405,8 +409,8 @@ const handleDelete = async (id) => {
               
                <div className='resume'>
                 <div className='resumepart-1'>
-                <img className='cvpic' src={resumepic}/>
-                <div className='text-center'>
+                <img className='cvpic' src={resumepic} alt='cv-icon'/>
+                <div className='contcv text-center'>
                       
                            <p className='profile-pdf m-0'>{data.cvname? getCVName(data.cvname): " "}</p>
                            <p className='profile-pdfdate m-0'>{data.cvname?  getUploadDate(data.cvname): " "}</p>
@@ -417,7 +421,7 @@ const handleDelete = async (id) => {
                        <p className='format text-light mb-0'>Supported Formats: doc, docx, rtf, pdf, upto 2 MB</p>
                      </div>
                </div>
-               {data.cvname !== " "?   <div className='mt-2'>
+               {data.cvname == " "?   <div className='mt-2'>
                      <Button className='mobbtn me-3' onClick={()=>handleDownload(data.name)}> <FontAwesomeIcon  icon={faDownload} /> Download</Button>
                      <Button className='mobbtn' variant='danger' onClick={()=>handleDelete(data._id)}> <i className="bi bi-trash3-fill"  > </i>Delete</Button>
                    </div>  : " "}
@@ -431,7 +435,7 @@ const handleDelete = async (id) => {
     <div key={dataIndex} className='mainkeys d-flex p-2'>
       {data.keySkills.map((skill, skillIndex) => (
         <div key={skillIndex} className='profilekey'>
-          <span className='profile-jobskill me-2 p-2'>{skill.replace(/\b\w/g, c => c.toUpperCase())}</span>
+          <span className='profile-jobskill  '>{skill.replace(/\b\w/g, c => c.toUpperCase())}</span>
         </div>
       ))}
     </div>

@@ -1,16 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import "../Style/Hiringnow.css"
 
- function Hiringnow() {
-  
-
-  
-    
-
-
-
-
-
+ function TopHiring() {
     const Data = [
         { id: 1, domain:"IT DOMAIN",position:"SOLUTION ARCHITECT",Location:"CHENNAI",Ctc:'UPTO 35LPA',exp:"10+ Experience Banking Domain", },
         { id: 2, domain: 'Bpo',position:"SOLUTION ARCHITECT",Location:"CHENNAI",Ctc:'upto 35LPA',exp:"10+ Experience Banking Domain",},
@@ -57,4 +48,4 @@ import "../Style/Hiringnow.css"
   )
 }
 
-export default Hiringnow;
+export default TopHiring;

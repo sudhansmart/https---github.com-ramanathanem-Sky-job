@@ -4,7 +4,6 @@ import { Footer } from './Footer'
 import JobsCategory from './JobsCategory'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons'
-import Card from './Card'
 import navlogo from "../assets/Images/skylarklogo1.png";
 import { Jobcarts } from './Jobcarts'
 import Clients from './Clients'
@@ -15,11 +14,28 @@ import { Link} from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import StepFormNew from './StepFormNew'
+import PopupComponent from './PopupComponent'
 
 export const Home = ({setAdmin}) => {
   const [authId, setAuthId] = useState(localStorage.getItem('authId'));
   const [profileData, setProfileData] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  
+  
+  useEffect(() => {
+    if (isPopupOpen) {
+      document.body.classList.add('overlays');
+    } else {
+      document.body.classList.remove('overlays');
+    }
+
+    return () => {
+      // Clean up the effect when the component unmounts or isPopupOpen changes
+      document.body.classList.remove('overlays');
+    };
+  }, [isPopupOpen]);
+
      
   const fetchData = async () => {
   
@@ -45,13 +61,14 @@ export const Home = ({setAdmin}) => {
    
   const handleClose = () => {
     setModalShow(false);
+    setIsPopupOpen(true);
   };
 
   return (
     <>
          <Helmet>
         {/* Basic SEO meta tags */}
-        <title>Skylarkjobs.com | Job Portal for Mid & Senior Level Jobs</title>
+        <title>Skylark Job Portal for Mid & Senior Level positions</title>
         <meta name="description" content="Join Skylarkjobs.com, a Job Portal for Mid & Senior Management. Register for exclusive listings. Your support grows our dedicated platform for professionals." />
         <meta name="keywords" content="Job search,
                               job portal,
@@ -84,40 +101,47 @@ export const Home = ({setAdmin}) => {
         <meta name="twitter:description" content="Join Skylarkjobs.com, a Job Portal for Mid & Senior Management. Register for exclusive listings. Your support grows our dedicated platform for professionals." />
         <meta name="twitter:image" content={navlogo}/>
       </Helmet>
+
+      
        
-         <Modal
+     <Modal
         fullscreen={true}
         show={modalShow}
         onHide={handleClose}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <Modal.Header closeButton >
+        <Modal.Header  >
         <Modal.Title>Create Profile</Modal.Title>
         </Modal.Header>
        
         <Modal.Body>
-          <StepFormNew handleClose={handleClose}/>
+          <StepFormNew handleClose={handleClose} />
+        
         </Modal.Body>
       </Modal>
-
        <div className='image'>
        <div className='headersec'>
         <div className='headerwordsec'>
            <p className='top-headerword' >Welcome to Skylark Jobs</p>
              <h1 className='hearderword'>Gateway for <br/> Mid & Senior level hiring</h1>
-             <p className='hearderwords mt-4'>Elevate your career,soar to success</p>
-             <Link to="/logs">
-               <Button className='footer-button mb-4'  style={{color:"black" }}>Register Now <FontAwesomeIcon className='rightarrow' icon={faChevronRight} /><FontAwesomeIcon  className='rightarrow' icon={faChevronRight} /></Button>
-         </Link>
+             <h2 className='hearderwords mt-4'>Elevate your career, Soar to success</h2>
+            
+             {authId?
+                   <Link to="/jobs">
+                   <Button className='banner-button mb-4'  style={{color:"black",border:"none"  }}>Explore Jobs <FontAwesomeIcon className='rightarrow' icon={faChevronRight} /><FontAwesomeIcon  className='rightarrow' icon={faChevronRight} /></Button>
+                 </Link>
+                :
+              <Link to="/logs">
+               <Button className='banner-button mb-4'  style={{color:"black",border:"none" }}>Register Now <FontAwesomeIcon className='rightarrow' icon={faChevronRight} /><FontAwesomeIcon  className='rightarrow' icon={faChevronRight} /></Button>
+             </Link>}
         </div>
-
-        <img src={banner} className='headerimg'/>
+        <img src={banner} className='headerimg' alt='banner-image'/>
        </div>
         
     </div>
+    <PopupComponent isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />
     <Jobcarts/>
     <JobsCategory/>
-    {/* <Card/> */}
     <Clients/>
     <ReviewSlider/>
     <Footer setAdmin={setAdmin}/>

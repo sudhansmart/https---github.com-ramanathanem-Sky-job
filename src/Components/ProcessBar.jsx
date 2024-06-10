@@ -35,7 +35,7 @@ function ProcessBar({page}) {
             </div>
         </div>
              :
-        <div className="step completed">
+        <div className={page >1? "step completed" : "step pending"}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
             </svg>
@@ -45,7 +45,7 @@ function ProcessBar({page}) {
           
         </div>}
         {/* <div className="line next-step-in-progress"> 
-        </div>*/}
+        </div> */}
         <div className="line completed"></div>
          {page === 2?
         <div className="step in-progress">
@@ -54,7 +54,7 @@ function ProcessBar({page}) {
                 Employment
             </div>
         </div>:
-         <div className="step completed">
+         <div className={page >2? "step completed" : "step pending"}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
             </svg>
@@ -72,7 +72,7 @@ function ProcessBar({page}) {
                 Add Skills
             </div>
         </div>:
-         <div className="step completed">
+         <div className={page >3? "step completed" : "step pending"}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
             </svg>
@@ -92,7 +92,7 @@ function ProcessBar({page}) {
             </div>
         </div>
              :
-        <div className="step completed">
+        <div className={page >4? "step completed" : "step pending"}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
             </svg>

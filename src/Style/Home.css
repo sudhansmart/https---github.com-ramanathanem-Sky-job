@@ -3,6 +3,9 @@
     margin: 0;
     font-family: 'Varela Round', sans-serif;
 }
+body.overlays {
+    overflow: hidden;
+  }
 
 .image{
     width: 100%;
@@ -21,6 +24,17 @@
     font-size: 2rem;
     color: white;
 }
+
+.banner-button{
+    background-color: orange !important;
+    border-radius: 20px !important;
+    font-weight: 500 !important;
+    border: none;
+}
+.banner-button:hover{
+    background-color: rgb(255, 175, 2) !important;
+    border-radius: 20px !important;
+}
 .hearderword{
     color: white;
     font-size: 56px;
@@ -34,7 +48,7 @@
 }
 .hearderwords{
     font-size: 2.5rem;
-    color: #e49908;
+    color: #ff8d35;
 }
 .headerimg{
     width: 50%;
@@ -61,6 +75,7 @@
     }
     .hearderwords{
         font-size: 1.25rem;
-        color: #ff6f00;
+        color: #ff8d35;
     }
 }
+

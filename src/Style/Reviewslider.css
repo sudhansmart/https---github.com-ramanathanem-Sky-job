@@ -78,11 +78,7 @@
     overflow-x: scroll;
   }
 
-  /* .test-body {
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 10px;
-  } */
+ 
   .test-body {
     display: flex;
     height: 100%;
@@ -123,11 +119,10 @@
   }
 }
 
-/* Horizontal scrolling container */
 
 
 .scroll-container::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for Webkit browsers */
+  display: none; 
 }
 
 .scroll-container > .contents {

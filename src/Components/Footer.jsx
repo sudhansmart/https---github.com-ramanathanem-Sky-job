@@ -23,7 +23,7 @@ export const Footer = ({setAdmin}) => {
  <div className='footer-main'>
     <div className='footer-main1 '>
       <div className='footer-logo'>
-      <img className='logosky mb-3' src={Footerlogo}/>
+      <img className='logosky mb-3' src={Footerlogo} alt='company-logo'/>
       <p className='logo-text'>Empowering professionals and advancing careers <br/>Your portal to senior-level opportunities</p>
       </div>
       <div className='links'>
@@ -41,10 +41,10 @@ export const Footer = ({setAdmin}) => {
          <div className='follow'>
              <p className='text-light'>Follow us on</p>
              <div className='d-flex justify-content-center'>
-                 <img className='follow-logo' src={fb}/>
-                 <img className='follow-logo' src={wa}/>
-                 <img className='follow-logo' src={insta}/>
-                 <img className='follow-logo' src={linked}/>
+                <a href="https://www.facebook.com/skylarkhrsolutions" target="_blank" rel="noopener noreferrer"> <img className='follow-logo' src={fb} alt='facebook-icon'/></a>
+                <a href="https://wa.me/8610010780?text=Hello%20there!Its%20Skylark%20Job%20Portal%20Feel%20free%20to%20contact" target="_blank" rel="noopener noreferrer"> <img className='follow-logo' src={wa} alt='whatsapp-icon'/></a>
+                <a href="https://www.instagram.com/skylark_fun_at_work/" target="_blank" rel="noopener noreferrer"> <img className='follow-logo' src={insta} alt='instagram-icon'/></a>
+                <a href="https://www.linkedin.com/company/skylark-hr-solutions/" target="_blank" rel="noopener noreferrer"> <img className='follow-logo' src={linked} alt='linkedin-icon'/></a>
                
              </div>
          </div>

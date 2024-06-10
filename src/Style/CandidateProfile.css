@@ -52,6 +52,7 @@
 .pro-details{
     font-size: small;
     font-weight: 600;
+    padding: 1rem;
 }
 .aboutme{
     padding: 2%;
@@ -79,8 +80,8 @@
   font-style: normal;
   color: #878787;
   font-size: 20px;
-  word-wrap: break-word; /* Older property, still widely supported */
-  overflow-wrap: break-word; /* Newer property, recommended */
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
   white-space: pre-wrap;
 }
 .profile-summary::first-letter {
@@ -140,7 +141,9 @@
     height: 60px;
     padding: 2%;
 }
-
+.profile-jobskill {
+  padding: 0.5rem;
+}
 .profilekey .profile-jobskill{
     background: #fff;
     padding: 4.5px 8px;
@@ -224,9 +227,7 @@
         justify-content: center;
         align-items: flex-end;
       }
-       .pro-details{
-        padding: 3rem ;
-    }
+ 
       
       .loading-bar {
         width: 20px;
@@ -316,9 +317,9 @@
         .edit-profile {
             font-size: 12px;
         }
-        .resume{
+        /* .resume{
             height:45px;
-        }
+        } */
         .cvpic {
             height: 40px;
         }
@@ -416,15 +417,20 @@
             height: 8px;
          }
          .profile-pdf {
-            font-size: 10px;
+            font-size: 8px;
           }
          .mobbtn{
             padding: 2px !important;
             font-size: 10px !important;
          }
          .profilekey .profile-jobskill {
-            padding: 0px;
+           
             margin: 0px!important;
+         }
+         .contcv{
+          padding: 2%;
+          height: 100%;
+          
          }
       }
       

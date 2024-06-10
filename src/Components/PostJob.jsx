@@ -151,19 +151,19 @@ function PostJob({setModalShow}) {
                    isInvalid={touched.category && !!errors.category}
                    aria-label="select Here"
             >
-                <option value="" >Please Select</option>
-                <option value="IT">IT</option>
-                <option value="Bpo">BPO</option>
-                 <option value="salesMarketing">sales & Marketing</option>
-                 <option value="Customerservice" >Customer service</option>
-                <option value="Account">Account</option>
-                <option value="DigitalMarketing">Digital Marketing</option>
-                 <option value="Healthcare">Health care</option>
-                 <option value="Manufacturing" >Manufacturing</option>
-                <option value="Skinclinic">Skin clinic</option>
-                <option value="HumanResource">Human Resource</option>
-                 <option value="Operation">Operation</option>
-                 <option value="Miscellaneous" >Miscellaneous</option>
+                  <option value="" disabled>Please Select</option>
+                  <option value="IT">IT</option>
+                  <option value="BPO">BPO</option>
+                  <option value="Sales & Marketing">Sales & Marketing</option>
+                  <option value="Customer Service">Customer Service</option>
+                  <option value="Accounts">Accounts</option>
+                  <option value="Digital Marketing">Digital Marketing</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Skin Clinic">Skin Clinic</option>
+                  <option value="Human Resources">Human Resources</option>
+                  <option value="Operations">Operations</option>
+                  <option value="Miscellaneous">Miscellaneous</option>
                 
                   </Form.Select>
           <Form.Control.Feedback type="invalid">

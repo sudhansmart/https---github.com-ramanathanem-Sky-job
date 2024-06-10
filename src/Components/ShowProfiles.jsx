@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Col, Form, Row,FloatingLabel } from 'react-bootstrap';
+import { Button, Col, Form, Row,FloatingLabel, Offcanvas } from 'react-bootstrap';
 import '../Style/candidate.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleDown, faBuilding, faEnvelope,faMagnifyingGlass, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass,faFilter} from '@fortawesome/free-solid-svg-icons';
 import FilterCandidate from './FilterCandidate';
+import NewProfile from './NewProfile'
 
 
 function ShowProfiles() {
+  const[show,setShow] = useState(false);
   const [jobData, setJobData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
  
@@ -30,7 +32,7 @@ const fetchData = async () => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-};
+}
 
 const [filter, setFilter] = useState({
   jobtitle:'',
@@ -175,7 +177,7 @@ const handleApplyFilters = () => {
     
   const filteredData = filterJobData();
   setData(filteredData);
-  console.log("filter :",filteredData)
+  handleClose();
 };
    
 
@@ -200,9 +202,16 @@ const handleApplyFilters = () => {
               console.error('Candidate not found');
               return;
             }
-      
-            const fileName = `${findcandidate.name.replace(/\s+/g, '_')}_CV.pdf`; // Replace whitespace with underscores
-      
+              
+            const fileNameParts = findcandidate.cvname.split('.');
+            console.log("fileNameParts :", fileNameParts);
+            const fileType = fileNameParts[fileNameParts.length - 1]; // Get the last part as the file type
+            const nameWithoutExtension = fileNameParts.slice(0, -1).join('.'); // Join all parts except the last one
+            
+            // Generate the formatted file name
+            const formattedName = nameWithoutExtension.replace(/\s+/g, '_');
+            const fileName = `${formattedName}_CV.${fileType}`;  
+          
             link.href = window.URL.createObjectURL(blob);
             link.download = fileName;
             document.body.appendChild(link);
@@ -215,7 +224,9 @@ const handleApplyFilters = () => {
       };
       
       
-      
+      const handleClose=()=>{
+        setShow(false);
+      }
 
     const handleApplicant = async (index, value,candidateId) => {
         const newData = [...data];
@@ -236,99 +247,74 @@ const handleApplyFilters = () => {
             console.error('An error occurred while updating:', error);
         }
     };
-    console.log(data)
+   
 
     return (
       <>
        <div className='top-section'>
-            <Form className='form-section-top' >
-                <Row>
-
-                <Form.Group controlId="formFile" as={Col} md="4" >
-                      <FloatingLabel  
-                  controlId="floatingInput"
-                  label="Search Role" 
-                >
-                  <Form.Control type="text" placeholder="Java Developer"
-                   name='jobtitle'
-                   value={filter.jobtitle}
-                   onChange={handleOnChange} />
-                </FloatingLabel>
-                </Form.Group>
-                <Form.Group controlId="formFile" as={Col} md="4" >
-                <FloatingLabel
-                  controlId="floatingInput"
-                  label="Location"
-                  
-                >
-                  <Form.Control type="text" placeholder="city" 
-                  name='location'
-                  value={filter.location}
-                  onChange={handleOnChange}/>
-                </FloatingLabel>
-                </Form.Group>
-                <Form.Group controlId="formFile" as={Col} md="4" className='d-flex' >
-                <Button onClick={handleApplyFilters}><FontAwesomeIcon icon={faMagnifyingGlass}/> Find</Button>
-                </Form.Group>
-                </Row>
-            </Form>
+        <span className="filterbtn d-md-none " onClick={()=>setShow(true)}><FontAwesomeIcon className='filter-icon' icon={faFilter} /></span>
+       
+       <Form className='form-section-top'>
+      <Row className='d-flex justify-content-center'>
+        <Col xs={5} md={4} className='mb-3'>
+          <Form.Group controlId="formFile">
+            <FloatingLabel controlId="floatingInput" label="Search Role">
+              <Form.Control
+                type="text"
+                placeholder="Java Developer"
+                name='jobtitle'
+                value={filter.jobtitle}
+                onChange={handleOnChange}
+              />
+            </FloatingLabel>
+          </Form.Group>
+        </Col>
+        <Col xs={5} md={4} className='mb-3'>
+          <Form.Group controlId="formFile">
+            <FloatingLabel controlId="floatingInput" label="Location">
+              <Form.Control
+                type="text"
+                placeholder="city"
+                name='location'
+                value={filter.location}
+                onChange={handleOnChange}
+              />
+            </FloatingLabel>
+          </Form.Group>
+        </Col>
+        <Col xs={10} md={4} className='mb-3 d-flex align-items-center'>
+          <Button onClick={handleApplyFilters} className='w-100'>
+            <FontAwesomeIcon icon={faMagnifyingGlass} /> Find
+          </Button>
+        </Col>
+      </Row>
+    </Form>
            </div>
-        <div className='d-flex p-3'>
-         
+        <div className='d-flex'>
+         <div className="hidefilter">
+
+        
           <FilterCandidate  
                filter={filter} 
                handleResetFilters={handleResetFilters}  
                handleOnChange={handleOnChange} handleApplyFilters={handleApplyFilters}/>
+                </div>
               {data.length == 0? <p className='text-center w-100 ' style={{fontSize:'30px',fontWeight:"600"}}>No Results Found.</p>
                :
-               <div  style={{height:"100%",width:"80%"}} >
-            {data.map((candidate, index) => (<div key={index}  className='candidate-main'>
-                <div className=' d-flex p-3 justify-content-around align-items-center ' key={index}>
-                     <div className='ellipse-9' />
-                    <div>
-                        <h5 className='candidate-name'>{candidate.name.replace(/\b\w/g,c=>c.toUpperCase())}</h5>
-                        <h5 className='candidate-job '>{candidate.role}</h5>
-                        <h5 className='candidate-loc mb-2'>{candidate.currentCompany}</h5>
-                        <h5 className='candidate-loc mb-2'>{candidate.location}</h5>
-                    </div>
-                    <div>
-                    <p className='experience'>Experience : <span className='years ps-1'> {candidate.experience} years </span> </p>
-                    <p className='experience'>CTC : <span className='years ps-1'> {candidate.currentctc} LPA </span> </p>
-                    <p className='experience'>Notice Period : <span className='years ps-1'> {candidate.noticeperiod} Days </span> </p>
-                    </div>
-                    
-                </div>
-                    <div className='d-flex justify-content-evenly p-3'>
-                         
-                    <div  className='datae p-5 '>
-                          <p ><FontAwesomeIcon icon={faEnvelope}/> Email : {candidate.email}</p>
-                          <p><FontAwesomeIcon icon={faBuilding}/> Industry : {candidate.industry}</p>
-                          <p><FontAwesomeIcon icon={faPhone}/> Phone Number : {candidate.phonenumber}</p>
-                    </div>
-                    <div  className='skill1 p-3'>
-                        <h5>Skills : </h5>
-                        <div className='m-3 '>
-                       {candidate.keySkills.map((skill, index) => (
-                            <div  className="skill-items" key={index}>
-                              <span className="skills-text" onClick={() => handleSkillEdit(index)}>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
-                             
-                           </div>
-        ))}
-      </div>
-                   </div>
-                    </div>
-                    <div className='d-flex justify-content-center '> 
-                    <button className='button-frame mb-3' onClick={() => handleDownload(candidate._id)}>
-                         <FontAwesomeIcon className='down-arrow' icon={faArrowAltCircleDown}/>
-                       <span className='download-resume'>Download Resume</span>
-                    </button>
-
-                    </div>
-                </div> 
-            ))}
-            
-            </div>}
+                  <NewProfile data={data} handleApplicant={handleApplicant} handleDownload={handleDownload}/>
+      }
         </div>
+        <Offcanvas show={show} onHide={handleClose} className="d-md-none">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body className='canvas'>
+                <FilterCandidate  
+               filter={filter} 
+               handleResetFilters={handleResetFilters}  
+               handleOnChange={handleOnChange} handleApplyFilters={handleApplyFilters}/>
+        </Offcanvas.Body>
+      </Offcanvas>
         </>
     );
 }

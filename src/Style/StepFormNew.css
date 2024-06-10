@@ -35,9 +35,7 @@
   margin: 0;
 }
 
-.number-input {
-  -moz-appearance: textfield; /* Firefox */
-}
+
 
 .color-text{
     color: #2a0795;

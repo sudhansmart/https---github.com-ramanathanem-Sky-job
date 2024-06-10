@@ -164,13 +164,8 @@ const ContactPage = () => {
         <Form.Control  as="textarea" rows={5} 
            value={contact.message} name='message' onChange={handleSubmitOnChange} />
       </FloatingLabel>
-                
-               
                 <Link
                  to="/forms"><span> <button className='con-bu'  onClick={handleSubmit}>Send Enquiry</button> </span> </Link>
-
-            {/* </div> */}
-          {/* </div> */}
           </div>
           <div className="col-sm-4"><div className="card m-5" >
             <div className="card-body">

@@ -17,10 +17,10 @@ const Clients = () => {
 <hr/>
 <marquee > 
 <div className="clients d-flex justify-content-evenly">
-  <img className='clientlogo' src={infosys}/>
-  <img className='clientlogo' src={Accenture}/>
-  <img className='clientlogo' src={Wipro}/>
-  <img className='clientlogo' src={survey}/>
+  <img className='clientlogo' src={infosys} alt='infosys-logo'/>
+  <img className='clientlogo' src={Accenture} alt='Accenture-logo'/>
+  <img className='clientlogo' src={Wipro} alt='Wipro-logo'/>
+  <img className='clientlogo' src={survey} alt='survey-logo'/>
  </div></marquee>
     </div>
   )

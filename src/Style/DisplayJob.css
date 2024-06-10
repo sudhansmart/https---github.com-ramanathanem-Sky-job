@@ -13,7 +13,10 @@
     display: flex;
     padding: 3rem;
 }
-
+   
+.backbtn{
+   display: none;
+}
 .top-tag{
 
     background-color: #3da57c
@@ -34,8 +37,14 @@
    .jobdisplay{
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: .5rem;
 }
+.backbtn{
+    padding: 3px !important;
+    margin-left: 3%;
+    color: black !important;
+    background-color: #fff !important;
+ }
     
 }
 

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Col, Form, Row,FloatingLabel } from 'react-bootstrap';
+import { Button, Col, Form, Row,FloatingLabel,Offcanvas } from 'react-bootstrap';
 import '../Style/candidate.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleDown, faBuilding, faEnvelope,faMagnifyingGlass, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleDown, faBuilding, faEnvelope,faMagnifyingGlass, faPhone,faFilter } from '@fortawesome/free-solid-svg-icons';
 import FilterAdmin from './FilterAdmin';
+import NewProfile from './NewProfile'
 
 
 function Candidates() {
+  const[show,setShow] = useState(false);
     const [jobData, setJobData] = useState([]);
     const [originalData, setOriginalData] = useState([]);
     const { jobid } = useParams();
@@ -73,7 +75,11 @@ const handleOnChange = (e) => {
     ...prevFilter,
     [name]: value,
   }));
-};
+};  
+   
+const handleClose=()=>{
+  setShow(false);
+}
 
 
 const filterJobData = () => {
@@ -168,7 +174,7 @@ const handleApplyFilters = () => {
     
   const filteredData = filterJobData();
   setData(filteredData);
-  console.log("filter :",filteredData)
+  handleClose();
 };
 
 
@@ -220,60 +226,74 @@ const handleApplyFilters = () => {
 
     return (
         <div className='d-flex p-3'>
+            <span className="filterbtn d-md-none " onClick={()=>setShow(true)}><FontAwesomeIcon className='filter-icon' icon={faFilter} /></span>
+            <div className="hidefilter">
           <FilterAdmin 
            filter={filter} 
            handleResetFilters={handleResetFilters}  
-           handleOnChange={handleOnChange} handleApplyFilters={handleApplyFilters}/>
+           handleOnChange={handleOnChange} handleApplyFilters={handleApplyFilters}/></div>
           {data.length == 0? <p className='text-center w-100 ' style={{fontSize:'30px',fontWeight:"600"}}>No Results Found.</p>
                :
-               <div  style={{height:"100%",width:"80%"}} >
-            {data.map((candidate, index) => (
-            <div key={index} className='candidate-main'>
-                <div className=' d-flex p-3 justify-content-around align-items-center ' key={index}>
-                     <div className='ellipse-9' />
-                    <div>
-                        <h5 className='candidate-name'>{candidate.name.replace(/\b\w/g,c=>c.toUpperCase())}</h5>
-                        <h5 className='candidate-job '>{candidate.role}</h5>
-                        <h5 className='candidate-loc mb-2'>{candidate.currentCompany}</h5>
-                        <h5 className='candidate-loc mb-2'>{candidate.location}</h5>
-                    </div>
-                    <div>
-                    <p className='experience'>Experience : <span className='years ps-1'> {candidate.experience} years </span> </p>
-                    <p className='experience'>CTC : <span className='years ps-1'> {candidate.currentctc} LPA </span> </p>
-                    <p className='experience'>Notice Period : <span className='years ps-1'> {candidate.noticeperiod} Days </span> </p>
-                    </div>
+               <NewProfile data={data}  handleDownload={handleDownload}/>
+      //          <div  style={{height:"100%",width:"80%"}} >
+      //       {data.map((candidate, index) => (
+      //       <div key={index} className='candidate-main'>
+      //           <div className=' d-flex p-3 justify-content-around align-items-center ' key={index}>
+      //                <div className='ellipse-9' />
+      //               <div>
+      //                   <h5 className='candidate-name'>{candidate.name.replace(/\b\w/g,c=>c.toUpperCase())}</h5>
+      //                   <h5 className='candidate-job '>{candidate.role}</h5>
+      //                   <h5 className='candidate-loc mb-2'>{candidate.currentCompany}</h5>qq
+      //                   <h5 className='candidate-loc mb-2'>{candidate.location}</h5>
+      //               </div>
+      //               <div>
+      //               <p className='experience'>Experience : <span className='years ps-1'> {candidate.experience} years </span> </p>
+      //               <p className='experience'>CTC : <span className='years ps-1'> {candidate.currentctc} LPA </span> </p>
+      //               <p className='experience'>Notice Period : <span className='years ps-1'> {candidate.noticeperiod} Days </span> </p>
+      //               </div>
                     
-                </div>
-                    <div className='d-flex justify-content-evenly p-3'>
+      //           </div>
+      //               <div className='d-flex justify-content-evenly p-3'>
                          
-                    <div  className='datae p-5 '>
-                          <p ><FontAwesomeIcon icon={faEnvelope}/> Email : {candidate.email}</p>
-                          <p><FontAwesomeIcon icon={faBuilding}/> Industry : {candidate.industry}</p>
-                          <p><FontAwesomeIcon icon={faPhone}/> Phone Number : {candidate.phonenumber}</p>
-                    </div>
-                    <div  className='skill1 p-3'>
-                        <h5>Skills : </h5>
-                        <div className='m-3 '>
-                       {candidate.keySkills.map((skill, index) => (
-                            <div className="skill-items" key={index}>
-                              <span className="skills-text" onClick={() => handleSkillEdit(index)}>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
+      //               <div  className='datae p-5 '>
+      //                     <p ><FontAwesomeIcon icon={faEnvelope}/> Email : {candidate.email}</p>
+      //                     <p><FontAwesomeIcon icon={faBuilding}/> Industry : {candidate.industry}</p>
+      //                     <p><FontAwesomeIcon icon={faPhone}/> Phone Number : {candidate.phonenumber}</p>
+      //               </div>
+      //               <div  className='skill1 p-3'>
+      //                   <h5>Skills : </h5>
+      //                   <div className='m-3 '>
+      //                  {candidate.keySkills.map((skill, index) => (
+      //                       <div className="skill-items" key={index}>
+      //                         <span className="skills-text" onClick={() => handleSkillEdit(index)}>{skill.replace(/\b\w/g,c=>c.toUpperCase())}</span>
                              
-                           </div>
-        ))}
-      </div>
-                   </div>
-                    </div>
-                    <div className='d-flex justify-content-center '> 
-                    <button className='button-frame mb-3' onClick={() => handleDownload(candidate._id)}>
-                         <FontAwesomeIcon className='down-arrow' icon={faArrowAltCircleDown}/>
-                       <span className='download-resume'>Download Resume</span>
-                    </button>
+      //                      </div>
+      //   ))}
+      // </div>
+      //              </div>
+      //               </div>
+      //               <div className='d-flex justify-content-center '> 
+      //               <button className='button-frame mb-3' onClick={() => handleDownload(candidate._id)}>
+      //                    <FontAwesomeIcon className='down-arrow' icon={faArrowAltCircleDown}/>
+      //                  <span className='download-resume'>Download Resume</span>
+      //               </button>
 
-                    </div>
-                </div> 
-            ))}
-            
-            </div>}
+      //               </div>
+      //           </div> 
+      //  ))}
+      // </div>
+            }
+             <Offcanvas show={show} onHide={handleClose} className="d-md-none">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body className='canvas'>
+        <FilterAdmin 
+           filter={filter} 
+           handleResetFilters={handleResetFilters}  
+           handleOnChange={handleOnChange} handleApplyFilters={handleApplyFilters}/>
+        </Offcanvas.Body>
+      </Offcanvas>
            
         </div>
     );

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import '../Style/DisplayJob.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faChevronCircleLeft, faLeftLong, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { Button, Modal, Form, Toast, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import SimilarJobs from './SimilarJobs';
 
 function DisplayJob() {
+ 
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
@@ -15,10 +17,12 @@ function DisplayJob() {
   const [fileError, setFileError] = useState('');
   const [authid, setAuthid] = useState(localStorage.getItem('authId'));
   const [showToast, setShowToast] = useState(false);
-  const navigate = useNavigate();
   const [showFeedback,setShowFeedback] = useState (false)
 
-
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate(-1); // This navigates to the previous page
+  };
   const handleClose = () => {
     setShow(false);
     setFile(null);
@@ -42,6 +46,7 @@ function DisplayJob() {
 
   useEffect(() => {
     fetchData();
+    window.scrollTo(0, 0);
   }, [id]);
 
   const handleFileChange = (e) => {
@@ -60,6 +65,7 @@ function DisplayJob() {
 
     try {
       const response = await axios.post(`https://www.skylarkjobs.com/nodejs/post/apply/${id}`, formData, {
+        // const response = await axios.post(`http://localhost:5000/post/apply/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -79,6 +85,8 @@ function DisplayJob() {
   };
 
   return (
+    <>
+    <Button onClick={handleBackClick}  className='backbtn'><FontAwesomeIcon  icon={faLeftLong}/></Button>
     <div className='jobdisplay'>
       {data.map((item, index) => (
         <div className='displayjob-main p-1' key={index}>
@@ -156,6 +164,7 @@ function DisplayJob() {
         </Col>
       </Row>
     </div>
+    </>
   );
 }
 

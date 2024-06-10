@@ -12,8 +12,7 @@
     line-height: 1.43rem!important;
     color: #1f662c;
     background-color: #e4f7e6;
-    /* border-radius: .25rem; */
-    /* width: 18%; */
+    
 }
 #job-exp{
     font-size: .875rem;
@@ -137,6 +136,10 @@
 @media screen and (max-width: 470px) {
   .mob-card{
     padding: 1rem!important;
+  }
+  .nojob{ 
+    font-weight: bold;
+    margin-top: 10%;
   }
   
 }
