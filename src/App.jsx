@@ -10,12 +10,13 @@ import AdminHome from './Components/AdminHome';
 import AdminNavbar from './Components/AdminNavbar';
 import AdminLogin from './Components/AdminLogin';
 import DisplayJob from './Components/DisplayJob';
-import ContactPage from './Components/ContactPage';
 import Candidates from './Components/Candidates';
 import CandidateProfile from './Components/CandidateProfile';
 import FindCandidates from './Components/FindCandidates';
 import ApplicantForm from './Components/ApplicantForm';
 import Jobcarddetails from './Components/Jobcarddetails';
+import Contact from './Components/Contact';
+
 
 
 
@@ -47,7 +48,7 @@ function App() {
                 <Route path='/candidates/:jobid' element={<Candidates/>}/>
                 <Route path='/logs' element={<Logins setUserloggedin={setUserloggedin} setToken={setToken} />} />
                 <Route path='/jobs' element={<Findjob />} />
-                <Route path='/contact' element={<ContactPage/>} />
+                <Route path='/contact' element={<Contact/>} />
                 <Route path='/jobdetails/:category' element={<Jobcarddetails/>} />
                 <Route path='/forms' element={<UploadForm />} />
                 <Route path='/findcandidate' element={<FindCandidates/>}/>

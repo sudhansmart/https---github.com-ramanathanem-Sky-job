@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Import axios
-import "../Style/It.css";
+import "../Style/jobcarddetails.css";
 import { Link,useNavigate} from 'react-router-dom';
 import FilterUser from './FilterUser';
 import { Button } from 'react-bootstrap';

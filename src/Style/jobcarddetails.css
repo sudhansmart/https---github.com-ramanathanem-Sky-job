@@ -133,6 +133,9 @@
 .card{
   height: 100% !important;
 }
+.backbtn{
+  display: none;
+}
 @media screen and (max-width: 470px) {
   .mob-card{
     padding: 1rem!important;
@@ -141,5 +144,6 @@
     font-weight: bold;
     margin-top: 10%;
   }
+
   
 }

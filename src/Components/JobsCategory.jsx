@@ -47,9 +47,9 @@ function JobsCategory() {
 
   return (
     <div className='overallbox'>
-      <h1 className='text-start ' id='jobsfont'>
+      <h3 className='text-start ' id='jobsfont'>
         Browse by Category
-      </h1>
+      </h3>
       <div className='container text-center'>
         <div className='row mb-4' id='icon'>
           {Data.map((data) => {
