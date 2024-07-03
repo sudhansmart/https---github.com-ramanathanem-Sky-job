@@ -21,18 +21,20 @@ import Contact from './Components/Contact';
 
 
 
+
+
+
+
 function App() {
     const [userloggedin, setUserloggedin] = useState(false);
     const [token, setToken] = useState(localStorage.getItem('authToken'));
-    const [authid, setAuthid] = useState(null);
+    const [authid, setAuthid] = useState(localStorage.getItem('authId'));
     const [adminToken, setAdminToken] = useState(localStorage.getItem('adauthToken'));
     const [admin, setAdmin] = useState(false);
+   
 
 
-    useEffect(() => {
-      const id = localStorage.getItem('authId');
-      setAuthid(id);
-    }, []);
+   
     
     return (
         <div>
@@ -42,7 +44,7 @@ function App() {
                 <Route path='/' element={adminToken ? <AdminHome /> : <Home setAdmin={setAdmin} />} />
                 <Route
                     path='/profile'
-                         element={authid ? <CandidateProfile /> : <Navigate to="/" />}
+                         element={token ? <CandidateProfile /> : <Navigate to="/" />}
                    />
                 <Route path='/jobdetails/:id/:category' element={<DisplayJob />}/>
                 <Route path='/candidates/:jobid' element={<Candidates/>}/>
@@ -54,7 +56,7 @@ function App() {
                 <Route path='/findcandidate' element={<FindCandidates/>}/>
                 <Route path='/adminlog' element={<AdminLogin setAdminToken={setAdminToken} />} />
                 <Route path='/addcandidate' element={<ApplicantForm/>}/>
-               
+                {/* <Route path='/dev' element={<ImageCropUpload/>}   /> */}
             </Routes>
             </Router>
         </div>

@@ -15,6 +15,10 @@ import { Button, Modal } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import StepFormNew from './StepFormNew'
 import PopupComponent from './PopupComponent'
+import ContentPage from './ContentPage'
+import About from './About'
+import CountsHome from './CountsHome'
+import HomeIntro from './HomeIntro'
 
 export const Home = ({setAdmin}) => {
   const [authId, setAuthId] = useState(localStorage.getItem('authId'));
@@ -83,6 +87,9 @@ export const Home = ({setAdmin}) => {
                               Job openings" />
         <meta name="author" content="Skylarkjobs" />
 
+         {/* Canonical tag */}
+         <link rel="canonical" href={window.location.href} />
+
         {/* Open Graph meta tags for Facebook */}
         <meta property="og:title" content="Skylarkjobs" />
         <meta property="og:description" content="Join Skylarkjobs.com, a Job Portal for Mid & Senior Management. Register for exclusive listings. Your support grows our dedicated platform for professionals." />
@@ -139,10 +146,14 @@ export const Home = ({setAdmin}) => {
        </div>
         
     </div>
+    <CountsHome />
     <PopupComponent isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />
     <Jobcarts/>
     <JobsCategory/>
     <Clients/>
+    <HomeIntro/>
+    <ContentPage/>
+    <About/>
     <ReviewSlider/>
     <Footer setAdmin={setAdmin}/>
     </>

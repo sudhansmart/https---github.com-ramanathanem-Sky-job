@@ -1,37 +1,58 @@
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/Satoshi-Black.woff2') format('woff2'),
+       url('../assets/fonts/Satoshi-Black.woff') format('woff'),
+       url('../assets/fonts/Satoshi-Black.ttf') format('truetype');
+       font-weight: 300 900;
+       font-display: swap;
+       font-style: normal;
+}
+/* .filtersec{
+  position: -webkit-sticky; 
+  position: sticky;
+  top: 0;
+  height: 100vh; 
+  overflow-y: auto; 
+} */
+.usersfilter{
+  width: 30%;
+}
+.covercard{
+  width: 100%;
+  margin-left: 10px;
+}
 #job-category{
    font-size: 1.5rem;
   font-weight: 700;
 }
 #job-role{
-    font-size: 2rem;
+    font-family: 'Satoshi';
+    font-size: 23px;
    
 }
-#job-type{
-    font-size: .875rem;
-    font-weight: 700;
-    line-height: 1.43rem!important;
-    color: #1f662c;
-    background-color: #e4f7e6;
-    
+.card-texts{
+    font-size: 14px;
+    color: #474d6a;
 }
-#job-exp{
-    font-size: .875rem;
-    font-weight: 700;
-    line-height: 1.43rem!important;
-    color: #1f662c;
-    background-color: #e4f7e6;
-    border-radius: .25rem;
-    /* width: 25%; */
+.card-l3{
+  display: flex;
+  align-items: center;
+  width: 50%;
+  
 }
-.job-salary{
-    font-size: .875rem;
-    font-weight: 700;
-    line-height: 1.43rem!important;
-    color: #1f662c;
-    background-color: #e4f7e6;
-    border-radius: .25rem;
-    /* width: 35%; */
+.card-textbox{
+  margin: 0 !important;
+  border-right: #c2c2c2 2px solid;
+  padding: 0px 15px;
+
 }
+.card-textbox3{
+  margin: 0 !important;
+  padding: 0px 15px;
+  
+}
+
+
 
 .job-apply{
     box-sizing: border-box;
@@ -48,7 +69,9 @@
     line-height: 1.25rem;
 }
 #job-location{
+    font-family: 'Satoshi';
     font-size: 14px;
+    color: #474d6a;
 }
 
 .link_wrapper{
@@ -129,9 +152,21 @@
 .button-17:disabled {
   box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
 }
+.brief-icon{
+  color: #6a0202;
+}
+.type-icon{
+  color: blue;
+}
+.inr-icon{
+  color: #4e8888;
+}
+.cardjobs{
+  background-color: #fff;
+  border-radius: 25px;
 
-.card{
-  height: 100% !important;
+  box-shadow: #8080808a 3px 6px 20px 0px;
+
 }
 .backbtn{
   display: none;
@@ -144,6 +179,19 @@
     font-weight: bold;
     margin-top: 10%;
   }
-
+  .covercard{
+    width: auto;
+    margin: 10px 3px;
+   
+  }
+  .filtercomp{
+    display: none;
+  }
+  .usersfilter{
+    display: none;
+  }
+  .card-l3 {
+    margin-top: 5px;
+    width: 100%;}
   
 }

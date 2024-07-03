@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
-function FilterUser({data,setData}) {
+function FilterUser({data,setData,handleClose}) {
   const { category } = useParams();
   const [jobData, setJobData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
@@ -89,7 +89,7 @@ function FilterUser({data,setData}) {
   const handleApplyFilters = () => {
     const filteredData = filterJobData();
     setData(filteredData)
-    console.log("Filtered : ", filteredData); 
+    handleClose();
   };
 
   const handleResetFilters = () => {
@@ -100,6 +100,7 @@ function FilterUser({data,setData}) {
       workmode: ''
     });
     setData(originalData); 
+    handleClose();
    
   };
 

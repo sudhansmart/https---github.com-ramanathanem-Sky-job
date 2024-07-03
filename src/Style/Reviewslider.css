@@ -26,10 +26,10 @@
   align-items: center;
   background-color: #f8f9fa;
   border: 1px solid #dee2e6;
-  border-radius: 0.25rem;
+  border-radius: 1.25rem;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 2px 2px 2px 2px #b6b6b6;
+  box-shadow: 5px 4px 10px 0px #b6b6b666;
 }
 
 .item {
@@ -76,6 +76,7 @@
     flex: 0 0 80%;
     max-width: 80%;
     overflow-x: scroll;
+    overflow-y: hidden;
   }
 
  

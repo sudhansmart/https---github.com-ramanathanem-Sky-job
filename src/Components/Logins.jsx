@@ -69,7 +69,7 @@ const Logins = ({setUserloggedin,setToken}) => {
             ...prevFormData,
             [name]: value,
         }));
-        console.log(loginFormData);
+      
     };
 
     const handleSignUpOnChange = (e) => {
@@ -146,7 +146,7 @@ const Logins = ({setUserloggedin,setToken}) => {
        <h2 className='logintitle text-center mt-4' >Register</h2>
           <form className='mt-4 form-login' onSubmit={handleSignUp}>
             <input type="text" placeholder="Name" className='input-login mb-3' name='name' value={signUpFormData.name} onChange={handleSignUpOnChange} required />
-            <input type="email" placeholder="Email" className='input-login'  name='email' value={signUpFormData.email} onChange={handleSignUpOnChange}  />
+            <input type="email" placeholder="Email" className='input-login'  name='email' value={signUpFormData.email.toLowerCase()} onChange={handleSignUpOnChange}  />
             {errors.email && <p className="error text-danger">{errors.email}</p>}
             <button className='button-login mt-3' type='submit'>Sign Up</button>
           </form>

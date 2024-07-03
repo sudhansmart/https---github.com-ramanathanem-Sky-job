@@ -39,12 +39,14 @@ const RecentJobPost = () => {
   const handleClose=()=>{
     setModalShow(false)
   }
+     
+  const sortedData = [...data].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
 
   return (
     <div className='recent-bg p-5'>
       <h4 className='recent-title'>Recent Posts</h4>
       <Row>
-      {data.map((job) => (
+      {sortedData.map((job) => (
         <Col key={job._id} md={4}>
           <div className='recent-job p-4'>
            <div className='d-flex justify-content-between'>

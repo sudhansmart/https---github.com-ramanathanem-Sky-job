@@ -16,6 +16,8 @@
 }
 .clientlogo{
     height: 120px;
+    padding: 12px;  
+    margin: 2%;    
 }
 @media screen and (max-width: 470px) {
     .clientheading{
@@ -26,5 +28,9 @@
 .clientlogo{
     height: 80px;
     margin-right: 8%;
+}
+.clients{
+   
+    margin: 0px 0px;
 }
 }

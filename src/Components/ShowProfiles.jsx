@@ -8,7 +8,7 @@ import { faMagnifyingGlass,faFilter} from '@fortawesome/free-solid-svg-icons';
 import FilterCandidate from './FilterCandidate';
 import NewProfile from './NewProfile'
 
-
+ 
 function ShowProfiles() {
   const[show,setShow] = useState(false);
   const [jobData, setJobData] = useState([]);
@@ -253,11 +253,8 @@ const handleApplyFilters = () => {
       <>
        <div className='top-section'>
         <span className="filterbtn d-md-none " onClick={()=>setShow(true)}><FontAwesomeIcon className='filter-icon' icon={faFilter} /></span>
-       
-       <Form className='form-section-top'>
-      <Row className='d-flex justify-content-center'>
-        <Col xs={5} md={4} className='mb-3'>
-          <Form.Group controlId="formFile">
+             <Form className='searchbarset'>
+             <Form.Group controlId="formFile">
             <FloatingLabel controlId="floatingInput" label="Search Role">
               <Form.Control
                 type="text"
@@ -265,11 +262,10 @@ const handleApplyFilters = () => {
                 name='jobtitle'
                 value={filter.jobtitle}
                 onChange={handleOnChange}
+                className='searchinput'
               />
             </FloatingLabel>
           </Form.Group>
-        </Col>
-        <Col xs={5} md={4} className='mb-3'>
           <Form.Group controlId="formFile">
             <FloatingLabel controlId="floatingInput" label="Location">
               <Form.Control
@@ -278,17 +274,15 @@ const handleApplyFilters = () => {
                 name='location'
                 value={filter.location}
                 onChange={handleOnChange}
+                 className='searchinput'
               />
             </FloatingLabel>
           </Form.Group>
-        </Col>
-        <Col xs={10} md={4} className='mb-3 d-flex align-items-center'>
-          <Button onClick={handleApplyFilters} className='w-100'>
-            <FontAwesomeIcon icon={faMagnifyingGlass} /> Find
-          </Button>
-        </Col>
-      </Row>
-    </Form>
+          <Form.Group onClick={handleApplyFilters} controlId="formFile" className='search-icon'>
+          <FontAwesomeIcon className='glass-icon'  icon={faMagnifyingGlass} />
+          </Form.Group>
+             </Form>
+
            </div>
         <div className='d-flex'>
          <div className="hidefilter">
@@ -299,7 +293,9 @@ const handleApplyFilters = () => {
                handleResetFilters={handleResetFilters}  
                handleOnChange={handleOnChange} handleApplyFilters={handleApplyFilters}/>
                 </div>
-              {data.length == 0? <p className='text-center w-100 ' style={{fontSize:'30px',fontWeight:"600"}}>No Results Found.</p>
+              {data.length == 0?
+                 <p className='no-result text-center w-100  '>No Results Found</p>
+
                :
                   <NewProfile data={data} handleApplicant={handleApplicant} handleDownload={handleDownload}/>
       }

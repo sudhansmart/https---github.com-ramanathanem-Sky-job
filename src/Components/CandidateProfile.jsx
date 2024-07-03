@@ -13,7 +13,6 @@ import Personaldata from './Personaldata';
 import AddLanguage from './AddLanguage';
 import Employment from './Employment';
 import EditEmployment from './EditEmployment';
-
 import propic from '../assets/Images/dummypropic.png'
 import probrief from   '../assets/Images/pro-brief.png'
 import procall from   '../assets/Images/pro-call.png'
@@ -22,9 +21,7 @@ import proLocation from   '../assets/Images/pro-location.png'
 import procalender from   '../assets/Images/pro-calender.png'
 import prorupee from   '../assets/Images/pro-rupee.png'
 import resumepic from '../assets/Images/cv.png'
-
-
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import ImageCropUpload from './ImageCropUpload';
 
 const CandidateProfile = () => {
   const fileInputRef = useRef(null);
@@ -44,19 +41,25 @@ const CandidateProfile = () => {
    const[education_id,setEducation_id] = useState(' ');
    const[showpersonal,setShowPersonal] =useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [languages, setLanguages] = useState([
-    
-  ]);
+  const [languages, setLanguages] = useState([ ]);
   const[page,setPage]=useState(0);
-
+  const[selectedFile, setSelectedFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const[uploadFeedBack,setUploadFeedBack] = useState(" ");
+  const [imgCrop,setImgCrop] = useState(false);
+ 
+ 
   const fetchData = async () => {
     try {
      if (authId){
+   
+        const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${authId}`);
+        setProfileData([response.data]);
+        setLanguages(response.data.languages);
+    
+    
         
-      const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/specificprofile/${authId}`);
-      setProfileData([response.data]);
-      setLanguages(response.data.languages);
-      console.log("fetching :",response.data);
+     
       
       }
     } catch (error) {
@@ -64,8 +67,26 @@ const CandidateProfile = () => {
     }
   };
 
+  const fetchProfilePicture = async () => {
+    try {
+     const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/profilepic/${authId}`, {
+        responseType: 'blob' // Important for handling binary data
+      });
+    
+        if(response.status===200){
+      
+      const imageUrl = URL.createObjectURL(response.data);
+      setImageUrl(imageUrl);}
+    } catch (error) {
+      console.error('Error fetching profile picture:', error);
+      // Handle errors gracefully (e.g., display a placeholder image)
+      setImageUrl('/path/to/placeholder.jpg'); // Use a placeholder image path
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchProfilePicture();
   }, [authId]);
 
   const handleEditProfile = () => {
@@ -73,14 +94,7 @@ const CandidateProfile = () => {
     setShowProfile(true);
   };
 
-  const handleCheckboxChange = (languageId, skill) => {
-    setLanguages(languages.map(language => {
-      if (language.id === languageId) {
-        return { ...language, [skill]: !language[skill] };
-      }
-      return language;
-    }));
-  };
+
 
 // upload Cv section
   const handleUpload = ()=>{
@@ -97,11 +111,12 @@ const CandidateProfile = () => {
     try {
       
       const response = await axios.post(`https://www.skylarkjobs.com/nodejs/profile/uploadcv/${authId}`, formData, {
+        // const response = await axios.post(`http://localhost:5000/profile/uploadcv/${authId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-
+      
       if(response.status == 201){
         handleCloseModal()
       }
@@ -130,14 +145,13 @@ const CandidateProfile = () => {
 
   const getCVName = (fileName) => {
     const parts = fileName.split('_');
-    const name = parts.slice(1).join('_').replace(' ', ''); 
+    const name = parts.slice(2).join('_').replace(' ', ''); 
     return name;
   };
   
-  const getUploadDate = (fileName) => {
-   
-    const parts = fileName.split('_'); 
-    const datePart = parts[0];
+  const getUploadDate = (fileName) => {   
+  const parts = fileName.split('_'); 
+    const datePart = parts[1];
     const year = datePart.slice(0, 4);
     const month = datePart.slice(5, 7);
     const day = datePart.slice(8, 10);
@@ -150,6 +164,7 @@ const CandidateProfile = () => {
 const handleDownload = async (name) => {
   try {
     const response = await axios.get(`https://www.skylarkjobs.com/nodejs/profile/download/${authId}`, {
+      // const response = await axios.get(`http://localhost:5000/profile/download/${authId}`, {
       responseType: 'blob',
     });
     
@@ -179,6 +194,7 @@ const handleDelete = async (id) => {
   try {
    
    const response =  await axios.delete(`https://www.skylarkjobs.com/nodejs/profile/delete/${id}`);
+  // const response =  await axios.delete(`http://localhost:5000/profile/delete/${id}`);
      
       if(response.status == 204){
         setShowToast(true); 
@@ -186,6 +202,9 @@ const handleDelete = async (id) => {
         fetchData();
       }else if(response.status == 205){
         alert("There is some issue with your uploaded cv.Please re-upload.")
+      }
+      else if(response.status == 206){
+        alert("Candidate CV not available.")
       }
   
   } catch (error) {
@@ -226,13 +245,6 @@ const handleDelete = async (id) => {
 
     
   }
-
-  const handlepersonal =()=>{
-    console.log("personal")
-
-    setModalShow(true);
-    setShowPersonal(true);
-  }
   const handleAddLanguage =()=>{
     setModalShow(true);
     setShowAddlanguages(true)
@@ -240,14 +252,14 @@ const handleDelete = async (id) => {
 
   const handlelanguagedel = async (id)=>{
     const response =  await axios.delete(`https://www.skylarkjobs.com/nodejs/profile/deletelanguage/${authId}/${id}`);
-    console.log(response.data)
+   
     fetchData()
   }
  
     const handleToastClose = ()=>{
       setShowToast(false);
       setDelFeedBack(false);
-      setSummaryFeedBack(false)
+      // setSummaryFeedBack(false)
     }
 
     const formatDate = (dateString) => {
@@ -280,12 +292,44 @@ const handleDelete = async (id) => {
       setEmployment_id(id)
       setShowEditEmployment(true);
       
-      console.log("id:",id)
+     
     }
     const handleEmploymentDelete = async(id)=>{
       const response =  await axios.delete(`https://www.skylarkjobs.com/nodejs/profile/deleteemployment/${authId}/${id}`);
       fetchData()
     }
+   
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      // handlePhotoUpload(file);
+      setModalShow(true);
+      setImgCrop(true)
+    }
+  };
+
+  const handlePhotoUpload = async (file) => {
+    const formData = new FormData();
+    formData.append('photo', file);
+
+    try {
+      const response = await axios.post(`https://www.skylarkjobs.com/nodejs/profile/uploadphoto/${authId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+        setUploadFeedBack(response.data.error)
+      if (response.status === 201) {
+        fetchProfilePicture();
+      } else {
+        console.error('Photo upload failed');
+      }
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+    }
+  };
 
    
   return (
@@ -303,6 +347,8 @@ const handleDelete = async (id) => {
         </Modal.Header>
         <Modal.Body>
             {showProfile? <ProfileDetails handleCloseModal={handleCloseModal}/>:" "}
+            {imgCrop && <ImageCropUpload selectedFile={selectedFile} fetchProfilePicture={fetchProfilePicture} 
+                         setModalShow={setModalShow}  setImgCrop={setImgCrop} />}
             {showUpload?  <Form  onSubmit={uploadSubmit}>
                               <Form.Group controlId="formFile" as={Col} md="5" className="mb-3">
                                <Form.Label>Upload CV</Form.Label>
@@ -366,7 +412,7 @@ const handleDelete = async (id) => {
               <div className="loading-bar"></div>
             </div>
             
-            </div>     
+            </div>      
           
                                     :
       <div  className='d-flex flex-row mb-5' >
@@ -375,8 +421,24 @@ const handleDelete = async (id) => {
               <div className='top-sec'>
                  <FontAwesomeIcon className="edit-icon" onClick={handleEditProfile} icon={faPencil}/>
               </div>
-              <div className='d-flex justify-content-center'>
-                 <img className='propic' src={propic} alt='User-Profile' />
+              <div className='imagecont '>
+                <div className='profile-img'>
+                 {imageUrl ? (
+        <img className='propic1' src={imageUrl} alt="Profile" />
+      ) : (
+        <img className='propic' src={propic} alt='User-Profile' />
+      )}
+              {imageUrl == null ? (      <div className="file btn btn-lg btn-primary">
+                                                                                    Add Photo
+                                           <input type="file" name="file" onChange={handleFileChange}/>  
+                                        </div> ):(
+                                        <div className="file btn btn-lg btn-primary">
+                                        Change Photo
+                                         <input type="file" name="file" onChange={handleFileChange}/>  
+                                       </div>
+              )}
+              <p className='text-danger'>{uploadFeedBack}</p>
+                            </div>
               </div>
               <div className='text-center'>
                 <h5 className='pro-name'>{data.name.toUpperCase()}</h5>
@@ -412,8 +474,8 @@ const handleDelete = async (id) => {
                 <img className='cvpic' src={resumepic} alt='cv-icon'/>
                 <div className='contcv text-center'>
                       
-                           <p className='profile-pdf m-0'>{data.cvname? getCVName(data.cvname): " "}</p>
-                           <p className='profile-pdfdate m-0'>{data.cvname?  getUploadDate(data.cvname): " "}</p>
+                           <p className='profile-pdf m-0'>{data.cvname !== ""? getCVName(data.cvname): " "}</p>
+                           <p className='profile-pdfdate m-0'>{data.cvname !== ""?  getUploadDate(data.cvname): " "}</p>
                 </div>
                          </div>
                         <div className='upload-profilecv  text-center'>
@@ -421,10 +483,10 @@ const handleDelete = async (id) => {
                        <p className='format text-light mb-0'>Supported Formats: doc, docx, rtf, pdf, upto 2 MB</p>
                      </div>
                </div>
-               {data.cvname == " "?   <div className='mt-2'>
-                     <Button className='mobbtn me-3' onClick={()=>handleDownload(data.name)}> <FontAwesomeIcon  icon={faDownload} /> Download</Button>
-                     <Button className='mobbtn' variant='danger' onClick={()=>handleDelete(data._id)}> <i className="bi bi-trash3-fill"  > </i>Delete</Button>
-                   </div>  : " "}
+               {data.cvname === "" ?  " "  :<div className='mt-2'>
+                <span style={{cursor:"pointer"}} className='actionbtn text-primary' onClick={()=>handleDownload(data.name)} ><FontAwesomeIcon   icon={faDownload} /></span>
+                <span style={{cursor:"pointer"}} className='actionbtn text-danger' onClick={()=>handleDelete(data._id)}><i className="bi bi-trash3-fill"  > </i></span>                    
+                   </div>  }
                     
                </div>))} 
                <div className='keyskill-main mt-3'> 

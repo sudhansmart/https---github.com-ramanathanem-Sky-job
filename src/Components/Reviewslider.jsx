@@ -27,7 +27,7 @@ function Reviewslider() {
     <div className='testmain mb-5'>  
       <div className="scroll-container">
       {reviews.map((data) => (
-        <div key={data.id} className="contents col-sm-3">
+        <div key={data.id} className="contents col-sm-4">
           <div className="test-body">
             <div className="item">
             

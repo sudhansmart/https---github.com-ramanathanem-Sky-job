@@ -7,6 +7,7 @@ import { Button, Modal, Form, Toast, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import SimilarJobs from './SimilarJobs';
+import { Helmet } from 'react-helmet';
 
 function DisplayJob() {
  
@@ -86,8 +87,13 @@ function DisplayJob() {
 
   return (
     <>
-    <Button onClick={handleBackClick}  className='backbtn'><FontAwesomeIcon  icon={faLeftLong}/></Button>
-    <div className='jobdisplay'>
+        <Helmet>
+           {/* Canonical tag */}
+        <link rel="canonical" href={window.location.href} />
+        </Helmet>
+
+<Button onClick={handleBackClick}  className='backbtn'><FontAwesomeIcon  icon={faLeftLong}/></Button>
+    <div className='jobdisplay1'>
       {data.map((item, index) => (
         <div className='displayjob-main p-1' key={index}>
           <div className='displayjob-top p-4'>

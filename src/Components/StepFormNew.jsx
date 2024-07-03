@@ -171,7 +171,7 @@ function StepFormNew({ handleClose }) {
               <Col>
                 <FloatingLabel
                   controlId="floatingInput"
-                  label="Current CTC"
+                  label="Current CTC in LPA"
                   className="color-text mb-3"
                 >
                   <Form.Control

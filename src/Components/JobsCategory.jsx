@@ -40,6 +40,7 @@ function JobsCategory() {
       const data = await response.json();
     
       setOpeningsData(data);
+      window.scrollTo(0, 0);
     };
 
     fetchOpeningsData();

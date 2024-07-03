@@ -8,7 +8,7 @@
     box-shadow: 1px 1px 4px 0px #302f2e;
   }
   
-  .celebrate {
+   .celebrate {
     text-align: center;
     padding: 50px 0;
     background-color: #fbfbfb;
@@ -127,6 +127,7 @@
     width: 56px;
     height: 40px;
     padding: 0px;
+    margin-right: 20px;
   }
   
   .location {
@@ -226,9 +227,8 @@
     width: 100%;
   }
   
-  input[type="text"],
-  input[type="email"],
-  textarea {
+  .contact-input,
+  .contact-textarea,.contact-number{
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -236,8 +236,18 @@
     border-radius: 4px;
     box-sizing: border-box;
   }
+
+  .contact-number::-webkit-outer-spin-button,
+  .contact-number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* .contact-number {
+    -moz-appearance: textfield;
+} */
   
-  textarea {
+  .contact-textarea {
     height: 100px;
     resize: vertical;
   }
@@ -254,6 +264,7 @@
   box-sizing: border-box;
 }
 
-.text-gray,.text-black,.text-center{
+
+.graytext{
   color: gray;
 }

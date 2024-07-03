@@ -10,9 +10,16 @@
     font-weight: 600;
 }
 .jobdisplay{
+    background-color: #f8f9fa;
     display: flex;
     padding: 3rem;
 }
+.jobdisplay1{
+    
+    display: flex;
+    padding: 1.5rem;
+}
+  
    
 .backbtn{
    display: none;

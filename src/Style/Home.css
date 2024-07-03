@@ -30,6 +30,7 @@ body.overlays {
     border-radius: 20px !important;
     font-weight: 500 !important;
     border: none;
+    color: white !important;
 }
 .banner-button:hover{
     background-color: rgb(255, 175, 2) !important;

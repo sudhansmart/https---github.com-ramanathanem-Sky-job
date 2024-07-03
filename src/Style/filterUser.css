@@ -12,10 +12,17 @@
     border-radius: 10px;
 }
 .filteruser{
-    width: 25%;
+    width: 100%;
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 25px;
+    height: 100vh;
+    overflow-y: auto; 
 }
 @media screen and (max-width: 470px) {
     .filteruser {
         width: 100%;
+        height: auto;
+        position: relative;
     }
 }
